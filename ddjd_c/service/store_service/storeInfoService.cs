@@ -23,7 +23,7 @@ namespace ddjd_c.service.store_service
         }
 
 
-		public static JObject UpdateStoreInfoService(Dictionary<string, string> dic)
+		public static JObject UpdateStoreInfoService(Dictionary<string, object> dic)
 		{
 			return JsonHelper.getJObject(baseHttp.PostStrFunction(storeRequest.UpdateStoreInfo, dic));
 		}
