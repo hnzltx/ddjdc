@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ddjd_c
+namespace ddjd_c.ct
 {
-    public partial class Form1 : Form
+    public partial class test : Form
     {
-        public Form1()
+        public test()
         {
             InitializeComponent();
         }
