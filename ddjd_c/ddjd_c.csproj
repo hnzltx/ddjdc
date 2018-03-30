@@ -36,14 +36,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DevComponents.DotNetBar2.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json.Fakes">
-      <HintPath>FakesAssemblies\Newtonsoft.Json.Fakes.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,6 +54,7 @@
   <ItemGroup>
     <Compile Include="common\AllRequest\goodsCateGoryRequest.cs" />
     <Compile Include="common\AllRequest\loginRequest.cs" />
+    <Compile Include="common\AllRequest\scanCodeRequest.cs" />
     <Compile Include="common\AllRequest\storeRequest.cs" />
     <Compile Include="common\extension\ExtensionString.cs" />
     <Compile Include="common\JsonHelper.cs" />
@@ -100,9 +95,16 @@
     <Compile Include="model\store\storeInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="service\goodsCategory_service\goodsCategoryService.cs" />
     <Compile Include="service\login_service\loginService.cs" />
+    <Compile Include="service\scanCode_service\scanCodeService.cs" />
     <Compile Include="service\store_service\storeInfoService.cs" />
+    <Compile Include="vo\goods\scanCodeGoods.cs" />
     <Compile Include="vo\login\loginReturnInfo.cs" />
     <EmbeddedResource Include="ct\ScanCode\ScanCode.resx">
       <DependentUpon>ScanCode.cs</DependentUpon>
@@ -122,14 +124,9 @@
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Fakes Include="Fakes\Newtonsoft.Json.fakes" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -152,5 +149,6 @@
     <Content Include="common\AllRequest\a必看.txt" />
     <None Include="Resources\logo.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

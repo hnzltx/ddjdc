@@ -37,7 +37,7 @@ namespace ddjd_c
                 MessageBox.Show("请输入账号或密码!", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Dictionary<string, string> d = new Dictionary<string, string>();
+            Dictionary<string, object> d = new Dictionary<string, object>();
             d.Add("userAccount", userAccount);
             d.Add("userPossword", userPossword);
             loginReturnInfo loginInfo = new loginReturnInfo();

@@ -11,7 +11,10 @@ namespace ddjd_c
     /// </summary>
     class GlobalsInfo
     {
-        public static int storeId; //店铺ID
+        /// <summary>
+        /// 为了方便，店铺id暂时写死。 此值登录后改变
+        /// </summary>
+        public static int storeId = 21; //店铺ID
         public static string storeName;    //店铺名称
         public static int storeType;   //店铺类型
     }

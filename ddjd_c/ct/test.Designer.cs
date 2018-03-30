@@ -48,7 +48,7 @@
             listViewItem2.Group = listViewGroup2;
             this.listViewEx1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem2});
-            this.listViewEx1.Location = new System.Drawing.Point(156, 75);
+            this.listViewEx1.Location = new System.Drawing.Point(12, 12);
             this.listViewEx1.Name = "listViewEx1";
             this.listViewEx1.Size = new System.Drawing.Size(345, 204);
             this.listViewEx1.TabIndex = 0;

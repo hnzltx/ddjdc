@@ -18,6 +18,8 @@ namespace ddjd_c.http
         //本地地址
         private static String ddjdcUrl = "http://192.168.199.215/";
 
+		///测试
+		private static String ddjdUrl = "123456789";
         
         /// <summary>
         /// 提供外部访问连接地址；
@@ -56,7 +58,7 @@ namespace ddjd_c.http
         /// <param name="httpName">请求方法名；</param>
         /// <param name="dic">参数对象</param>
         /// <returns>string</returns>
-        public static string PostStrFunction(string httpName, Dictionary<string,string> dic)
+        public static string PostStrFunction(string httpName, Dictionary<string, object> dic)
         {
             string serviceAddress = ddjdcUrl + httpName;
             string result = "";
