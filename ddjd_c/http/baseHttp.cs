@@ -18,8 +18,6 @@ namespace ddjd_c.http
         //本地地址
         private static String ddjdcUrl = "http://192.168.199.215/";
 
-		///测试
-		private static String ddjdUrl = "123456789";
         
         /// <summary>
         /// 提供外部访问连接地址；

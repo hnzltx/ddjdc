@@ -16,5 +16,13 @@ namespace ddjd_c.common.AllRequest
         /// </summary>
         private static string queryStoreInfo = "front/storeInfo/queryStoreInfo";
         public static string QueryStoreInfo { get => queryStoreInfo; }
-    }
+
+
+		/// <summary>
+		/// 修改店铺信息
+		/// </summary>
+		private static string updateStoreInfo = "front/storeInfo/updateStoreInfo";
+		public static string UpdateStoreInfo { get => updateStoreInfo; }
+	
+	}
 }

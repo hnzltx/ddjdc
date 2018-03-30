@@ -17,7 +17,7 @@ namespace ddjd_c
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmScanCode());
+            Application.Run(new login());
         }
     }
 }
