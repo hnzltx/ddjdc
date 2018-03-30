@@ -16,7 +16,7 @@ namespace ddjd_c.http
         //private static String ddjdcUrl = "http://c.hnddjd.com/";
 
         //本地地址
-        private static String ddjdcUrl = "http://localhost/";
+        private static String ddjdcUrl = "http://192.168.199.215/";
         
         /// <summary>
         /// 提供外部访问连接地址；
