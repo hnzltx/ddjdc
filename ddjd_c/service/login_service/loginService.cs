@@ -18,7 +18,7 @@ namespace ddjd_c.service.login_service
         /// </summary>
         /// <param name="dic"></param>
         /// <returns>返回登录信息对象</returns>
-        public static loginReturnInfo loginValidate(Dictionary<string, string> dic) {
+        public static loginReturnInfo loginValidate(Dictionary<string, object> dic) {
             return JsonHelper.DeserializeJsonToObject<loginReturnInfo>(baseHttp.PostStrFunction(loginRequest.Login, dic));
         }
 
@@ -28,7 +28,7 @@ namespace ddjd_c.service.login_service
         /// </summary>
         /// <param name="dic"></param>
         /// <returns>返回JsonObject</returns>
-        public static JObject loginValidate2(Dictionary<string, string> dic) {
+        public static JObject loginValidate2(Dictionary<string, object> dic) {
             return JsonHelper.getJObject(baseHttp.PostStrFunction(loginRequest.Login, dic));
         }
 

@@ -58,7 +58,7 @@ namespace ddjd_c.http
         /// <param name="httpName">请求方法名；</param>
         /// <param name="dic">参数对象</param>
         /// <returns>string</returns>
-        public static string PostStrFunction(string httpName, Dictionary<string, string> dic)
+        public static string PostStrFunction(string httpName, Dictionary<string, object> dic)
         {
             string serviceAddress = ddjdcUrl + httpName;
             string result = "";
