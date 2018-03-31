@@ -19,7 +19,7 @@ namespace ddjd_c.service.store_service
         /// <returns>返回店铺信息对象</returns>
         public static storeInfo queryStoreInfo()
         {
-            return JsonHelper.DeserializeJsonToObject<storeInfo>(baseHttp.GetStrFunction(storeRequest.QueryStoreInfo + "?storeId=21"));
+            return JsonHelper.DeserializeJsonToObject<storeInfo>(baseHttp.GetStrFunction(storeRequest.QueryStoreInfo + "?storeId="+ GlobalsInfo.storeId));
         }
 
 

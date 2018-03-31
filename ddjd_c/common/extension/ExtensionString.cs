@@ -33,5 +33,16 @@ namespace ddjd_c.common.extension
 			int.TryParse(t, out id);//这里当转换失败时返回的id为0
 			return id;
 		}
+        /// <summary>
+        /// 将字符串转换为double
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns>当转换失败时返回0</returns>
+        public static double ToDouble(this string t)
+        {
+            double d;
+            double.TryParse(t, out d);
+            return d;
+        }
 	}
 }
