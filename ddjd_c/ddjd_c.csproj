@@ -57,6 +57,8 @@
     <Compile Include="common\AllRequest\scanCodeRequest.cs" />
     <Compile Include="common\AllRequest\storeRequest.cs" />
     <Compile Include="common\JsonHelper.cs" />
+    <Compile Include="common\GetParam.cs" />
+    <Compile Include="common\KeyboardHookLib.cs" />
     <Compile Include="ct\ScanCode\ScanCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +105,9 @@
     <Compile Include="service\login_service\loginService.cs" />
     <Compile Include="service\scanCode_service\scanCodeService.cs" />
     <Compile Include="service\store_service\storeInfoService.cs" />
+    <Compile Include="vo\addShopCar\addShopCarGoods.cs" />
+    <Compile Include="vo\addShopCar\addShopCarReturnInfo.cs" />
+    <Compile Include="vo\addShopCar\addShopCarStatuInfo.cs" />
     <Compile Include="vo\goods\scanCodeGoods.cs" />
     <Compile Include="vo\login\loginReturnInfo.cs" />
     <EmbeddedResource Include="ct\ScanCode\ScanCode.resx">

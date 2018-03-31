@@ -1,4 +1,5 @@
-﻿using ddjd_c.ct.ScanCode;
+﻿using ddjd_c.ct;
+using ddjd_c.ct.ScanCode;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace ddjd_c
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmScanCode());
+            Application.Run(new frmTest());
         }
     }
 }

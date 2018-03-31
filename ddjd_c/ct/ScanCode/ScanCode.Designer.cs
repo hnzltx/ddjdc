@@ -37,12 +37,14 @@
             this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.lblTime = new DevComponents.DotNetBar.LabelX();
             this.dgvShopcar = new System.Windows.Forms.DataGridView();
-            this.goodsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sumMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.textCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.storeShoppingcarId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.goodsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oneMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sumMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabGoodscategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShopcar)).BeginInit();
@@ -81,11 +83,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabGoodscategory.BackColor = System.Drawing.Color.Transparent;
             this.tabGoodscategory.CanReorderTabs = true;
-            this.tabGoodscategory.Location = new System.Drawing.Point(487, 63);
+            this.tabGoodscategory.Location = new System.Drawing.Point(484, 63);
             this.tabGoodscategory.Name = "tabGoodscategory";
             this.tabGoodscategory.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
             this.tabGoodscategory.SelectedTabIndex = -1;
-            this.tabGoodscategory.Size = new System.Drawing.Size(579, 376);
+            this.tabGoodscategory.Size = new System.Drawing.Size(582, 376);
             this.tabGoodscategory.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Dock;
             this.tabGoodscategory.TabIndex = 6;
             this.tabGoodscategory.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
@@ -96,9 +98,9 @@
             this.buttonX5.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX5.BackColor = System.Drawing.Color.Transparent;
             this.buttonX5.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX5.Location = new System.Drawing.Point(342, 344);
+            this.buttonX5.Location = new System.Drawing.Point(395, 321);
             this.buttonX5.Name = "buttonX5";
-            this.buttonX5.Size = new System.Drawing.Size(102, 58);
+            this.buttonX5.Size = new System.Drawing.Size(73, 58);
             this.buttonX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX5.TabIndex = 5;
             this.buttonX5.Text = "清空购物车";
@@ -108,9 +110,9 @@
             this.buttonX4.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX4.BackColor = System.Drawing.Color.Transparent;
             this.buttonX4.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX4.Location = new System.Drawing.Point(342, 254);
+            this.buttonX4.Location = new System.Drawing.Point(395, 234);
             this.buttonX4.Name = "buttonX4";
-            this.buttonX4.Size = new System.Drawing.Size(102, 58);
+            this.buttonX4.Size = new System.Drawing.Size(73, 58);
             this.buttonX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX4.TabIndex = 5;
             this.buttonX4.Text = "支付宝支付";
@@ -120,9 +122,9 @@
             this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX3.BackColor = System.Drawing.Color.Transparent;
             this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX3.Location = new System.Drawing.Point(342, 161);
+            this.buttonX3.Location = new System.Drawing.Point(395, 150);
             this.buttonX3.Name = "buttonX3";
-            this.buttonX3.Size = new System.Drawing.Size(102, 58);
+            this.buttonX3.Size = new System.Drawing.Size(73, 58);
             this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX3.TabIndex = 5;
             this.buttonX3.Text = "微信支付";
@@ -132,9 +134,9 @@
             this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX2.BackColor = System.Drawing.Color.Transparent;
             this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX2.Location = new System.Drawing.Point(342, 63);
+            this.buttonX2.Location = new System.Drawing.Point(395, 63);
             this.buttonX2.Name = "buttonX2";
-            this.buttonX2.Size = new System.Drawing.Size(102, 58);
+            this.buttonX2.Size = new System.Drawing.Size(73, 58);
             this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX2.TabIndex = 5;
             this.buttonX2.Text = "结算";
@@ -153,37 +155,23 @@
             // 
             // dgvShopcar
             // 
+            this.dgvShopcar.AllowUserToAddRows = false;
             this.dgvShopcar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvShopcar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShopcar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.storeShoppingcarId,
             this.goodsName,
             this.num,
+            this.oneMoney,
             this.sumMoney});
             this.dgvShopcar.Location = new System.Drawing.Point(32, 63);
             this.dgvShopcar.MultiSelect = false;
             this.dgvShopcar.Name = "dgvShopcar";
             this.dgvShopcar.RowHeadersVisible = false;
             this.dgvShopcar.RowTemplate.Height = 23;
-            this.dgvShopcar.Size = new System.Drawing.Size(271, 376);
+            this.dgvShopcar.Size = new System.Drawing.Size(348, 376);
             this.dgvShopcar.TabIndex = 2;
-            // 
-            // goodsName
-            // 
-            this.goodsName.HeaderText = "商品名称";
-            this.goodsName.Name = "goodsName";
-            // 
-            // num
-            // 
-            this.num.HeaderText = "数量/重量";
-            this.num.Name = "num";
-            this.num.Width = 70;
-            // 
-            // sumMoney
-            // 
-            this.sumMoney.HeaderText = "小计";
-            this.sumMoney.Name = "sumMoney";
-            this.sumMoney.Width = 55;
             // 
             // buttonX1
             // 
@@ -212,6 +200,36 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // storeShoppingcarId
+            // 
+            this.storeShoppingcarId.HeaderText = "购物车ID";
+            this.storeShoppingcarId.Name = "storeShoppingcarId";
+            this.storeShoppingcarId.Visible = false;
+            // 
+            // goodsName
+            // 
+            this.goodsName.HeaderText = "商品名称";
+            this.goodsName.Name = "goodsName";
+            this.goodsName.Width = 150;
+            // 
+            // num
+            // 
+            this.num.HeaderText = "数量/重量";
+            this.num.Name = "num";
+            this.num.Width = 70;
+            // 
+            // oneMoney
+            // 
+            this.oneMoney.HeaderText = "单价";
+            this.oneMoney.Name = "oneMoney";
+            this.oneMoney.Width = 70;
+            // 
+            // sumMoney
+            // 
+            this.sumMoney.HeaderText = "小计";
+            this.sumMoney.Name = "sumMoney";
+            this.sumMoney.Width = 55;
+            // 
             // frmScanCode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -235,9 +253,6 @@
         private DevComponents.DotNetBar.ButtonX buttonX1;
         private DevComponents.DotNetBar.Controls.TextBoxX textCode;
         private System.Windows.Forms.DataGridView dgvShopcar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn goodsName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sumMoney;
         private System.Windows.Forms.Timer timer1;
         private DevComponents.DotNetBar.LabelX lblTime;
         private DevComponents.DotNetBar.ButtonX buttonX2;
@@ -245,5 +260,10 @@
         private DevComponents.DotNetBar.ButtonX buttonX3;
         private DevComponents.DotNetBar.ButtonX buttonX5;
         private DevComponents.DotNetBar.TabControl tabGoodscategory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn storeShoppingcarId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn goodsName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oneMoney;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sumMoney;
     }
 }

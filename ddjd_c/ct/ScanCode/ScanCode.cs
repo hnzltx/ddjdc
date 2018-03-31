@@ -1,5 +1,7 @@
 ﻿using ddjd_c.service.scanCode_service;
+using ddjd_c.vo.addShopCar;
 using DevComponents.DotNetBar;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,37 +23,74 @@ namespace ddjd_c.ct.ScanCode
         }
 
 
-
+        /// <summary>
+        /// 窗体加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmScanCode_Load(object sender, EventArgs e)
         {
-            Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
-            int width1 = ScreenArea.Width;
-            int height1 = ScreenArea.Height;
-            this.Width = width1;
-            this.Height = height1;
-            this.Top = 0;
-            this.Left = 0;
-            this.TopMost = true;
+            //Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
+            //int width1 = ScreenArea.Width;
+            //int height1 = ScreenArea.Height;
+            //this.Width = width1;
+            //this.Height = height1;
+            //this.Top = 0;
+            //this.Left = 0;
+            //this.TopMost = true;
+            
 
-            //输入条码框获取焦点
-            this.textCode.Focus();
-
+            //获取当前店铺购物车的商品
+            queryStoreshoppingcar();
+            
             //添加默认常用选项 ,并添加listview
-            addListView(this.tabGoodscategory.CreateTab("常用"),null);
+            addListView(this.tabGoodscategory.CreateTab("常用"), null);
 
             //查询分类集合
-            List<model.goodscategory> goodsCategoryList =  service.goodsCategory_service.goodsCategoryService.queryGoodsCateGoryForOne();
+            List<model.goodscategory> goodsCategoryList = service.goodsCategory_service.goodsCategoryService.queryGoodsCateGoryForOne();
 
             if (goodsCategoryList.Count > 0) {
                 foreach (model.goodscategory g in goodsCategoryList) {
-                    TabItem t =  this.tabGoodscategory.CreateTab(g.GoodsCategoryName);
+                    TabItem t = this.tabGoodscategory.CreateTab(g.GoodsCategoryName);
                     t.Name = "goodscategory_" + g.GoodsCategoryId;
                     t.Click += new System.EventHandler(this.goodscategory_click);
                 }
             }
 
+            SetTextCode();
 
         }
+
+
+        /// <summary>
+        /// 查询店铺当前购物车数据
+        /// </summary>
+        private void queryStoreshoppingcar() {
+            List<addShopCarGoods> goodsInfo = service.scanCode_service.scanCodeService.queryStoreshoppingcar();
+
+            if (goodsInfo.Count > 0)
+            {
+                foreach (addShopCarGoods goods in goodsInfo)
+                {
+                    //新增购物车数据
+                    DataGridViewRow row = new DataGridViewRow();
+                    row.CreateCells(dgvShopcar);
+
+                    decimal count = new decimal(int.Parse(goods.GoodsCount.ToString()));
+                    decimal storeGoodsPrice = new decimal(double.Parse(goods.StoreGoodsPrice));
+
+                    row.Cells[0].Value = goods.StoreShoppingcarId;
+                    row.Cells[1].Value = goods.GoodsName;
+                    row.Cells[2].Value = goods.GoodsCount;
+                    row.Cells[3].Value = goods.StoreGoodsPrice;
+                    row.Cells[4].Value = count * storeGoodsPrice;
+
+                    dgvShopcar.Rows.Add(row);
+                }
+            }
+        }
+
+
 
         /// <summary>
         ///  分类的点击事件
@@ -63,6 +102,7 @@ namespace ddjd_c.ct.ScanCode
             TabItem t = (TabItem)sender;
             string[] strArray = t.Name.Split('_');
             addListView(t, int.Parse(strArray[1]));
+            SetTextCode();
         }
 
 
@@ -123,7 +163,8 @@ namespace ddjd_c.ct.ScanCode
             int selectCount = lv.SelectedItems.Count; //SelectedItems.Count就是：取得值，表示SelectedItems集合的物件数目。 
             if (selectCount > 0)//若selectCount大於0，说明用户有选中某列。
             {
-                addGoods(lv.SelectedItems[0].SubItems[0].Text,1,"10.55");
+                this.textCode.Text = lv.SelectedItems[0].SubItems[0].Name;
+                addGoods();
             }
         }
 
@@ -147,7 +188,7 @@ namespace ddjd_c.ct.ScanCode
                     }
                     return true;
                 case Keys.Enter:
-                    addGoods("ceshi",1,"11");
+                    addGoods();
                     return true;
                 default:
                     return base.ProcessCmdKey(ref msg, keyData);
@@ -159,20 +200,114 @@ namespace ddjd_c.ct.ScanCode
         /// <summary>
         /// 添加商品 -  加入购物车
         /// </summary>
-        protected void addGoods(string goodsName,int num,string money)
+        protected void addGoods()
         {
+            string code = this.textCode.Text;
+            if (code == "") {
+                MessageBox.Show("请输入或扫描条码!");
+                SetTextCode();
+                return;
+            }
+            
+            //查询商品后返回的jsonObjer
+            JObject json = scanCodeService.queryGoodsInfoByGoodsCode(this.textCode.Text);
+            
+            if (null != json)
+            {
+                if (null != json["result"])
+                {
+                    //获得加入购物车返回的状态信息
+                    addShopCarStatuInfo statuInfo = common.JsonHelper.DeserializeJsonToObject<addShopCarStatuInfo>(json["result"].ToString());
+                    if (statuInfo.Success.Equals("success"))
+                    {
+                        //获取商品信息
+                        addShopCarGoods goodsInfo = common.JsonHelper.DeserializeJsonToObject<addShopCarGoods>(json["goodsInfo"].ToString());
+                        //判断是新增还是增加数量
+                        if (statuInfo.AddOrUpdate.Equals(1))
+                        {
+                            //增加数量
+                            DataGridViewRowAddCount(statuInfo.StoreShoppingcarId.Value);
+                        }
+                        else
+                        {
+                            //新增购物车数据
+                            DataGridViewRow row = new DataGridViewRow();
+                            row.CreateCells(dgvShopcar);
 
-            DataGridViewRow row = new DataGridViewRow();
-            row.CreateCells(dgvShopcar);
+                            row.Cells[0].Value = goodsInfo.StoreShoppingcarId;
+                            row.Cells[1].Value = goodsInfo.GoodsName;
+                            row.Cells[2].Value = 1;
+                            row.Cells[3].Value = goodsInfo.StoreGoodsPrice;
+                            row.Cells[4].Value = goodsInfo.StoreGoodsPrice;
+                            
+                            dgvShopcar.Rows.Add(row);
+                            row.Selected = true;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("加入购物车失败!");
+                    }
+                }
+                else
+                {
+                    string success1 = json["success"].ToString();
+                    if (success1.Equals("underStock"))
+                    {
+                        MessageBox.Show("库存不足!");
+                    }
+                    else if (success1.Equals("xiajia"))
+                    {
+                        MessageBox.Show("商品已下架!");
+                    }
+                    else if (success1.Equals("notExist"))
+                    {
+                        MessageBox.Show("商品不存在!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("请求失败!");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("请求失败!");
+            }
 
-            row.Cells[0].Value = goodsName;
-            row.Cells[1].Value = num;
-            row.Cells[2].Value = money;
-            dgvShopcar.Rows.Add(row);
-            row.Selected = true;
-            this.textCode.Text = "";
-
+            SetTextCode();
         }
+
+
+
+        /// <summary>
+        /// 为某行商品增加数量
+        /// </summary>
+        /// <param name="storeShoppingcarId"></param>
+        private void DataGridViewRowAddCount(int storeShoppingcarId) {
+            //列表中所有的行
+            DataGridViewRowCollection dvrc = dgvShopcar.Rows;
+
+            if (dvrc.Count > 0) {
+                foreach (DataGridViewRow dgvr in dvrc) {
+                    if (int.Parse(dgvr.Cells[0].Value.ToString()).Equals(storeShoppingcarId)) {
+
+                        //增加一个之后的数量
+                        int newCount = int.Parse(dgvr.Cells[2].Value.ToString()) + 1;
+
+                        //将数量和单价转换为高精度来处理
+                        decimal count = new decimal(newCount);
+                        decimal storeGoodsPrice = new decimal(double.Parse(dgvr.Cells[3].Value.ToString()));
+
+                        //重新设置商品数量和小计
+                        dgvShopcar.Rows[dgvr.Index].Cells[2].Value = newCount;
+                        dgvShopcar.Rows[dgvr.Index].Cells[4].Value = count * storeGoodsPrice;
+                        
+                    }
+                }
+            }
+        }
+
 
 
         /// <summary>
@@ -184,5 +319,15 @@ namespace ddjd_c.ct.ScanCode
         {
             lblTime.Text = DateTime.Now.ToString();
         }
+
+
+        /// <summary>
+        /// 设置收银界面条码输入框的焦点，并清空
+        /// </summary>
+        public void SetTextCode() {
+            this.textCode.Text = "";
+            this.textCode.Focus();
+        }
+
     }
 }
