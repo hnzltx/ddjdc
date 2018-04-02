@@ -16,6 +16,12 @@ namespace ddjd_c
         /// </summary>
         public static int storeId = 21; //店铺ID
         public static string storeName;    //店铺名称
-        public static int storeType;   //店铺类型
+        public static int storeType = 2;   //店铺类型 1. 直营 2. 加盟
+
+        
+        /// <summary>
+        /// 操作成功的标识
+        /// </summary>
+        public static string success = "success";
     }
 }

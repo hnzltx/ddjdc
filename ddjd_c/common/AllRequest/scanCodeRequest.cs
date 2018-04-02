@@ -38,7 +38,15 @@ namespace ddjd_c.common.AllRequest
         /// </summary>
         public static string QueryStoreshoppingcar { get => queryStoreshoppingcar;}
         #endregion
-        
+
+
+        #region 清空店铺的购物车
+        private static string deleteStoreshoppingcarAll = "code/deleteStoreshoppingcarAll";
+        /// <summary>
+        /// 清空店铺的购物车
+        /// </summary>
+        public static string DeleteStoreshoppingcarAll { get => deleteStoreshoppingcarAll;}
+        #endregion
 
     }
 }

@@ -30,33 +30,38 @@ namespace ddjd_c.ct.ScanCode
         /// <param name="e"></param>
         private void frmScanCode_Load(object sender, EventArgs e)
         {
-            //Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
-            //int width1 = ScreenArea.Width;
-            //int height1 = ScreenArea.Height;
-            //this.Width = width1;
-            //this.Height = height1;
-            //this.Top = 0;
-            //this.Left = 0;
-            //this.TopMost = true;
             
+
+            Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
+            int width1 = ScreenArea.Width;
+            int height1 = ScreenArea.Height;
+            this.Width = width1;
+            this.Height = height1;
+            this.Top = 0;
+            this.Left = 0;
+            this.TopMost = true;
+
 
             //获取当前店铺购物车的商品
             queryStoreshoppingcar();
             
             //添加默认常用选项 ,并添加listview
-            addListView(this.tabGoodscategory.CreateTab("常用"), null);
+            addListView(this.tabGoodscategory.CreateTab("  常用  "), null);
 
             //查询分类集合
             List<model.goodscategory> goodsCategoryList = service.goodsCategory_service.goodsCategoryService.queryGoodsCateGoryForOne();
 
             if (goodsCategoryList.Count > 0) {
                 foreach (model.goodscategory g in goodsCategoryList) {
-                    TabItem t = this.tabGoodscategory.CreateTab(g.GoodsCategoryName);
+                    TabItem t = this.tabGoodscategory.CreateTab("  " + g.GoodsCategoryName + "  ");
                     t.Name = "goodscategory_" + g.GoodsCategoryId;
                     t.Click += new System.EventHandler(this.goodscategory_click);
+                    
                 }
             }
 
+
+            displaySumCountAndSumMoney();
             SetTextCode();
 
         }
@@ -241,8 +246,8 @@ namespace ddjd_c.ct.ScanCode
                             row.Cells[4].Value = goodsInfo.StoreGoodsPrice;
                             
                             dgvShopcar.Rows.Add(row);
-                            row.Selected = true;
                         }
+                        displaySumCountAndSumMoney();
                     }
                     else
                     {
@@ -327,6 +332,121 @@ namespace ddjd_c.ct.ScanCode
         public void SetTextCode() {
             this.textCode.Text = "";
             this.textCode.Focus();
+        }
+
+
+        /// <summary>
+        /// 清空购物车
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void emptyShopCar_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确定清空购物车所有商品吗?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                string deleteStatu = scanCodeService.deleteStoreshoppingcarAll();
+                if (deleteStatu != "") {
+                    //清空表单
+                    this.dgvShopcar.Rows.Clear();
+                }
+                else {
+                    MessageBox.Show("清空失败!");
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 微信支付按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void weixinPay_Click(object sender, EventArgs e)
+        {
+            if (GlobalsInfo.storeType == 1)
+            {
+                MessageBox.Show("微信支付成功!");
+            }
+            else {
+                MessageBox.Show("加盟店暂时不能使用此支付方式!");
+            }
+        }
+
+        /// <summary>
+        /// 支付宝支付按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void alipay_Click(object sender, EventArgs e)
+        {
+            if (GlobalsInfo.storeType == 1)
+            {
+                MessageBox.Show("支付宝支付成功!");
+            }
+            else
+            {
+                MessageBox.Show("加盟店暂时不能使用此支付方式!");
+            }
+        }
+
+
+        /// <summary>
+        /// 右键购物车某商品出现的菜单
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvShopcar_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right && e.ColumnIndex > -1 && e.RowIndex > -1)  //点击的是鼠标右键，并且不是表头
+            {
+                //右键选中单元格
+                this.dgvShopcar.Rows[e.RowIndex].Selected = true;
+                this.dgvMenu.Show(MousePosition.X, MousePosition.Y); //MousePosition.X, MousePosition.Y 是为了让菜单在所选行的位置显示
+
+            }
+        }
+
+        /// <summary>
+        /// 确定按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddGoods_Click(object sender, EventArgs e)
+        {
+            addGoods();
+        }
+
+
+
+
+        /// <summary>
+        /// 计算购物车中商品总数量和总金额
+        /// </summary>
+        private void displaySumCountAndSumMoney() {
+            //列表中所有的行
+            DataGridViewRowCollection dvrc = dgvShopcar.Rows;
+
+            //默认数量
+            int sumCount = 0;
+            //默认金额
+            decimal sumMoney = 0;
+
+            if (dvrc.Count > 0)
+            {
+                foreach (DataGridViewRow dgvr in dvrc)
+                {
+                    //将数量和单价转换为高精度来处理
+                    decimal storeGoodsPrice = new decimal(double.Parse(dgvr.Cells[3].Value.ToString()));
+
+                    sumMoney += int.Parse(dgvr.Cells[2].Value.ToString()) * storeGoodsPrice;
+                    sumCount += int.Parse(dgvr.Cells[2].Value.ToString());
+                    
+                }
+            }
+
+            this.lblSumCount.Text = sumCount.ToString();
+            this.lblSumMoney.Text = sumMoney.ToString();
+
         }
 
     }

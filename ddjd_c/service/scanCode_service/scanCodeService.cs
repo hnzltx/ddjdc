@@ -46,5 +46,17 @@ namespace ddjd_c.service.scanCode_service
                 common.AllRequest.scanCodeRequest.QueryStoreshoppingcar + common.GetParam.GetStrParam(dic)));
         }
 
+
+        /// <summary>
+        /// 清空店铺购物车
+        /// </summary>
+        /// <returns></returns>
+        public static string deleteStoreshoppingcarAll() {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("storeId", GlobalsInfo.storeId);
+            return http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.DeleteStoreshoppingcarAll, dic);
+        }
+
+
     }
 }
