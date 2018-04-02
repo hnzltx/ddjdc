@@ -145,6 +145,7 @@ namespace ddjd_c.ct.store
                 case "success":
                     ///重新加载店铺数据
                     HttpQeryStoreInfo();
+                    MessageBox.Show("修改成功");
                     break;
                 case "memberDiscountMaxOrMin":
                     MessageBox.Show("填写的折扣数不能大于100 或小于 10");
