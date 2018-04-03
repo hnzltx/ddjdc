@@ -53,7 +53,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Image = global::ddjd_c.Properties.Resources.logo;
             this.pictureBox2.Location = new System.Drawing.Point(26, 155);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(160, 146);
@@ -64,7 +64,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(261, 165);
+            this.label1.Location = new System.Drawing.Point(286, 165);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 2;
@@ -73,7 +73,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(261, 227);
+            this.label2.Location = new System.Drawing.Point(298, 227);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 2;
@@ -91,6 +91,7 @@
             // 
             this.userPossword.Location = new System.Drawing.Point(333, 224);
             this.userPossword.Name = "userPossword";
+            this.userPossword.PasswordChar = '*';
             this.userPossword.Size = new System.Drawing.Size(154, 21);
             this.userPossword.TabIndex = 2;
             this.userPossword.Text = "123456";
