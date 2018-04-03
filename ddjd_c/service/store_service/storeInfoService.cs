@@ -22,6 +22,14 @@ namespace ddjd_c.service.store_service
             return JsonHelper.DeserializeJsonToObject<storeInfo>(baseHttp.GetStrFunction(storeRequest.QueryStoreInfo + "?storeId=21"));
         }
 
-        
-    }
+
+		public static JObject UpdateStoreInfoService(Dictionary<string, object> dic)
+		{
+			return JsonHelper.getJObject(baseHttp.PostStrFunction(storeRequest.UpdateStoreInfo, dic));
+		}
+
+
+
+
+	}
 }
