@@ -449,5 +449,15 @@ namespace ddjd_c.ct.ScanCode
 
         }
 
+
+        /// <summary>
+        /// 提交订单按钮 -- 结算按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void submitOrder_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

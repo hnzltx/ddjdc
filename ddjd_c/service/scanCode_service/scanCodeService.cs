@@ -16,8 +16,8 @@ namespace ddjd_c.service.scanCode_service
         /// <returns></returns>
         public static List<vo.goods.scanCodeGoods> queryGoodsWithCustomGoods(Dictionary<string, object> dic) {
             //添加店铺ID
-            dic.Add("storeId",GlobalsInfo.storeId);
-            return common.JsonHelper.DeserializeJsonToList<vo.goods.scanCodeGoods>(http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.QueryGoodsWithCustomGoods,dic));
+            dic.Add("storeId", GlobalsInfo.storeId);
+            return common.JsonHelper.DeserializeJsonToList<vo.goods.scanCodeGoods>(http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.QueryGoodsWithCustomGoods, dic));
         }
 
 
@@ -55,6 +55,13 @@ namespace ddjd_c.service.scanCode_service
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("storeId", GlobalsInfo.storeId);
             return http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.DeleteStoreshoppingcarAll, dic);
+        }
+
+
+
+        public static string saveOrder(Dictionary<string, object> dic) {
+
+            return "";
         }
 
 

@@ -30,6 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
+            this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
+            this.labelX3 = new DevComponents.DotNetBar.LabelX();
+            this.lblSumMoney = new DevComponents.DotNetBar.LabelX();
+            this.lblSumCount = new DevComponents.DotNetBar.LabelX();
+            this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.ribbonControl1 = new DevComponents.DotNetBar.RibbonControl();
             this.tabGoodscategory = new DevComponents.DotNetBar.TabControl();
             this.emptyShopCar = new DevComponents.DotNetBar.ButtonX();
             this.alipay = new DevComponents.DotNetBar.ButtonX();
@@ -47,18 +53,12 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.dgvMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除此商品ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ribbonControl1 = new DevComponents.DotNetBar.RibbonControl();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager();
-            this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
-            this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.labelX4 = new DevComponents.DotNetBar.LabelX();
-            this.lblSumCount = new DevComponents.DotNetBar.LabelX();
-            this.lblSumMoney = new DevComponents.DotNetBar.LabelX();
             this.panelEx1.SuspendLayout();
+            this.panelEx2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabGoodscategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShopcar)).BeginInit();
             this.dgvMenu.SuspendLayout();
-            this.panelEx2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelEx1
@@ -88,6 +88,92 @@
             this.panelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelEx1.Style.GradientAngle = 90;
             this.panelEx1.TabIndex = 0;
+            // 
+            // panelEx2
+            // 
+            this.panelEx2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelEx2.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx2.Controls.Add(this.labelX3);
+            this.panelEx2.Controls.Add(this.lblSumMoney);
+            this.panelEx2.Controls.Add(this.lblSumCount);
+            this.panelEx2.Controls.Add(this.labelX4);
+            this.panelEx2.Location = new System.Drawing.Point(32, 432);
+            this.panelEx2.Name = "panelEx2";
+            this.panelEx2.Size = new System.Drawing.Size(348, 40);
+            this.panelEx2.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelEx2.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelEx2.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelEx2.Style.GradientAngle = 90;
+            this.panelEx2.TabIndex = 9;
+            // 
+            // labelX3
+            // 
+            // 
+            // 
+            // 
+            this.labelX3.BackgroundStyle.Class = "";
+            this.labelX3.Location = new System.Drawing.Point(196, 8);
+            this.labelX3.Name = "labelX3";
+            this.labelX3.Size = new System.Drawing.Size(44, 23);
+            this.labelX3.TabIndex = 9;
+            this.labelX3.Text = "总价：";
+            // 
+            // lblSumMoney
+            // 
+            // 
+            // 
+            // 
+            this.lblSumMoney.BackgroundStyle.Class = "";
+            this.lblSumMoney.Location = new System.Drawing.Point(250, 8);
+            this.lblSumMoney.Name = "lblSumMoney";
+            this.lblSumMoney.Size = new System.Drawing.Size(95, 23);
+            this.lblSumMoney.TabIndex = 10;
+            this.lblSumMoney.Text = "这里显示总价";
+            // 
+            // lblSumCount
+            // 
+            // 
+            // 
+            // 
+            this.lblSumCount.BackgroundStyle.Class = "";
+            this.lblSumCount.Location = new System.Drawing.Point(73, 8);
+            this.lblSumCount.Name = "lblSumCount";
+            this.lblSumCount.Size = new System.Drawing.Size(100, 23);
+            this.lblSumCount.TabIndex = 10;
+            this.lblSumCount.Text = "这里显示总数";
+            // 
+            // labelX4
+            // 
+            // 
+            // 
+            // 
+            this.labelX4.BackgroundStyle.Class = "";
+            this.labelX4.Location = new System.Drawing.Point(15, 8);
+            this.labelX4.Name = "labelX4";
+            this.labelX4.Size = new System.Drawing.Size(49, 23);
+            this.labelX4.TabIndex = 10;
+            this.labelX4.Text = "总数：";
+            // 
+            // ribbonControl1
+            // 
+            // 
+            // 
+            // 
+            this.ribbonControl1.BackgroundStyle.Class = "";
+            this.ribbonControl1.CaptionVisible = true;
+            this.ribbonControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ribbonControl1.KeyTipsFont = new System.Drawing.Font("Tahoma", 7F);
+            this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
+            this.ribbonControl1.Name = "ribbonControl1";
+            this.ribbonControl1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.ribbonControl1.Size = new System.Drawing.Size(1090, 24);
+            this.ribbonControl1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonControl1.TabGroupHeight = 14;
+            this.ribbonControl1.TabIndex = 7;
             // 
             // tabGoodscategory
             // 
@@ -160,6 +246,7 @@
             this.submitOrder.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.submitOrder.TabIndex = 5;
             this.submitOrder.Text = "结算";
+            this.submitOrder.Click += new System.EventHandler(this.submitOrder_Click);
             // 
             // lblTime
             // 
@@ -266,95 +353,9 @@
             this.删除此商品ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.删除此商品ToolStripMenuItem.Text = "删除此商品";
             // 
-            // ribbonControl1
-            // 
-            // 
-            // 
-            // 
-            this.ribbonControl1.BackgroundStyle.Class = "";
-            this.ribbonControl1.CaptionVisible = true;
-            this.ribbonControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ribbonControl1.KeyTipsFont = new System.Drawing.Font("Tahoma", 7F);
-            this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Name = "ribbonControl1";
-            this.ribbonControl1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.ribbonControl1.Size = new System.Drawing.Size(1090, 24);
-            this.ribbonControl1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonControl1.TabGroupHeight = 14;
-            this.ribbonControl1.TabIndex = 7;
-            // 
             // styleManager1
             // 
             this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
-            // 
-            // panelEx2
-            // 
-            this.panelEx2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelEx2.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelEx2.Controls.Add(this.labelX3);
-            this.panelEx2.Controls.Add(this.lblSumMoney);
-            this.panelEx2.Controls.Add(this.lblSumCount);
-            this.panelEx2.Controls.Add(this.labelX4);
-            this.panelEx2.Location = new System.Drawing.Point(32, 432);
-            this.panelEx2.Name = "panelEx2";
-            this.panelEx2.Size = new System.Drawing.Size(348, 40);
-            this.panelEx2.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.panelEx2.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelEx2.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelEx2.Style.GradientAngle = 90;
-            this.panelEx2.TabIndex = 9;
-            // 
-            // labelX3
-            // 
-            // 
-            // 
-            // 
-            this.labelX3.BackgroundStyle.Class = "";
-            this.labelX3.Location = new System.Drawing.Point(196, 8);
-            this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(44, 23);
-            this.labelX3.TabIndex = 9;
-            this.labelX3.Text = "总价：";
-            // 
-            // labelX4
-            // 
-            // 
-            // 
-            // 
-            this.labelX4.BackgroundStyle.Class = "";
-            this.labelX4.Location = new System.Drawing.Point(15, 8);
-            this.labelX4.Name = "labelX4";
-            this.labelX4.Size = new System.Drawing.Size(49, 23);
-            this.labelX4.TabIndex = 10;
-            this.labelX4.Text = "总数：";
-            // 
-            // lblSumCount
-            // 
-            // 
-            // 
-            // 
-            this.lblSumCount.BackgroundStyle.Class = "";
-            this.lblSumCount.Location = new System.Drawing.Point(73, 8);
-            this.lblSumCount.Name = "lblSumCount";
-            this.lblSumCount.Size = new System.Drawing.Size(100, 23);
-            this.lblSumCount.TabIndex = 10;
-            this.lblSumCount.Text = "这里显示总数";
-            // 
-            // lblSumMoney
-            // 
-            // 
-            // 
-            // 
-            this.lblSumMoney.BackgroundStyle.Class = "";
-            this.lblSumMoney.Location = new System.Drawing.Point(250, 8);
-            this.lblSumMoney.Name = "lblSumMoney";
-            this.lblSumMoney.Size = new System.Drawing.Size(95, 23);
-            this.lblSumMoney.TabIndex = 10;
-            this.lblSumMoney.Text = "这里显示总价";
             // 
             // frmScanCode
             // 
@@ -367,10 +368,10 @@
             this.Text = "收银 -- 主界面 -- 点单收银";
             this.Load += new System.EventHandler(this.frmScanCode_Load);
             this.panelEx1.ResumeLayout(false);
+            this.panelEx2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabGoodscategory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShopcar)).EndInit();
             this.dgvMenu.ResumeLayout(false);
-            this.panelEx2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
