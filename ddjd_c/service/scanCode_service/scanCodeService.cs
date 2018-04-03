@@ -59,9 +59,14 @@ namespace ddjd_c.service.scanCode_service
 
 
 
-        public static string saveOrder(Dictionary<string, object> dic) {
-
-            return "";
+        /// <summary>
+        /// 提交订单
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public static JObject saveOrder(Dictionary<string, object> dic) {
+            dic.Add("storeId", GlobalsInfo.storeId);
+            return common.JsonHelper.getJObject(http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.SaveOrder, dic));
         }
 
 

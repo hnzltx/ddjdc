@@ -457,7 +457,8 @@ namespace ddjd_c.ct.ScanCode
         /// <param name="e"></param>
         private void submitOrder_Click(object sender, EventArgs e)
         {
-
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            scanCodeService.saveOrder(dic);
         }
     }
 }
