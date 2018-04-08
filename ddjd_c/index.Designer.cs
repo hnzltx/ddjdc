@@ -57,6 +57,12 @@
             this.ribbonTabItem3 = new DevComponents.DotNetBar.RibbonTabItem();
             this.ribbonTabItem4 = new DevComponents.DotNetBar.RibbonTabItem();
             this.ribbonTabItem5 = new DevComponents.DotNetBar.RibbonTabItem();
+            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.styleManager2 = new DevComponents.DotNetBar.StyleManager();
+            this.tabMain = new DevComponents.DotNetBar.TabControl();
+            this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnMCloseAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnMCloseOther = new System.Windows.Forms.ToolStripMenuItem();
             this.office2007StartButton1 = new DevComponents.DotNetBar.Office2007StartButton();
             this.itemContainer1 = new DevComponents.DotNetBar.ItemContainer();
             this.itemContainer2 = new DevComponents.DotNetBar.ItemContainer();
@@ -65,12 +71,6 @@
             this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
             this.itemContainer4 = new DevComponents.DotNetBar.ItemContainer();
             this.退出程序 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
-            this.styleManager2 = new DevComponents.DotNetBar.StyleManager();
-            this.tabMain = new DevComponents.DotNetBar.TabControl();
-            this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnMCloseAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnMCloseOther = new System.Windows.Forms.ToolStripMenuItem();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel5.SuspendLayout();
             this.ribbonPanel1.SuspendLayout();
@@ -92,8 +92,8 @@
             // 
             this.ribbonControl1.BackgroundStyle.Class = "";
             this.ribbonControl1.CaptionVisible = true;
-            this.ribbonControl1.Controls.Add(this.ribbonPanel5);
             this.ribbonControl1.Controls.Add(this.ribbonPanel1);
+            this.ribbonControl1.Controls.Add(this.ribbonPanel5);
             this.ribbonControl1.Controls.Add(this.ribbonPanel3);
             this.ribbonControl1.Controls.Add(this.ribbonPanel2);
             this.ribbonControl1.Controls.Add(this.ribbonPanel4);
@@ -139,6 +139,7 @@
             // 
             this.ribbonPanel5.StyleMouseOver.Class = "";
             this.ribbonPanel5.TabIndex = 5;
+            this.ribbonPanel5.Visible = false;
             // 
             // ribbonBar5
             // 
@@ -197,7 +198,6 @@
             // 
             this.ribbonPanel1.StyleMouseOver.Class = "";
             this.ribbonPanel1.TabIndex = 1;
-            this.ribbonPanel1.Visible = false;
             // 
             // ribbonBar1
             // 
@@ -450,6 +450,7 @@
             // 
             // ribbonTabItem1
             // 
+            this.ribbonTabItem1.Checked = true;
             this.ribbonTabItem1.Name = "ribbonTabItem1";
             this.ribbonTabItem1.Panel = this.ribbonPanel1;
             this.ribbonTabItem1.Text = "基本资料";
@@ -474,10 +475,57 @@
             // 
             // ribbonTabItem5
             // 
-            this.ribbonTabItem5.Checked = true;
             this.ribbonTabItem5.Name = "ribbonTabItem5";
             this.ribbonTabItem5.Panel = this.ribbonPanel5;
             this.ribbonTabItem5.Text = "关于我们";
+            // 
+            // buttonItem1
+            // 
+            this.buttonItem1.Name = "buttonItem1";
+            this.buttonItem1.Text = "点单相邻";
+            // 
+            // styleManager2
+            // 
+            this.styleManager2.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
+            // 
+            // tabMain
+            // 
+            this.tabMain.CanReorderTabs = true;
+            this.tabMain.CloseButtonOnTabsVisible = true;
+            this.tabMain.CloseButtonPosition = DevComponents.DotNetBar.eTabCloseButtonPosition.Right;
+            this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabMain.Location = new System.Drawing.Point(0, 131);
+            this.tabMain.Name = "tabMain";
+            this.tabMain.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
+            this.tabMain.SelectedTabIndex = -1;
+            this.tabMain.Size = new System.Drawing.Size(839, 236);
+            this.tabMain.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Dock;
+            this.tabMain.TabIndex = 1;
+            this.tabMain.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
+            this.tabMain.Text = "tabControl1";
+            this.tabMain.TabItemClose += new DevComponents.DotNetBar.TabStrip.UserActionEventHandler(this.tabMain_TabItemClose);
+            // 
+            // cms
+            // 
+            this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnMCloseAll,
+            this.btnMCloseOther});
+            this.cms.Name = "cms";
+            this.cms.Size = new System.Drawing.Size(125, 48);
+            // 
+            // btnMCloseAll
+            // 
+            this.btnMCloseAll.Name = "btnMCloseAll";
+            this.btnMCloseAll.Size = new System.Drawing.Size(124, 22);
+            this.btnMCloseAll.Text = "全部关闭";
+            this.btnMCloseAll.Click += new System.EventHandler(this.btnMCloseAll_Click_1);
+            // 
+            // btnMCloseOther
+            // 
+            this.btnMCloseOther.Name = "btnMCloseOther";
+            this.btnMCloseOther.Size = new System.Drawing.Size(124, 22);
+            this.btnMCloseOther.Text = "关闭其它";
+            this.btnMCloseOther.Click += new System.EventHandler(this.btnMCloseOther_Click);
             // 
             // office2007StartButton1
             // 
@@ -565,54 +613,6 @@
             this.退出程序.Name = "退出程序";
             this.退出程序.SubItemsExpandWidth = 24;
             this.退出程序.Text = "退出程序";
-            // 
-            // buttonItem1
-            // 
-            this.buttonItem1.Name = "buttonItem1";
-            this.buttonItem1.Text = "点单相邻";
-            // 
-            // styleManager2
-            // 
-            this.styleManager2.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
-            // 
-            // tabMain
-            // 
-            this.tabMain.CanReorderTabs = true;
-            this.tabMain.CloseButtonOnTabsVisible = true;
-            this.tabMain.CloseButtonPosition = DevComponents.DotNetBar.eTabCloseButtonPosition.Right;
-            this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabMain.Location = new System.Drawing.Point(0, 131);
-            this.tabMain.Name = "tabMain";
-            this.tabMain.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
-            this.tabMain.SelectedTabIndex = -1;
-            this.tabMain.Size = new System.Drawing.Size(839, 236);
-            this.tabMain.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Dock;
-            this.tabMain.TabIndex = 1;
-            this.tabMain.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
-            this.tabMain.Text = "tabControl1";
-            this.tabMain.TabItemClose += new DevComponents.DotNetBar.TabStrip.UserActionEventHandler(this.tabMain_TabItemClose);
-            // 
-            // cms
-            // 
-            this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnMCloseAll,
-            this.btnMCloseOther});
-            this.cms.Name = "cms";
-            this.cms.Size = new System.Drawing.Size(125, 48);
-            // 
-            // btnMCloseAll
-            // 
-            this.btnMCloseAll.Name = "btnMCloseAll";
-            this.btnMCloseAll.Size = new System.Drawing.Size(124, 22);
-            this.btnMCloseAll.Text = "全部关闭";
-            this.btnMCloseAll.Click += new System.EventHandler(this.btnMCloseAll_Click_1);
-            // 
-            // btnMCloseOther
-            // 
-            this.btnMCloseOther.Name = "btnMCloseOther";
-            this.btnMCloseOther.Size = new System.Drawing.Size(124, 22);
-            this.btnMCloseOther.Text = "关闭其它";
-            this.btnMCloseOther.Click += new System.EventHandler(this.btnMCloseOther_Click);
             // 
             // indexName
             // 

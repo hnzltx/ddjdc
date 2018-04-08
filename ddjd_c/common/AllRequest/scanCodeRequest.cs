@@ -57,5 +57,23 @@ namespace ddjd_c.common.AllRequest
         public static string SaveOrder { get => saveOrder; }
         #endregion
 
+
+        #region 删除店铺购物车中某商品
+        private static string deleteStoreshoppingcar = "code/deleteStoreshoppingcar";
+        /// <summary>
+        /// 删除店铺购物车中某商品
+        /// </summary>
+        public static string DeleteStoreshoppingcar { get => deleteStoreshoppingcar; }
+        #endregion
+
+
+        #region 修改商品数量/重量
+        private static string updateStoreCar = "code/updateStoreCar";
+        /// <summary>
+        /// 修改商品数量/重量
+        /// </summary>
+        public static string UpdateStoreCar { get => updateStoreCar; }
+        #endregion
+
     }
 }

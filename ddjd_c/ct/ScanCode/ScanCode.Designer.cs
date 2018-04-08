@@ -43,17 +43,20 @@
             this.submitOrder = new DevComponents.DotNetBar.ButtonX();
             this.lblTime = new DevComponents.DotNetBar.LabelX();
             this.dgvShopcar = new System.Windows.Forms.DataGridView();
+            this.btnAddGoods = new DevComponents.DotNetBar.ButtonX();
+            this.textCode = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dgvMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteGoodsBystoreAndGoodsId = new System.Windows.Forms.ToolStripMenuItem();
+            this.styleManager1 = new DevComponents.DotNetBar.StyleManager();
+            this.command1 = new DevComponents.DotNetBar.Command(this.components);
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.storeShoppingcarId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.goodsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.oneMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sumMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAddGoods = new DevComponents.DotNetBar.ButtonX();
-            this.textCode = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.dgvMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.删除此商品ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.styleManager1 = new DevComponents.DotNetBar.StyleManager();
+            this.isBulkCargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelEx1.SuspendLayout();
             this.panelEx2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabGoodscategory)).BeginInit();
@@ -132,7 +135,7 @@
             this.lblSumMoney.Name = "lblSumMoney";
             this.lblSumMoney.Size = new System.Drawing.Size(95, 23);
             this.lblSumMoney.TabIndex = 10;
-            this.lblSumMoney.Text = "这里显示总价";
+            this.lblSumMoney.Text = "0";
             // 
             // lblSumCount
             // 
@@ -144,7 +147,7 @@
             this.lblSumCount.Name = "lblSumCount";
             this.lblSumCount.Size = new System.Drawing.Size(100, 23);
             this.lblSumCount.TabIndex = 10;
-            this.lblSumCount.Text = "这里显示总数";
+            this.lblSumCount.Text = "0";
             // 
             // labelX4
             // 
@@ -272,7 +275,8 @@
             this.goodsName,
             this.num,
             this.oneMoney,
-            this.sumMoney});
+            this.sumMoney,
+            this.isBulkCargo});
             this.dgvShopcar.Location = new System.Drawing.Point(32, 96);
             this.dgvShopcar.MultiSelect = false;
             this.dgvShopcar.Name = "dgvShopcar";
@@ -281,36 +285,6 @@
             this.dgvShopcar.Size = new System.Drawing.Size(348, 324);
             this.dgvShopcar.TabIndex = 2;
             this.dgvShopcar.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvShopcar_CellMouseClick);
-            // 
-            // storeShoppingcarId
-            // 
-            this.storeShoppingcarId.HeaderText = "购物车ID";
-            this.storeShoppingcarId.Name = "storeShoppingcarId";
-            this.storeShoppingcarId.Visible = false;
-            // 
-            // goodsName
-            // 
-            this.goodsName.HeaderText = "商品名称";
-            this.goodsName.Name = "goodsName";
-            this.goodsName.Width = 150;
-            // 
-            // num
-            // 
-            this.num.HeaderText = "数量/重量";
-            this.num.Name = "num";
-            this.num.Width = 70;
-            // 
-            // oneMoney
-            // 
-            this.oneMoney.HeaderText = "单价";
-            this.oneMoney.Name = "oneMoney";
-            this.oneMoney.Width = 70;
-            // 
-            // sumMoney
-            // 
-            this.sumMoney.HeaderText = "小计";
-            this.sumMoney.Name = "sumMoney";
-            this.sumMoney.Width = 55;
             // 
             // btnAddGoods
             // 
@@ -343,19 +317,60 @@
             // dgvMenu
             // 
             this.dgvMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除此商品ToolStripMenuItem});
+            this.deleteGoodsBystoreAndGoodsId});
             this.dgvMenu.Name = "dgvMenu";
             this.dgvMenu.Size = new System.Drawing.Size(137, 26);
             // 
-            // 删除此商品ToolStripMenuItem
+            // deleteGoodsBystoreAndGoodsId
             // 
-            this.删除此商品ToolStripMenuItem.Name = "删除此商品ToolStripMenuItem";
-            this.删除此商品ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.删除此商品ToolStripMenuItem.Text = "删除此商品";
+            this.deleteGoodsBystoreAndGoodsId.Name = "deleteGoodsBystoreAndGoodsId";
+            this.deleteGoodsBystoreAndGoodsId.Size = new System.Drawing.Size(136, 22);
+            this.deleteGoodsBystoreAndGoodsId.Text = "删除此商品";
+            this.deleteGoodsBystoreAndGoodsId.Click += new System.EventHandler(this.deleteGoodsBystoreAndGoodsId_Click);
             // 
             // styleManager1
             // 
             this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
+            // 
+            // serialPort1
+            // 
+            this.serialPort1.PortName = "COM4";
+            // 
+            // storeShoppingcarId
+            // 
+            this.storeShoppingcarId.HeaderText = "购物车ID";
+            this.storeShoppingcarId.Name = "storeShoppingcarId";
+            this.storeShoppingcarId.Visible = false;
+            // 
+            // goodsName
+            // 
+            this.goodsName.HeaderText = "商品名称";
+            this.goodsName.Name = "goodsName";
+            this.goodsName.Width = 150;
+            // 
+            // num
+            // 
+            this.num.HeaderText = "数量/重量";
+            this.num.Name = "num";
+            this.num.Width = 70;
+            // 
+            // oneMoney
+            // 
+            this.oneMoney.HeaderText = "单价";
+            this.oneMoney.Name = "oneMoney";
+            this.oneMoney.Width = 70;
+            // 
+            // sumMoney
+            // 
+            this.sumMoney.HeaderText = "小计";
+            this.sumMoney.Name = "sumMoney";
+            this.sumMoney.Width = 55;
+            // 
+            // isBulkCargo
+            // 
+            this.isBulkCargo.HeaderText = "是否散货";
+            this.isBulkCargo.Name = "isBulkCargo";
+            this.isBulkCargo.Visible = false;
             // 
             // frmScanCode
             // 
@@ -366,6 +381,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmScanCode";
             this.Text = "收银 -- 主界面 -- 点单收银";
+            this.Activated += new System.EventHandler(this.frmScanCode_Activated);
             this.Load += new System.EventHandler(this.frmScanCode_Load);
             this.panelEx1.ResumeLayout(false);
             this.panelEx2.ResumeLayout(false);
@@ -389,13 +405,8 @@
         private DevComponents.DotNetBar.ButtonX weixinPay;
         private DevComponents.DotNetBar.ButtonX emptyShopCar;
         private DevComponents.DotNetBar.TabControl tabGoodscategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn storeShoppingcarId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn goodsName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn oneMoney;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sumMoney;
         private System.Windows.Forms.ContextMenuStrip dgvMenu;
-        private System.Windows.Forms.ToolStripMenuItem 删除此商品ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteGoodsBystoreAndGoodsId;
         private DevComponents.DotNetBar.RibbonControl ribbonControl1;
         private DevComponents.DotNetBar.StyleManager styleManager1;
         private DevComponents.DotNetBar.PanelEx panelEx2;
@@ -403,5 +414,13 @@
         private DevComponents.DotNetBar.LabelX labelX4;
         private DevComponents.DotNetBar.LabelX lblSumMoney;
         private DevComponents.DotNetBar.LabelX lblSumCount;
+        private DevComponents.DotNetBar.Command command1;
+        private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn storeShoppingcarId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn goodsName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oneMoney;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sumMoney;
+        private System.Windows.Forms.DataGridViewTextBoxColumn isBulkCargo;
     }
 }

@@ -61,11 +61,18 @@
     <Compile Include="common\JsonHelper.cs" />
     <Compile Include="common\GetParam.cs" />
     <Compile Include="common\KeyboardHookLib.cs" />
+    <Compile Include="common\serialport.cs" />
     <Compile Include="ct\ScanCode\ScanCode.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ct\ScanCode\ScanCode.Designer.cs">
       <DependentUpon>ScanCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ct\ScanCode\submitOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\ScanCode\submitOrder.Designer.cs">
+      <DependentUpon>submitOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="ct\store\frmStoreInfo.cs">
       <SubType>Form</SubType>
@@ -112,8 +119,12 @@
     <Compile Include="vo\addShopCar\addShopCarStatuInfo.cs" />
     <Compile Include="vo\goods\scanCodeGoods.cs" />
     <Compile Include="vo\login\loginReturnInfo.cs" />
+    <Compile Include="vo\serialPortInfo.cs" />
     <EmbeddedResource Include="ct\ScanCode\ScanCode.resx">
       <DependentUpon>ScanCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\ScanCode\submitOrder.resx">
+      <DependentUpon>submitOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\store\frmStoreInfo.resx">
       <DependentUpon>frmStoreInfo.cs</DependentUpon>

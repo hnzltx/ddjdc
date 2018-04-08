@@ -70,5 +70,36 @@ namespace ddjd_c.service.scanCode_service
         }
 
 
+        /// <summary>
+        /// 删除购物车中某商品
+        /// </summary>
+        /// <param name="storeShoppingcarId"></param>
+        /// <returns></returns>
+        public static JObject deleteStoreshoppingcar(object storeShoppingcarId) {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("storeId", GlobalsInfo.storeId);
+            dic.Add("storeShoppingcarId", storeShoppingcarId);
+            return common.JsonHelper.getJObject(http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.DeleteStoreshoppingcar, dic));
+        }
+
+
+        /// <summary>
+        /// 修改商品数量/重量
+        /// </summary>
+        /// <param name="goodsCount"></param>
+        /// <param name="weight"></param>
+        /// <param name="storeShoppingcarId"></param>
+        /// <returns></returns>
+        public static JObject updateStoreCar(int goodsCount,string weight,int? storeShoppingcarId) {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("storeId", GlobalsInfo.storeId);
+            dic.Add("storeShoppingcarId", storeShoppingcarId);
+            dic.Add("goodsCount", goodsCount);
+            dic.Add("weight", weight);
+
+            return common.JsonHelper.getJObject(http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.UpdateStoreCar, dic));
+
+        }
+
     }
 }
