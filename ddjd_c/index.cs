@@ -23,6 +23,8 @@ namespace ddjd_c
         {
             this.Text = this.Text + " --【" + GlobalsInfo.storeName + "】";
             //lblDate.Text = DateTime.Now.Date.ToString("yyyy年MM月dd日 HH:mm:ss");
+
+            loadAppConfig();
         }
 
         
@@ -165,5 +167,50 @@ namespace ddjd_c
             frm.Show();
             //openWindow(frm, frm.Name);
         }
+
+        /// <summary>
+        /// 跳转到关于我们界面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAboutUs_Click(object sender, EventArgs e)
+        {
+            ct.AboutUs.frmAboutUs frm = new ct.AboutUs.frmAboutUs();
+            openWindow(frm,frm.Name);
+        }
+
+
+       /// <summary>
+       /// 跳转到收银秤设置界面
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
+        private void btnSetCashierScale_Click(object sender, EventArgs e)
+        {
+            ct.Set.frmSetCashierScale frm = new ct.Set.frmSetCashierScale();
+            openWindow(frm, frm.Name);
+        }
+
+        /// <summary>
+        /// 左上角退出程序按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSignOut_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
+
+        /// <summary>
+        /// 加载一些配置文件
+        /// </summary>
+        private void loadAppConfig() {
+            
+        }
+
+
+
     }
 }

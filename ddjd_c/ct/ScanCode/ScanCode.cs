@@ -32,16 +32,21 @@ namespace ddjd_c.ct.ScanCode
         /// <param name="e"></param>
         private void frmScanCode_Load(object sender, EventArgs e)
         {
-            
+            if (!loadCashierScaleConfig())
+            {
+                return;
+            }
 
-            //Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
-            //int width1 = ScreenArea.Width;
-            //int height1 = ScreenArea.Height;
-            //this.Width = width1;
-            //this.Height = height1;
-            //this.Top = 0;
-            //this.Left = 0;
-            //this.TopMost = true;
+
+            //将窗体全屏
+            Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
+            int width1 = ScreenArea.Width;
+            int height1 = ScreenArea.Height;
+            this.Width = width1;
+            this.Height = height1;
+            this.Top = 0;
+            this.Left = 0;
+            this.TopMost = true;
 
 
             //获取当前店铺购物车的商品
@@ -62,11 +67,15 @@ namespace ddjd_c.ct.ScanCode
                 }
             }
 
-
+            //显示总数和总价
             displaySumCountAndSumMoney();
+            //输入框选中
             SetTextCode();
 
         }
+
+
+
 
 
         /// <summary>
@@ -238,7 +247,7 @@ namespace ddjd_c.ct.ScanCode
                     {
                         //获取商品信息
                         addShopCarGoods goodsInfo = common.JsonHelper.DeserializeJsonToObject<addShopCarGoods>(json["goodsInfo"].ToString());
-                       
+
                         //是否为散货 true 是
                         bool isBulkCargo = goodsInfo.IsBulkCargo == 2 ? true : false;
                         //散货的重量
@@ -248,16 +257,18 @@ namespace ddjd_c.ct.ScanCode
                         if (isBulkCargo)
                         {
                             //如果是散货，打开电脑与收银秤的串口连接
-                            InitPort();
+                            if (!InitPort()) {
+                                return;
+                            }
                             //暂停下再拿
-                            Thread.Sleep(100);
+                            Thread.Sleep(500);
 
                             //获取收银秤重量
                             bulkCargoWeight = getWeight();
 
                             //清空重量变量
                             weight.Clear();
-                            
+
 
                             scanCodeService.updateStoreCar(1, bulkCargoWeight, statuInfo.StoreShoppingcarId);
 
@@ -267,7 +278,7 @@ namespace ddjd_c.ct.ScanCode
                         if (statuInfo.AddOrUpdate.Equals(1))
                         {
                             //增加数量
-                            DataGridViewRowAddCount(statuInfo.StoreShoppingcarId.Value,isBulkCargo,bulkCargoWeight);
+                            DataGridViewRowAddCount(statuInfo.StoreShoppingcarId.Value, isBulkCargo, bulkCargoWeight);
 
                         }
                         else
@@ -296,10 +307,10 @@ namespace ddjd_c.ct.ScanCode
                                 //默认是单价
                                 row.Cells[4].Value = goodsInfo.StoreGoodsPrice;
                             }
-                            
+
                             //添加单价
                             row.Cells[3].Value = goodsInfo.StoreGoodsPrice;
-                            
+
                             //添加是否为散货标识
                             row.Cells[5].Value = goodsInfo.IsBulkCargo;
 
@@ -308,7 +319,7 @@ namespace ddjd_c.ct.ScanCode
 
                         //计算总价
                         displaySumCountAndSumMoney();
-                        
+
                     }
                     else
                     {
@@ -351,7 +362,7 @@ namespace ddjd_c.ct.ScanCode
         /// <param name="storeShoppingcarId"></param>
         /// <param name="isBulkCargo">是否为散货； true是</param>
         /// <param name="bulkCargoWeight">散货的重量</param>
-        private void DataGridViewRowAddCount(int storeShoppingcarId,bool isBulkCargo = false, string bulkCargoWeight = "") {
+        private void DataGridViewRowAddCount(int storeShoppingcarId, bool isBulkCargo = false, string bulkCargoWeight = "") {
             //列表中所有的行
             DataGridViewRowCollection dvrc = dgvShopcar.Rows;
 
@@ -367,7 +378,7 @@ namespace ddjd_c.ct.ScanCode
                             //增加一个之后的数量
                             count = int.Parse(dgvr.Cells[2].Value.ToString()) + 1;
                         }
-                        
+
 
                         //将数量和单价转换为高精度来处理
                         decimal storeGoodsPrice = new decimal(double.Parse(dgvr.Cells[3].Value.ToString()));
@@ -472,11 +483,11 @@ namespace ddjd_c.ct.ScanCode
                 //右键选中单元格
                 this.dgvShopcar.Rows[e.RowIndex].Selected = true;
                 this.dgvMenu.Show(MousePosition.X, MousePosition.Y); //MousePosition.X, MousePosition.Y 是为了让菜单在所选行的位置显示
-                
+
 
             }
         }
-        
+
 
 
         /// <summary>
@@ -510,8 +521,8 @@ namespace ddjd_c.ct.ScanCode
                 {
                     //将数量和单价转换为高精度来处理
                     decimal storeGoodsPrice = new decimal(double.Parse(dgvr.Cells[3].Value.ToString()));
-                    
-                    sumMoney += new decimal(double.Parse(dgvr.Cells[2].Value.ToString())) * storeGoodsPrice ;
+
+                    sumMoney += new decimal(double.Parse(dgvr.Cells[2].Value.ToString())) * storeGoodsPrice;
 
                     //如果不是散货，数量累加
                     if (int.Parse(dgvr.Cells[5].Value.ToString()) == 1)
@@ -522,8 +533,8 @@ namespace ddjd_c.ct.ScanCode
                         //如果是散货，数量直接+1
                         sumCount += 1;
                     }
-                    
-                    
+
+
                 }
             }
 
@@ -540,10 +551,10 @@ namespace ddjd_c.ct.ScanCode
         /// <param name="e"></param>
         private void submitOrder_Click(object sender, EventArgs e)
         {
-            frmSubmitOrder submitOrder = new frmSubmitOrder(this.lblSumMoney.Text,this);
+            frmSubmitOrder submitOrder = new frmSubmitOrder(this.lblSumMoney.Text, this);
             submitOrder.TopMost = true;
             submitOrder.ShowDialog();
-            
+
         }
 
         /// <summary>
@@ -556,7 +567,7 @@ namespace ddjd_c.ct.ScanCode
             var storeShoppingcarId = this.dgvShopcar.SelectedRows[0].Cells[0].Value;
             if (null != storeShoppingcarId)
             {
-                JObject json =  service.scanCode_service.scanCodeService.deleteStoreshoppingcar(storeShoppingcarId.ToString());
+                JObject json = service.scanCode_service.scanCodeService.deleteStoreshoppingcar(storeShoppingcarId.ToString());
                 if (json["success"].ToString().Equals(GlobalsInfo.success))
                 {
                     this.dgvShopcar.Rows.Remove(this.dgvShopcar.SelectedRows[0]);
@@ -597,37 +608,48 @@ namespace ddjd_c.ct.ScanCode
                 double ss = double.Parse(weight.ToString());
                 return ss.ToString();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + "--" + weight.ToString());
                 return "0";
             }
         }
-        
+
 
         //重量
         StringBuilder weight = new StringBuilder();
         //定义个串口
         SerialPort com = new SerialPort();
-        private void InitPort()
+        private bool InitPort()
         {
-            if (!com.IsOpen)
+            try
             {
-                com.BaudRate = 9600;
-                com.PortName = "COM4";
-                com.DataBits = 8;
-                com.Parity = Parity.None;
-                com.StopBits = StopBits.One;
+                if (!com.IsOpen)
+                {
+                    com.BaudRate = db.SetCashierScale.SetCashierScale.BaudRate;
+                    com.PortName = db.SetCashierScale.SetCashierScale.PortName;
+                    com.DataBits = db.SetCashierScale.SetCashierScale.DataBits;
+                    //com.BaudRate = 9600;
+                    //com.PortName = "COM4";
+                    //com.DataBits = 8;
+                    com.Parity = Parity.None;
+                    com.StopBits = StopBits.One;
 
-                com.Open();
+                    com.Open();
+                }
+                com.WriteTimeout = 3000;
+                com.ReadTimeout = 3000;
+                com.ReceivedBytesThreshold = 1;
+                com.DtrEnable = true;
+                com.RtsEnable = true;
+                com.DataReceived += new SerialDataReceivedEventHandler(com_DataReceived);
+                return true;
             }
-            com.WriteTimeout = 3000;
-            com.ReadTimeout = 3000;
-            com.ReceivedBytesThreshold = 1;
-            com.DtrEnable = true;
-            com.RtsEnable = true;
-            com.DataReceived += new SerialDataReceivedEventHandler(com_DataReceived);
-            
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message + " -- (请检查收银秤是否连接正确!)");
+                return false;
+            }
+
         }
 
         //定义委托处理数据
@@ -637,14 +659,19 @@ namespace ddjd_c.ct.ScanCode
             weight.Append(str);
             if (weight.ToString().Length >= 4)
             {
-                if (com.IsOpen) {
+                Console.WriteLine(" oo -" + weight.ToString());
+                if (com.IsOpen)
+                {
                     com.DataReceived -= new SerialDataReceivedEventHandler(com_DataReceived);
                     com.Close();
                 }
                 weight = weight.Insert(1, ".");
-                
+
             }
         }
+
+
+
 
         private void com_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -667,37 +694,7 @@ namespace ddjd_c.ct.ScanCode
                 res = res.Replace("?", "");
                 res = res.Replace(".", "");
                 DisplayData(res);
-                //if (test2.InvokeRequired)
-                //{
-                //    test2.Invoke((System.Threading.ThreadStart)delegate
-                //    {
-                //        Console.WriteLine(res);
-                //        test2.Text = res;
 
-
-                //        if (test1.Text == "")
-                //        {
-                //            double s = double.Parse(res.Replace("\r", "")) / 1000;
-                //            test1.Text = res.Replace("\r", "");
-                //        }
-
-                //    });
-                //}
-
-                //res = System.Text.RegularExpressions.Regex.Replace(res, @"[^\d]*", "");
-
-                //if (res.Length >= 4)
-                //{
-                //    res = res.Substring(0, 4);
-                //    //Console.WriteLine("持续读取:" + res);
-                //    if (!res.Equals("0000"))
-                //    {
-                //        //com.Close();
-                //        res = res.Insert(1, ".");
-                //        weight = res;
-                //        //Console.WriteLine(DateTime.Now.ToString() + "关闭：" + res);
-                //    }
-                //}
             }
             catch (Exception ex)
             {
@@ -706,6 +703,32 @@ namespace ddjd_c.ct.ScanCode
         }
 
 
+        private bool loadCashierScaleConfig() {
+
+            if (common.utils.FileExists("SetCashierScale", "SetCashierScale.json"))
+            {
+                JObject json = common.utils.getFile("SetCashierScale", "SetCashierScale.json");
+                if (json != null)
+                {
+                    db.SetCashierScale.SetCashierScale.PortName = json["PortName"].ToString();
+                    db.SetCashierScale.SetCashierScale.BaudRate = int.Parse(json["BaudRate"].ToString());
+                    db.SetCashierScale.SetCashierScale.DataBits = int.Parse(json["DataBits"].ToString());
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("您可能还未设置收银秤,请先去设置!");
+                    this.Close();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("您可能还未设置收银秤,请先去设置!");
+                this.Close();
+                return false;
+            }
+        }
 
     }
 }

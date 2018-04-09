@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,6 +63,13 @@
     <Compile Include="common\GetParam.cs" />
     <Compile Include="common\KeyboardHookLib.cs" />
     <Compile Include="common\serialport.cs" />
+    <Compile Include="common\utils.cs" />
+    <Compile Include="ct\AboutUs\AboutUs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\AboutUs\AboutUs.Designer.cs">
+      <DependentUpon>AboutUs.cs</DependentUpon>
+    </Compile>
     <Compile Include="ct\ScanCode\ScanCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +81,12 @@
     </Compile>
     <Compile Include="ct\ScanCode\submitOrder.Designer.cs">
       <DependentUpon>submitOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ct\Set\SetCashierScale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\Set\SetCashierScale.Designer.cs">
+      <DependentUpon>SetCashierScale.cs</DependentUpon>
     </Compile>
     <Compile Include="ct\store\frmStoreInfo.cs">
       <SubType>Form</SubType>
@@ -86,6 +100,7 @@
     <Compile Include="ct\test.Designer.cs">
       <DependentUpon>test.cs</DependentUpon>
     </Compile>
+    <Compile Include="db\SetCashierScale\SetCashierScale.cs" />
     <Compile Include="GlobalsInfo.cs" />
     <Compile Include="http\baseHttp.cs" />
     <Compile Include="index.cs">
@@ -120,11 +135,17 @@
     <Compile Include="vo\goods\scanCodeGoods.cs" />
     <Compile Include="vo\login\loginReturnInfo.cs" />
     <Compile Include="vo\serialPortInfo.cs" />
+    <EmbeddedResource Include="ct\AboutUs\AboutUs.resx">
+      <DependentUpon>AboutUs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ct\ScanCode\ScanCode.resx">
       <DependentUpon>ScanCode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\ScanCode\submitOrder.resx">
       <DependentUpon>submitOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\Set\SetCashierScale.resx">
+      <DependentUpon>SetCashierScale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\store\frmStoreInfo.resx">
       <DependentUpon>frmStoreInfo.cs</DependentUpon>
@@ -164,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="common\AllRequest\a必看.txt" />
+    <Content Include="db\说明.txt" />
     <None Include="Resources\logo.jpg" />
   </ItemGroup>
   <ItemGroup />

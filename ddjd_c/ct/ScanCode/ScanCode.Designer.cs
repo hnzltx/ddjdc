@@ -43,6 +43,12 @@
             this.submitOrder = new DevComponents.DotNetBar.ButtonX();
             this.lblTime = new DevComponents.DotNetBar.LabelX();
             this.dgvShopcar = new System.Windows.Forms.DataGridView();
+            this.storeShoppingcarId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.goodsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oneMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sumMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isBulkCargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddGoods = new DevComponents.DotNetBar.ButtonX();
             this.textCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -51,12 +57,6 @@
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager();
             this.command1 = new DevComponents.DotNetBar.Command(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.storeShoppingcarId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.goodsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oneMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sumMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isBulkCargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelEx1.SuspendLayout();
             this.panelEx2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabGoodscategory)).BeginInit();
@@ -286,6 +286,42 @@
             this.dgvShopcar.TabIndex = 2;
             this.dgvShopcar.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvShopcar_CellMouseClick);
             // 
+            // storeShoppingcarId
+            // 
+            this.storeShoppingcarId.HeaderText = "购物车ID";
+            this.storeShoppingcarId.Name = "storeShoppingcarId";
+            this.storeShoppingcarId.Visible = false;
+            // 
+            // goodsName
+            // 
+            this.goodsName.HeaderText = "商品名称";
+            this.goodsName.Name = "goodsName";
+            this.goodsName.Width = 150;
+            // 
+            // num
+            // 
+            this.num.HeaderText = "数量/重量";
+            this.num.Name = "num";
+            this.num.Width = 70;
+            // 
+            // oneMoney
+            // 
+            this.oneMoney.HeaderText = "单价";
+            this.oneMoney.Name = "oneMoney";
+            this.oneMoney.Width = 70;
+            // 
+            // sumMoney
+            // 
+            this.sumMoney.HeaderText = "小计";
+            this.sumMoney.Name = "sumMoney";
+            this.sumMoney.Width = 55;
+            // 
+            // isBulkCargo
+            // 
+            this.isBulkCargo.HeaderText = "是否散货";
+            this.isBulkCargo.Name = "isBulkCargo";
+            this.isBulkCargo.Visible = false;
+            // 
             // btnAddGoods
             // 
             this.btnAddGoods.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -335,42 +371,6 @@
             // serialPort1
             // 
             this.serialPort1.PortName = "COM4";
-            // 
-            // storeShoppingcarId
-            // 
-            this.storeShoppingcarId.HeaderText = "购物车ID";
-            this.storeShoppingcarId.Name = "storeShoppingcarId";
-            this.storeShoppingcarId.Visible = false;
-            // 
-            // goodsName
-            // 
-            this.goodsName.HeaderText = "商品名称";
-            this.goodsName.Name = "goodsName";
-            this.goodsName.Width = 150;
-            // 
-            // num
-            // 
-            this.num.HeaderText = "数量/重量";
-            this.num.Name = "num";
-            this.num.Width = 70;
-            // 
-            // oneMoney
-            // 
-            this.oneMoney.HeaderText = "单价";
-            this.oneMoney.Name = "oneMoney";
-            this.oneMoney.Width = 70;
-            // 
-            // sumMoney
-            // 
-            this.sumMoney.HeaderText = "小计";
-            this.sumMoney.Name = "sumMoney";
-            this.sumMoney.Width = 55;
-            // 
-            // isBulkCargo
-            // 
-            this.isBulkCargo.HeaderText = "是否散货";
-            this.isBulkCargo.Name = "isBulkCargo";
-            this.isBulkCargo.Visible = false;
             // 
             // frmScanCode
             // 
