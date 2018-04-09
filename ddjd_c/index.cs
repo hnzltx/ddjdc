@@ -23,7 +23,7 @@ namespace ddjd_c
         {
             this.Text = this.Text + " --【" + GlobalsInfo.storeName + "】";
             //lblDate.Text = DateTime.Now.Date.ToString("yyyy年MM月dd日 HH:mm:ss");
-
+            
             loadAppConfig();
         }
 
@@ -50,8 +50,28 @@ namespace ddjd_c
             }
             return isOpened;
         }
-        public void openWindow(Form frm, string Name)
+
+
+        /// <summary>
+        /// 打开窗体，加入tab
+        /// </summary>
+        /// <param name="frm">窗体</param>
+        /// <param name="Name">窗体的name</param>
+        /// <param name="isRefresh">是否是刷新窗体</param>
+        /// <param name="isRefreshStr">如果是刷新窗体，可以带上一段描述</param>
+        public void openWindow(Form frm, string Name,bool isRefresh = false,string isRefreshStr = "")
         {
+            //如果当前窗体已经打开
+            if (IsOpenTab(Name)) {
+                //刷新状态为 true
+                if (isRefresh)
+                {
+                    //移除当前窗体
+                    TabItem tb = tabMain.SelectedTab;
+                    tabMain.Tabs.Remove(tb);
+                }
+            }
+
             DevComponents.DotNetBar.TabItem tp = new DevComponents.DotNetBar.TabItem();
             DevComponents.DotNetBar.TabControlPanel tcp = new DevComponents.DotNetBar.TabControlPanel();
             tp.MouseDown += new MouseEventHandler(tp_MouseDown);
@@ -63,8 +83,12 @@ namespace ddjd_c
             frm.FormBorderStyle = FormBorderStyle.None;
             frm.Show();
             tcp.Controls.Add(frm);
-            tp.Text = frm.Text;
             tp.Name = Name;
+
+            if (isRefresh)
+                tp.Text = frm.Text + " -- " + isRefreshStr;
+            else
+                tp.Text = frm.Text;
 
             if (!IsOpenTab(Name))
             {
@@ -75,6 +99,8 @@ namespace ddjd_c
                 tabMain.SelectedTab = tp;
             }
             tabMain.Refresh();
+
+            
         }
 
 
@@ -210,7 +236,33 @@ namespace ddjd_c
             
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblDate.Text = DateTime.Now.ToString();
+        }
 
+        /// <summary>
+        /// 订单待发货按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnOrder1_Click(object sender, EventArgs e)
+        {
+            ct.Order.frmOrder frm = new ct.Order.frmOrder(1);
+            openWindow(frm, frm.Name,true,"待发货");
+        }
+        
 
+        private void btnOrder2_Click(object sender, EventArgs e)
+        {
+            ct.Order.frmOrder frm = new ct.Order.frmOrder(2);
+            openWindow(frm, frm.Name, true, "已发货");
+        }
+
+        private void btnOrder3_Click(object sender, EventArgs e)
+        {
+            ct.Order.frmOrder frm = new ct.Order.frmOrder(3);
+            openWindow(frm, frm.Name, true, "已完成");
+        }
     }
 }
