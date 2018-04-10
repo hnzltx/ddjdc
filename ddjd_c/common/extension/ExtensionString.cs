@@ -44,5 +44,31 @@ namespace ddjd_c.common.extension
             double.TryParse(t, out d);
             return d;
         }
+
+        /// <summary>
+        /// 生成get请求url
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public static string ToGetRequestURL(this string t,Dictionary<string,object> dic=null)
+        {
+            if(dic == null)
+            {
+                return t;
+            }
+            StringBuilder builder = new StringBuilder();
+            builder.Append(t);
+            builder.Append("?");
+            int i = 0;
+            foreach (var item in dic)
+            {
+                if (i > 0)
+                builder.Append("&");
+                builder.AppendFormat("{0}={1}", item.Key, item.Value);
+                i++;
+            }
+            return builder.ToString();
+        }
 	}
 }

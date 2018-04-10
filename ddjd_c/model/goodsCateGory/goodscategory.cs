@@ -16,7 +16,8 @@ namespace ddjd_c.model
         private int? goodsCategoryPid;   //父级ID
         private string goodsCategoryIco;    //分类图片
         private int? goodsCategorySort;  //分类排序
-        private int? goodsCategoryFlag;  //是否显示分类； 1显示，2不显示
+        private int? goodsCategoryFlag;  //是否显示分类； 1显示，2不显示L
+        private List<goodscategory> list; //分类集合
 
         public int? GoodsCategoryId { get => goodsCategoryId; set => goodsCategoryId = value; }
         public string GoodsCategoryName { get => goodsCategoryName; set => goodsCategoryName = value; }
@@ -24,5 +25,6 @@ namespace ddjd_c.model
         public string GoodsCategoryIco { get => goodsCategoryIco; set => goodsCategoryIco = value; }
         public int? GoodsCategorySort { get => goodsCategorySort; set => goodsCategorySort = value; }
         public int? GoodsCategoryFlag { get => goodsCategoryFlag; set => goodsCategoryFlag = value; }
+        internal List<goodscategory> List { get => list; set => list = value; }
     }
 }

@@ -165,5 +165,16 @@ namespace ddjd_c
             frm.Show();
             //openWindow(frm, frm.Name);
         }
+
+        /// <summary>
+        /// 跳转到所有商品页面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAllGood_Click(object sender, EventArgs e)
+        {
+            ct.good.goodManagement frm = new ct.good.goodManagement();
+            openWindow(frm, frm.Name);
+        }
     }
 }

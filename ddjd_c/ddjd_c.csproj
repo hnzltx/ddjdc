@@ -31,13 +31,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>bitbug_favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2, Version=8.3.0.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DevComponents.DotNetBar2.dll</HintPath>
     </Reference>
+    <Reference Include="DevComponents.DotNetBar2.Fakes">
+      <HintPath>FakesAssemblies\DevComponents.DotNetBar2.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Fakes">
+      <HintPath>FakesAssemblies\Newtonsoft.Json.Fakes.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,8 +63,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WHC.Pager.WinControlEx">
+      <HintPath>C:\Users\Administrator\AppData\Local\Temp\Rar$DRa8724.23501\WHC.Pager.WinControlEx.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="common\AllRequest\goodRequest.cs" />
     <Compile Include="common\AllRequest\goodsCateGoryRequest.cs" />
     <Compile Include="common\AllRequest\loginRequest.cs" />
     <Compile Include="common\AllRequest\scanCodeRequest.cs" />
@@ -59,6 +76,18 @@
     <Compile Include="common\extension\ExtensionImage.cs" />
     <Compile Include="common\extension\ExtensionString.cs" />
     <Compile Include="common\JsonHelper.cs" />
+    <Compile Include="ct\good\goodDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\good\goodDetail.Designer.cs">
+      <DependentUpon>goodDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ct\good\goodManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\good\goodManagement.Designer.cs">
+      <DependentUpon>goodManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="ct\ScanCode\ScanCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +121,7 @@
       <DependentUpon>login.cs</DependentUpon>
     </Compile>
     <Compile Include="model\goodsCateGory\goodscategory.cs" />
+    <Compile Include="model\good\goodEntity.cs" />
     <Compile Include="model\member\memberInfo.cs" />
     <Compile Include="model\store\storeInfo.cs" />
     <Compile Include="Program.cs" />
@@ -102,11 +132,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="service\goodsCategory_service\goodsCategoryService.cs" />
+    <Compile Include="service\good\goodService.cs" />
     <Compile Include="service\login_service\loginService.cs" />
     <Compile Include="service\scanCode_service\scanCodeService.cs" />
     <Compile Include="service\store_service\storeInfoService.cs" />
     <Compile Include="vo\goods\scanCodeGoods.cs" />
     <Compile Include="vo\login\loginReturnInfo.cs" />
+    <EmbeddedResource Include="ct\good\goodDetail.resx">
+      <DependentUpon>goodDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\good\goodManagement.resx">
+      <DependentUpon>goodManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ct\ScanCode\ScanCode.resx">
       <DependentUpon>ScanCode.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,7 +166,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Fakes Include="Fakes\Newtonsoft.Json.fakes" />
+    <Fakes Include="Fakes\DevComponents.DotNetBar2.fakes" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\ddjd_c.model.good.goodEntity.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -147,8 +186,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bitbug_favicon.ico" />
     <Content Include="common\AllRequest\a必看.txt" />
-    <None Include="Resources\logo.jpg" />
+    <None Include="Resources\logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

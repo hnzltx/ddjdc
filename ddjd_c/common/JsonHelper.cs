@@ -21,6 +21,7 @@ namespace ddjd_c.common
         /// <param name="json"></param>
         /// <returns></returns>
         public static JObject getJObject(string json) {
+            
             return JObject.Parse(json);
         }
 
@@ -31,6 +32,7 @@ namespace ddjd_c.common
         /// <param name="json"></param>
         /// <returns></returns>
         public static JArray getJArray(string json) {
+
             return JArray.Parse(json);
         }
 
