@@ -1,4 +1,5 @@
-﻿using ddjd_c.ct.ScanCode;
+﻿using ddjd_c.ct;
+using ddjd_c.ct.ScanCode;
 using System;
 using System.Collections.Generic;
 using System.Linq;
