@@ -9,7 +9,7 @@ namespace ddjd_c.common.extension
 	public static class ExtensionString
 	{
 		/// <summary>
-		/// 验证string是否为空  
+		/// 验证string是否为空  true为空:false
 		/// </summary>
 		/// <param name="str">传入字符串</param>
 		/// <returns>返回true是 false不是</returns>
@@ -44,7 +44,19 @@ namespace ddjd_c.common.extension
             double.TryParse(t, out d);
             return d;
         }
-
+        /// <summary>
+        /// 验证是否是数字 true是 false不是
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool IsNumber(this string input)
+        {
+            double d = 0;
+            if (double.TryParse(input, out d)) // TryParse返回true说明是数值
+                return true;
+            else // 不是数值
+                return false;
+        }
         /// <summary>
         /// 生成get请求url
         /// </summary>

@@ -129,15 +129,7 @@ namespace ddjd_c.ct.good
             LoadData(this.pageNumber, this.pageSize, null);
         }
 
-        /// <summary>
-        /// 数据错误处理
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridViewX1_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-
-        }
+        
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
@@ -220,11 +212,20 @@ namespace ddjd_c.ct.good
 
         private void dataGridViewX1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Console.Write("fjsdjfajhfhahlf");
-            ct.good.goodDetail frm = new ct.good.goodDetail();
-
+            model.good.goodEntity entity = this.list[e.RowIndex];
+            ct.good.goodDetail frm = new ct.good.goodDetail(entity.StoreAndGoodsId);
+            frm.UpdateGoodList += new UpdateGoodListDelegate(Frm_UpdateGoodList);
             frm.ShowDialog();
 
+        }
+
+        /// <summary>
+        /// 修改商品成功后执行
+        /// </summary>
+        /// <param name="goodFlag"></param>
+        private void Frm_UpdateGoodList(int goodFlag)
+        {
+            var str = goodFlag;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace ddjd_c.common.extension
                         image = Properties.Resources.logo;
                         break;
                     case DefaultImgType.Good:
-                        image = Properties.Resources.logo;
+                        image = Properties.Resources.default_icon;
                         break;
                     case DefaultImgType.Order:
                         image = Properties.Resources.logo;
