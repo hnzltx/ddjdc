@@ -714,9 +714,9 @@ namespace ddjd_c.ct.ScanCode
         /// <returns></returns>
         private bool loadCashierScaleConfig() {
 
-            if (common.utils.FileExists("SetCashierScale", "SetCashierScale.json"))
+            if (common.utils.FileExists("SetCashierScale.json"))
             {
-                JObject json = common.utils.getFile("SetCashierScale", "SetCashierScale.json");
+                JObject json = common.utils.getFile("SetCashierScale.json");
                 if (json != null)
                 {
                     db.SetCashierScale.SetCashierScale.PortName = json["PortName"].ToString();

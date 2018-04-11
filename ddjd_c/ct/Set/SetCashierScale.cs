@@ -42,7 +42,7 @@ namespace ddjd_c.ct.Set
             source.Add("Parity", cmbParity.Text);
             source.Add("DataBits", cmbDataBits.Text);
 
-            if (common.utils.writeFile("SetCashierScale", "SetCashierScale.json", source))
+            if (common.utils.writeFile("SetCashierScale.json", source))
             {
                 db.SetCashierScale.SetCashierScale.BaudRate = int.Parse(cmbBaudRate.Text);
                 db.SetCashierScale.SetCashierScale.PortName = cmbPortList.Text;

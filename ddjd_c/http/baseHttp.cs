@@ -13,10 +13,10 @@ namespace ddjd_c.http
     {
 
         //线上地址
-        //private static String ddjdcUrl = "http://c.hnddjd.com/";
+        private static String ddjdcUrl = "http://c.hnddjd.com/";
 
         //本地地址
-        private static String ddjdcUrl = "http://192.168.199.215/";
+        //private static String ddjdcUrl = "http://192.168.199.215/";
 
 		///测试
 		private static String ddjdUrl = "123456789";

@@ -20,14 +20,11 @@ namespace ddjd_c.common
         /// <param name="fileName">文件的名称；  如:  test.json </param>
         /// <param name="data">数据；</param>
         /// <returns></returns>
-        public static bool writeFile(string Catalog,string fileName,object data) {
+        public static bool writeFile(string fileName,object data) {
 
             try
             {
-                string url = @"..\..\db\";
-                url += Catalog;
-                url += @"\";
-                url += fileName;
+                string url = fileName;
                 if (!File.Exists(url))
                 {
                     FileStream fs1 = new FileStream(url, FileMode.Create, FileAccess.ReadWrite);
@@ -51,12 +48,8 @@ namespace ddjd_c.common
         /// <param name="Catalog"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public static bool FileExists(string Catalog, string fileName) {
-            string url = @"..\..\db\";
-            url += Catalog;
-            url += @"\";
-            url += fileName;
-            if (File.Exists(url))
+        public static bool FileExists( string fileName) {
+            if (File.Exists(fileName))
             {
                 return true;
             }
@@ -72,12 +65,8 @@ namespace ddjd_c.common
         /// <param name="Catalog"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public static JObject getFile(string Catalog, string fileName) {
-            string url = @"..\..\db\";
-            url += Catalog;
-            url += @"\";
-            url += fileName;
-            var sourceContent = File.ReadAllText(url);
+        public static JObject getFile(string fileName) {
+            var sourceContent = File.ReadAllText(fileName);
             return JObject.Parse(sourceContent);
         }
 
