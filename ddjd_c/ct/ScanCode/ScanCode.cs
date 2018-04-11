@@ -104,8 +104,8 @@ namespace ddjd_c.ct.ScanCode
                         row.Cells[4].Value = count * storeGoodsPrice;
                     }
                     else {
-                        row.Cells[2].Value = goods.Weight;
-                        row.Cells[4].Value = (new decimal(double.Parse(goods.Weight)) * storeGoodsPrice).ToString("#0.00");
+                        row.Cells[2].Value = goods.Weight; 
+                        row.Cells[4].Value = common.utils.CutDecimalWithN(new decimal(double.Parse(goods.Weight)) * storeGoodsPrice,2);
                     }
                     row.Cells[3].Value = goods.StoreGoodsPrice;
                     row.Cells[5].Value = goods.IsBulkCargo;
@@ -297,7 +297,7 @@ namespace ddjd_c.ct.ScanCode
                                 row.Cells[2].Value = bulkCargoWeight;
 
                                 //计算散货金额
-                                row.Cells[4].Value = (new decimal(double.Parse(goodsInfo.StoreGoodsPrice)) * new decimal(double.Parse(bulkCargoWeight))).ToString("#0.00");
+                                row.Cells[4].Value = common.utils.CutDecimalWithN(new decimal(double.Parse(goodsInfo.StoreGoodsPrice)) * new decimal(double.Parse(bulkCargoWeight)), 2);
                             }
                             else
                             {
@@ -385,7 +385,8 @@ namespace ddjd_c.ct.ScanCode
 
                         //重新设置商品数量和小计
                         dgvShopcar.Rows[dgvr.Index].Cells[2].Value = count;
-                        dgvShopcar.Rows[dgvr.Index].Cells[4].Value = (count * storeGoodsPrice).ToString("#0.00");
+                        dgvShopcar.Rows[dgvr.Index].Cells[4].Value = common.utils.CutDecimalWithN(count * storeGoodsPrice, 2);
+
 
                     }
                 }
@@ -522,7 +523,7 @@ namespace ddjd_c.ct.ScanCode
                     //将数量和单价转换为高精度来处理
                     decimal storeGoodsPrice = new decimal(double.Parse(dgvr.Cells[3].Value.ToString()));
 
-                    sumMoney += new decimal(double.Parse(dgvr.Cells[2].Value.ToString())) * storeGoodsPrice;
+                    sumMoney += new decimal(double.Parse(dgvr.Cells[4].Value.ToString()));
 
                     //如果不是散货，数量累加
                     if (int.Parse(dgvr.Cells[5].Value.ToString()) == 1)
@@ -539,7 +540,7 @@ namespace ddjd_c.ct.ScanCode
             }
 
             this.lblSumCount.Text = sumCount.ToString();
-            this.lblSumMoney.Text = sumMoney.ToString("#0.00");
+            this.lblSumMoney.Text = common.utils.CutDecimalWithN(sumMoney, 2).ToString();
 
         }
 
@@ -616,6 +617,7 @@ namespace ddjd_c.ct.ScanCode
         }
 
 
+        #region 串口获取重量
         //重量
         StringBuilder weight = new StringBuilder();
         //定义个串口
@@ -645,7 +647,8 @@ namespace ddjd_c.ct.ScanCode
                 com.DataReceived += new SerialDataReceivedEventHandler(com_DataReceived);
                 return true;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message + " -- (请检查收银秤是否连接正确!)");
                 return false;
             }
@@ -670,9 +673,7 @@ namespace ddjd_c.ct.ScanCode
             }
         }
 
-
-
-
+        
         private void com_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
@@ -701,8 +702,16 @@ namespace ddjd_c.ct.ScanCode
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
 
 
+
+
+
+        /// <summary>
+        /// 加载收银秤的配置
+        /// </summary>
+        /// <returns></returns>
         private bool loadCashierScaleConfig() {
 
             if (common.utils.FileExists("SetCashierScale", "SetCashierScale.json"))

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="common\AllRequest\goodsCateGoryRequest.cs" />
     <Compile Include="common\AllRequest\loginRequest.cs" />
+    <Compile Include="common\AllRequest\orderInfoRequest.cs" />
     <Compile Include="common\AllRequest\scanCodeRequest.cs" />
     <Compile Include="common\AllRequest\storeRequest.cs" />
     <Compile Include="common\extension\ExtensionImage.cs" />
@@ -75,6 +76,12 @@
     </Compile>
     <Compile Include="ct\Order\Order.Designer.cs">
       <DependentUpon>Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ct\Order\OrderDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\Order\OrderDetail.Designer.cs">
+      <DependentUpon>OrderDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="ct\ScanCode\ScanCode.cs">
       <SubType>Form</SubType>
@@ -123,6 +130,7 @@
     </Compile>
     <Compile Include="model\goodsCateGory\goodscategory.cs" />
     <Compile Include="model\member\memberInfo.cs" />
+    <Compile Include="model\order\order.cs" />
     <Compile Include="model\store\storeInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +141,7 @@
     </Compile>
     <Compile Include="service\goodsCategory_service\goodsCategoryService.cs" />
     <Compile Include="service\login_service\loginService.cs" />
+    <Compile Include="service\order_service\orderService.cs" />
     <Compile Include="service\scanCode_service\scanCodeService.cs" />
     <Compile Include="service\store_service\storeInfoService.cs" />
     <Compile Include="vo\addShopCar\addShopCarGoods.cs" />
@@ -140,12 +149,18 @@
     <Compile Include="vo\addShopCar\addShopCarStatuInfo.cs" />
     <Compile Include="vo\goods\scanCodeGoods.cs" />
     <Compile Include="vo\login\loginReturnInfo.cs" />
+    <Compile Include="vo\order\order.cs" />
+    <Compile Include="vo\order\orderInfoGoodsDetails.cs" />
+    <Compile Include="vo\pageInfo.cs" />
     <Compile Include="vo\serialPortInfo.cs" />
     <EmbeddedResource Include="ct\AboutUs\AboutUs.resx">
       <DependentUpon>AboutUs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\Order\Order.resx">
       <DependentUpon>Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\Order\OrderDetail.resx">
+      <DependentUpon>OrderDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\ScanCode\ScanCode.resx">
       <DependentUpon>ScanCode.cs</DependentUpon>

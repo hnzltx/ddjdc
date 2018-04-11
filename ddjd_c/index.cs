@@ -248,20 +248,20 @@ namespace ddjd_c
         /// <param name="e"></param>
         private void btnOrder1_Click(object sender, EventArgs e)
         {
-            ct.Order.frmOrder frm = new ct.Order.frmOrder(1);
+            ct.Order.frmOrder frm = new ct.Order.frmOrder(2);
             openWindow(frm, frm.Name,true,"待发货");
         }
         
 
         private void btnOrder2_Click(object sender, EventArgs e)
         {
-            ct.Order.frmOrder frm = new ct.Order.frmOrder(2);
+            ct.Order.frmOrder frm = new ct.Order.frmOrder(3);
             openWindow(frm, frm.Name, true, "已发货");
         }
 
         private void btnOrder3_Click(object sender, EventArgs e)
         {
-            ct.Order.frmOrder frm = new ct.Order.frmOrder(3);
+            ct.Order.frmOrder frm = new ct.Order.frmOrder(4);
             openWindow(frm, frm.Name, true, "已完成");
         }
     }

@@ -82,5 +82,33 @@ namespace ddjd_c.common
         }
 
 
+
+        /// <summary>
+        /// 将某金额，截取后保留N位小数点返回  ；  -- 是截取 ，不是四舍五入
+        /// </summary>
+        /// <param name="d">金额</param>
+        /// <param name="n">保留几位</param>
+        /// <returns></returns>
+        public static decimal CutDecimalWithN(decimal d, int n)
+        {
+            string strDecimal = d.ToString();
+            int index = strDecimal.IndexOf(".");
+            if (index == -1 || strDecimal.Length < index + n + 1)
+            {
+                strDecimal = string.Format("{0:F" + n + "}", d);
+            }
+            else
+            {
+                int length = index;
+                if (n != 0)
+                {
+                    length = index + n + 1;
+                }
+                strDecimal = strDecimal.Substring(0, length);
+            }
+            return Decimal.Parse(strDecimal);
+        }
+
+
     }
 }

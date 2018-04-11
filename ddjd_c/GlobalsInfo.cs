@@ -18,7 +18,12 @@ namespace ddjd_c
         public static string storeName;    //店铺名称
         public static int storeType = 2;   //店铺类型 1. 直营 2. 加盟
 
-        
+
+        //分页，默认每页查询多少条数据
+        public static int pageSize = 10;
+        //分页，默认查询第几页
+        public static int pageNumber = 1;
+
         /// <summary>
         /// 操作成功的标识
         /// </summary>
