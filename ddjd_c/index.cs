@@ -264,5 +264,11 @@ namespace ddjd_c
             ct.Order.frmOrder frm = new ct.Order.frmOrder(4);
             openWindow(frm, frm.Name, true, "已完成");
         }
+
+        private void buttonItem16_Click(object sender, EventArgs e)
+        {
+            ct.good.goodManagement frm = new ct.good.goodManagement();
+            openWindow(frm, frm.Name);
+        }
     }
 }

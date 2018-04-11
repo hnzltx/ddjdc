@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="common\AllRequest\goodRequest.cs" />
     <Compile Include="common\AllRequest\goodsCateGoryRequest.cs" />
     <Compile Include="common\AllRequest\loginRequest.cs" />
     <Compile Include="common\AllRequest\orderInfoRequest.cs" />
@@ -70,6 +71,18 @@
     </Compile>
     <Compile Include="ct\AboutUs\AboutUs.Designer.cs">
       <DependentUpon>AboutUs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ct\good\goodDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\good\goodDetail.Designer.cs">
+      <DependentUpon>goodDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ct\good\goodManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\good\goodManagement.Designer.cs">
+      <DependentUpon>goodManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="ct\Order\Order.cs">
       <SubType>Form</SubType>
@@ -129,6 +142,7 @@
       <DependentUpon>login.cs</DependentUpon>
     </Compile>
     <Compile Include="model\goodsCateGory\goodscategory.cs" />
+    <Compile Include="model\good\goodEntity.cs" />
     <Compile Include="model\member\memberInfo.cs" />
     <Compile Include="model\order\order.cs" />
     <Compile Include="model\store\storeInfo.cs" />
@@ -140,6 +154,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="service\goodsCategory_service\goodsCategoryService.cs" />
+    <Compile Include="service\good\goodService.cs" />
     <Compile Include="service\login_service\loginService.cs" />
     <Compile Include="service\order_service\orderService.cs" />
     <Compile Include="service\scanCode_service\scanCodeService.cs" />
@@ -155,6 +170,12 @@
     <Compile Include="vo\serialPortInfo.cs" />
     <EmbeddedResource Include="ct\AboutUs\AboutUs.resx">
       <DependentUpon>AboutUs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\good\goodDetail.resx">
+      <DependentUpon>goodDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\good\goodManagement.resx">
+      <DependentUpon>goodManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\Order\Order.resx">
       <DependentUpon>Order.cs</DependentUpon>
