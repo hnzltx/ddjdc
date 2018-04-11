@@ -44,6 +44,8 @@ namespace ddjd_c.model.good
         private string promotionEndTime; //促销结束时间
         private int? promotionEndTimeSeconds; //促销结束时间秒
         private double? purchasePrice;//店铺进货价
+        private int? storeAndGoodsId; //店铺商品id
+
 
         public int? GoodsId { get => goodsId; set => goodsId = value; }
         public string GoodsName { get => goodsName; set => goodsName = value; }
@@ -77,5 +79,6 @@ namespace ddjd_c.model.good
         public string PromotionEndTime { get => promotionEndTime; set => promotionEndTime = value; }
         public int? PromotionEndTimeSeconds { get => promotionEndTimeSeconds; set => promotionEndTimeSeconds = value; }
         public double? PurchasePrice { get => purchasePrice; set => purchasePrice = value; }
+        public int? StoreAndGoodsId { get => storeAndGoodsId; set => storeAndGoodsId = value; }
     }
 }
