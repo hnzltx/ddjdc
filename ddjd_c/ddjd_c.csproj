@@ -90,6 +90,12 @@
     <Compile Include="ct\good\goodManagement.Designer.cs">
       <DependentUpon>goodManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="ct\good\inputTxtSort.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\good\inputTxtSort.Designer.cs">
+      <DependentUpon>inputTxtSort.cs</DependentUpon>
+    </Compile>
     <Compile Include="ct\Order\Order.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ct\good\goodManagement.resx">
       <DependentUpon>goodManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\good\inputTxtSort.resx">
+      <DependentUpon>inputTxtSort.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\Order\Order.resx">
       <DependentUpon>Order.cs</DependentUpon>

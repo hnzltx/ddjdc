@@ -30,7 +30,6 @@
         {
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.btnSubmit = new DevComponents.DotNetBar.ButtonX();
-            this.pbGoodPic = new System.Windows.Forms.PictureBox();
             this.lblGoodsMixed = new DevComponents.DotNetBar.LabelX();
             this.labelX22 = new DevComponents.DotNetBar.LabelX();
             this.lblBrand = new DevComponents.DotNetBar.LabelX();
@@ -63,6 +62,7 @@
             this.txtPurchasePrice = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
+            this.pbGoodPic = new System.Windows.Forms.PictureBox();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodPic)).BeginInit();
             this.SuspendLayout();
@@ -127,17 +127,6 @@
             this.btnSubmit.TabIndex = 30;
             this.btnSubmit.Text = "提交";
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
-            // 
-            // pbGoodPic
-            // 
-            this.pbGoodPic.BackColor = System.Drawing.Color.White;
-            this.pbGoodPic.Image = global::ddjd_c.Properties.Resources.default_icon1;
-            this.pbGoodPic.Location = new System.Drawing.Point(644, 215);
-            this.pbGoodPic.Name = "pbGoodPic";
-            this.pbGoodPic.Size = new System.Drawing.Size(150, 150);
-            this.pbGoodPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbGoodPic.TabIndex = 29;
-            this.pbGoodPic.TabStop = false;
             // 
             // lblGoodsMixed
             // 
@@ -509,6 +498,17 @@
             this.labelX1.TabIndex = 0;
             this.labelX1.Text = "可修改信息";
             // 
+            // pbGoodPic
+            // 
+            this.pbGoodPic.BackColor = System.Drawing.Color.White;
+            this.pbGoodPic.Image = global::ddjd_c.Properties.Resources.default_icon1;
+            this.pbGoodPic.Location = new System.Drawing.Point(644, 215);
+            this.pbGoodPic.Name = "pbGoodPic";
+            this.pbGoodPic.Size = new System.Drawing.Size(150, 150);
+            this.pbGoodPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbGoodPic.TabIndex = 29;
+            this.pbGoodPic.TabStop = false;
+            // 
             // goodDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -519,6 +519,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "goodDetail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "修改商品信息";
             this.Load += new System.EventHandler(this.goodDetail_Load);
             this.panelEx1.ResumeLayout(false);

@@ -23,10 +23,10 @@ namespace ddjd_c.service.good
         /// </summary>
         /// <param name="dic">参数</param>
         /// <returns></returns>
-        public static JObject QueryStoreAndGoodsList(Dictionary<string,object> dic=null)
+        public static vo.pageInfo<model.good.goodEntity> QueryStoreAndGoodsList(Dictionary<string,object> dic=null)
         {
          
-            return JsonHelper.getJObject(baseHttp.GetStrFunction(goodRequest.QueryStoreAndGoodsList.ToGetRequestURL(dic)));
+            return JsonHelper.DeserializeJsonToObject<vo.pageInfo<model.good.goodEntity>>(baseHttp.GetStrFunction(goodRequest.QueryStoreAndGoodsList.ToGetRequestURL(dic)));
         }
 
         /// <summary>
@@ -39,9 +39,62 @@ namespace ddjd_c.service.good
             return JsonHelper.DeserializeJsonToObject<goodEntity>(baseHttp.GetStrFunction(goodRequest.QueryStoreAndGoodsDetail.ToGetRequestURL(dic)));
         }
 
+        /// <summary>
+        /// 修改店铺信息
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <returns></returns>
         public static JObject UpdateGoodsByStoreAndGoodsId(Dictionary<string, object> dic)
         {
             return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.UpdateGoodsByStoreAndGoodsId,dic));
+        }
+
+        /// <summary>
+        /// 添加促销商品
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public static JObject AddPromotiongoods(Dictionary<string, object> dic)
+        {
+            return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.AddPromotiongoods, dic));
+        }
+
+        /// <summary>
+        /// 删除促销商品
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public static JObject RemovePromotiongoods(Dictionary<string, object> dic)
+        {
+            return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.RemovePromotiongoods, dic));
+        }
+        /// <summary>
+        /// 商品上下架
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public static JObject UpdateGoodsFlagByStoreAndGoodsId(Dictionary<string, object> dic)
+        {
+            return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.UpdateGoodsFlagByStoreAndGoodsId, dic));
+        }
+
+        /// <summary>
+        /// 删除首页推荐商品
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public static JObject RemoveIndexGoods(Dictionary<string, object> dic)
+        {
+            return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.RemoveIndexGoods, dic));
+        }
+        /// <summary>
+        /// 添加首页推荐商品
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public static JObject AddIndexGoods(Dictionary<string, object> dic)
+        {
+            return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.AddIndexGoods, dic));
         }
     }
 }

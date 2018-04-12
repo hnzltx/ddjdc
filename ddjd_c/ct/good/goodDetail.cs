@@ -17,14 +17,16 @@ namespace ddjd_c.ct.good
     /// 更新商品list
     /// </summary>
     /// <param name="goodFlag"></param>
-    public delegate void UpdateGoodListDelegate(int goodFlag);
+    public delegate void UpdateGoodListDelegate(int goodFlag,int rowIndex);
     public partial class goodDetail : Form
     {
         public event UpdateGoodListDelegate UpdateGoodList;
         private int? storeAndGoodsId;
-        public goodDetail(int? id)
+        private int rowIndex;
+        public goodDetail(int? id,int rowIndex)
         {
             this.storeAndGoodsId = id;
+            this.rowIndex = rowIndex;
             InitializeComponent();
         }
 
@@ -107,7 +109,7 @@ namespace ddjd_c.ct.good
                 case "success":
                     if (MessageBox.Show("修改成功", "确定", MessageBoxButtons.OK) == DialogResult.OK)
                     {
-                        UpdateGoodList(dic["goodsFlag"].ToString().ToInt());
+                        UpdateGoodList(dic["goodsFlag"].ToString().ToInt(),rowIndex);
                         this.Close();
                     }
                     break;
