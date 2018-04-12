@@ -71,6 +71,25 @@ namespace ddjd_c.common
         }
 
 
+        /// <summary>
+        /// 删除某文件
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static bool reomveFile(string fileName)
+        {
+            try
+            {
+                File.Delete(fileName);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            
+        }
+
 
         /// <summary>
         /// 将某金额，截取后保留N位小数点返回  ；  -- 是截取 ，不是四舍五入

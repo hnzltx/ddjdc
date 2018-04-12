@@ -23,6 +23,10 @@ namespace ddjd_c.ct.Set
         {
             //获取系统当前所有的串口
             string[] allPort = common.serialport.getAllPortList();
+            if (allPort.Length <= 0) {
+                MessageBox.Show("没有检测到收银秤!");
+            }
+
             cmbPortList.DataSource = allPort;
 
             //选中第一个波特率
@@ -35,6 +39,10 @@ namespace ddjd_c.ct.Set
 
         private void btnSetCashierScale_Click(object sender, EventArgs e)
         {
+            if (cmbPortList.Text == "") {
+                MessageBox.Show("没有选择端口号!");
+                return;
+            }
             JObject source = new JObject();
             source.Add("PortName", cmbPortList.Text);
             source.Add("BaudRate", cmbBaudRate.Text);

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -56,29 +57,6 @@ namespace ddjd_c.ct.Order
         }
 
 
-        /// <summary>
-        /// 查询数据并配置分页
-        /// </summary>
-        private void commQueryPageInfo() {
-            vo.pageInfo<vo.order.order> pg = new vo.pageInfo<vo.order.order>();
-
-            //本次查询数据需要的参数
-            Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("orderStatus", orderStatus);
-            dic.Add("pageSize", ct_pageSize);
-            dic.Add("pageNumber", ct_pageNumber);
-
-            //查询分页数据
-            pg = service.order_service.orderService.QueryStoreSystem_orderInfo_winform(dic);
-
-            //分页配置
-            pageInfoConfig(pg);
-            //赋值给BindingList
-            BList = new BindingList<vo.order.order>(pg.List);
-            //显示数据
-            commDgv.DataSource = BList;
-        }
-
 
         /// <summary>
         /// 删除选中行
@@ -91,13 +69,46 @@ namespace ddjd_c.ct.Order
 
                 //如果当前显示的数据总数大于0，减去1
                 int lblCount = int.Parse(this.lblCount.Text);
-                if (lblCount > 0) {
+                if (lblCount > 0)
+                {
                     this.lblCount.Text = (lblCount - 1) + "";
                 }
             }
         }
 
 
+        /// <summary>
+        /// 查询数据并配置分页
+        /// </summary>
+        /// <param name="searchDic">传了search的情况下，可以根据条件搜索。</param>
+        private void commQueryPageInfo(Dictionary<string, object> searchDic = null) {
+            vo.pageInfo<vo.order.order> pg = new vo.pageInfo<vo.order.order>();
+
+            //本次查询数据需要的参数
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("orderStatus", orderStatus);
+            dic.Add("pageSize", ct_pageSize);
+            dic.Add("pageNumber", ct_pageNumber);
+
+            if (searchDic != null) {
+                //将搜索参数添加到查询参数中
+                foreach (var item in searchDic)
+                {
+                    dic.Add(item.Key, item.Value);
+                }
+            }
+
+            //查询分页数据
+            pg = service.order_service.orderService.QueryStoreSystem_orderInfo_winform(dic);
+
+            //分页配置
+            pageInfoConfig(pg);
+            //赋值给BindingList
+            BList = new BindingList<vo.order.order>(pg.List);
+            //显示数据
+            commDgv.DataSource = BList;
+        }
+        
 
         #region 分页代码
         /** 目前分页需要改动的只有泛型对象， 
@@ -328,7 +339,44 @@ namespace ddjd_c.ct.Order
 
         #region 打印功能
 
-        
+        const int OPEN_EXISTING = 3;
+
+        string prnPort = "LPT1";
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+        private static extern IntPtr CreateFile(string lpFileName,
+        int dwDesiredAccess,
+        int dwShareMode,
+        int lpSecurityAttributes,
+        int dwCreationDisposition,
+        int dwFlagsAndAttributes,
+        int hTemplateFile);
+
+
+        public string PrintLine(string str)
+        {
+            IntPtr iHandle = CreateFile(prnPort, 0x50000000, 0, 0, OPEN_EXISTING, 0, 0);
+            if (iHandle.ToInt32() == -1)
+            {
+                Console.WriteLine(iHandle.ToString());
+                return "没有连接打印机或者打印机端口不是LPT1";
+            }
+            else
+            {
+                Console.WriteLine(iHandle.ToString());
+                FileStream fs = new FileStream(iHandle, FileAccess.ReadWrite);
+                StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.Default);
+                sw.WriteLine("           小票单");
+                sw.WriteLine();
+                sw.WriteLine(str);
+                sw.WriteLine("打印内容");
+                sw.WriteLine("---------------------------");
+
+                sw.Close();
+                fs.Close();
+                return "打印成功!";
+            }
+        }
+
 
         /// <summary>
         /// 打印
@@ -337,12 +385,44 @@ namespace ddjd_c.ct.Order
         /// <param name="e"></param>
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            
+            Console.WriteLine(PrintLine("哦哦哦哦")); 
         }
 
-        
+
 
         #endregion
+
+
+
+        #region 订单搜索功能
+
+        /// <summary>
+        /// 点击搜索按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSeatchOrder_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, object> search = new Dictionary<string, object>();
+            search.Add("startTime",dtStartTime.Text);
+            search.Add("endTime",dtEndTime.Text);
+            commQueryPageInfo(search);
+        }
+
+
+        /// <summary>
+        /// 显示全部按钮； 从第一页开始重新查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnShowAllOrder_Click(object sender, EventArgs e)
+        {
+            ct_pageNumber = 1;
+            commQueryPageInfo();
+        }
+
+        #endregion
+
 
     }
 }

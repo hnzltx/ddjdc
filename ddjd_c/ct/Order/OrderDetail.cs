@@ -24,7 +24,6 @@ namespace ddjd_c.ct.Order
             if (json["orderInfoDetails"] != null)
             {
                 model.order.order order = common.JsonHelper.DeserializeJsonToObject<model.order.order>(json["orderInfoDetails"].ToString());
-                Console.WriteLine(json["orderInfoGoodsListDetails"].ToString());
                 List<vo.order.orderInfoGoodsDetails> orderDetailList = common.JsonHelper.DeserializeJsonToList<vo.order.orderInfoGoodsDetails>(json["orderInfoGoodsListDetails"].ToString());
                 
                 if (order != null || orderDetailList.Count > 0)

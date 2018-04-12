@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2, Version=8.3.0.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -156,6 +159,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
     <Compile Include="service\goodsCategory_service\goodsCategoryService.cs" />
     <Compile Include="service\good\goodService.cs" />
     <Compile Include="service\login_service\loginService.cs" />
@@ -213,6 +221,10 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <Fakes Include="Fakes\Newtonsoft.Json.fakes" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -234,6 +246,8 @@
   <ItemGroup>
     <Content Include="common\AllRequest\a必看.txt" />
     <Content Include="db\说明.txt" />
+    <None Include="Resources\键盘.png" />
+    <None Include="Resources\c.jpg" />
     <None Include="Resources\default_icon.png" />
     <None Include="Resources\logo.jpg" />
   </ItemGroup>
