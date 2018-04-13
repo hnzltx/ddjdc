@@ -40,10 +40,12 @@ namespace ddjd_c.ct.good
         /// </summary>
         private void RequestGoodDetail()
         {
+            ddjd_c.http.ResponseDelegate responseDelegate = new http.ResponseDelegate(r);
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("storeAndGoodsId",this.storeAndGoodsId);
             dic.Add("storeId", ddjd_c.GlobalsInfo.storeId);
-            ddjd_c.model.good.goodEntity entity = goodService.QueryStoreAndGoodsDetail(dic);
+            ddjd_c.model.good.goodEntity entity = new model.good.goodEntity();
+            goodService.QueryStoreAndGoodsDetail(responseDelegate,dic);
             this.txtPurchasePrice.Text = entity.PurchasePrice.ToString();
             this.txtOfflineStock.Text = entity.OfflineStock.ToString();
             this.txtStock.Text = entity.Stock.ToString();
@@ -60,7 +62,16 @@ namespace ddjd_c.ct.good
             this.pbGoodPic.Image = ddjd_c.common.extension.ExtensionImage.HttpGetImage(ddjd_c.http.baseHttp.getDdjdcUrl() + entity.GoodsPic, common.extension.DefaultImgType.Good);
             
         }
-
+        
+        private void r(http.ResponseResult result)
+        {
+            if (result != null)
+            {
+                Console.Write(result.Error);
+                Console.Write(result.JsonStr);
+            }
+           
+        }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             
