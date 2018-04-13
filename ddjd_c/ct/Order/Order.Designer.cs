@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.btnPrint = new DevComponents.DotNetBar.ButtonX();
             this.btnDetail = new DevComponents.DotNetBar.ButtonX();
             this.btnDeliverGoods = new DevComponents.DotNetBar.ButtonX();
             this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
+            this.dtEndTime = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
+            this.dtStartTime = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.btnShowAllOrder = new DevComponents.DotNetBar.ButtonX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
@@ -62,15 +64,13 @@
             this.orderOriginalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelEx3 = new DevComponents.DotNetBar.PanelEx();
-            this.dtStartTime = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
-            this.dtEndTime = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.panelEx1.SuspendLayout();
             this.panelEx2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtEndTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtStartTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderInfo)).BeginInit();
             this.panelEx3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtStartTime)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtEndTime)).BeginInit();
             this.SuspendLayout();
             // 
             // panelEx1
@@ -152,6 +152,102 @@
             this.panelEx2.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelEx2.Style.GradientAngle = 90;
             this.panelEx2.TabIndex = 3;
+            // 
+            // dtEndTime
+            // 
+            // 
+            // 
+            // 
+            this.dtEndTime.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dtEndTime.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.dtEndTime.ButtonDropDown.Visible = true;
+            this.dtEndTime.CustomFormat = "yyyy-MM-dd";
+            this.dtEndTime.Format = DevComponents.Editors.eDateTimePickerFormat.Custom;
+            this.dtEndTime.Location = new System.Drawing.Point(268, 7);
+            // 
+            // 
+            // 
+            this.dtEndTime.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dtEndTime.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dtEndTime.MonthCalendar.BackgroundStyle.Class = "";
+            this.dtEndTime.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.dtEndTime.MonthCalendar.DisplayMonth = new System.DateTime(2018, 4, 1, 0, 0, 0, 0);
+            this.dtEndTime.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.dtEndTime.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dtEndTime.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.dtEndTime.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.dtEndTime.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dtEndTime.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.dtEndTime.MonthCalendar.TodayButtonVisible = true;
+            this.dtEndTime.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.dtEndTime.Name = "dtEndTime";
+            this.dtEndTime.Size = new System.Drawing.Size(116, 21);
+            this.dtEndTime.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.dtEndTime.TabIndex = 3;
+            // 
+            // dtStartTime
+            // 
+            // 
+            // 
+            // 
+            this.dtStartTime.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.dtStartTime.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
+            this.dtStartTime.ButtonDropDown.Visible = true;
+            this.dtStartTime.CustomFormat = "yyyy-MM-dd";
+            this.dtStartTime.Format = DevComponents.Editors.eDateTimePickerFormat.Custom;
+            this.dtStartTime.Location = new System.Drawing.Point(71, 7);
+            // 
+            // 
+            // 
+            this.dtStartTime.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dtStartTime.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.dtStartTime.MonthCalendar.BackgroundStyle.Class = "";
+            this.dtStartTime.MonthCalendar.ClearButtonVisible = true;
+            // 
+            // 
+            // 
+            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
+            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
+            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
+            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
+            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.Class = "";
+            this.dtStartTime.MonthCalendar.DisplayMonth = new System.DateTime(2018, 4, 1, 0, 0, 0, 0);
+            this.dtStartTime.MonthCalendar.MarkedDates = new System.DateTime[0];
+            this.dtStartTime.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
+            // 
+            // 
+            // 
+            this.dtStartTime.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.dtStartTime.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
+            this.dtStartTime.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.dtStartTime.MonthCalendar.NavigationBackgroundStyle.Class = "";
+            this.dtStartTime.MonthCalendar.TodayButtonVisible = true;
+            this.dtStartTime.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
+            this.dtStartTime.Name = "dtStartTime";
+            this.dtStartTime.Size = new System.Drawing.Size(116, 21);
+            this.dtStartTime.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.dtStartTime.TabIndex = 3;
             // 
             // labelX2
             // 
@@ -330,14 +426,14 @@
             this.orderPrice,
             this.orderOriginalPrice,
             this.addTime});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrderInfo.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrderInfo.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvOrderInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOrderInfo.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvOrderInfo.Location = new System.Drawing.Point(0, 0);
@@ -398,102 +494,6 @@
             this.panelEx3.Style.GradientAngle = 90;
             this.panelEx3.TabIndex = 3;
             // 
-            // dtStartTime
-            // 
-            // 
-            // 
-            // 
-            this.dtStartTime.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.dtStartTime.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
-            this.dtStartTime.ButtonDropDown.Visible = true;
-            this.dtStartTime.CustomFormat = "yyyy-MM-dd";
-            this.dtStartTime.Format = DevComponents.Editors.eDateTimePickerFormat.Custom;
-            this.dtStartTime.Location = new System.Drawing.Point(71, 7);
-            // 
-            // 
-            // 
-            this.dtStartTime.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.dtStartTime.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.dtStartTime.MonthCalendar.BackgroundStyle.Class = "";
-            this.dtStartTime.MonthCalendar.ClearButtonVisible = true;
-            // 
-            // 
-            // 
-            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
-            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
-            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.dtStartTime.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.dtStartTime.MonthCalendar.DisplayMonth = new System.DateTime(2018, 4, 1, 0, 0, 0, 0);
-            this.dtStartTime.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.dtStartTime.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.dtStartTime.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.dtStartTime.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
-            this.dtStartTime.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.dtStartTime.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.dtStartTime.MonthCalendar.TodayButtonVisible = true;
-            this.dtStartTime.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.dtStartTime.Name = "dtStartTime";
-            this.dtStartTime.Size = new System.Drawing.Size(116, 21);
-            this.dtStartTime.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dtStartTime.TabIndex = 3;
-            // 
-            // dtEndTime
-            // 
-            // 
-            // 
-            // 
-            this.dtEndTime.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.dtEndTime.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
-            this.dtEndTime.ButtonDropDown.Visible = true;
-            this.dtEndTime.CustomFormat = "yyyy-MM-dd";
-            this.dtEndTime.Format = DevComponents.Editors.eDateTimePickerFormat.Custom;
-            this.dtEndTime.Location = new System.Drawing.Point(268, 7);
-            // 
-            // 
-            // 
-            this.dtEndTime.MonthCalendar.AnnuallyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.dtEndTime.MonthCalendar.BackgroundStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.dtEndTime.MonthCalendar.BackgroundStyle.Class = "";
-            this.dtEndTime.MonthCalendar.ClearButtonVisible = true;
-            // 
-            // 
-            // 
-            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground2;
-            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BackColorGradientAngle = 90;
-            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid;
-            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BorderTopColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.BorderTopWidth = 1;
-            this.dtEndTime.MonthCalendar.CommandsBackgroundStyle.Class = "";
-            this.dtEndTime.MonthCalendar.DisplayMonth = new System.DateTime(2018, 4, 1, 0, 0, 0, 0);
-            this.dtEndTime.MonthCalendar.MarkedDates = new System.DateTime[0];
-            this.dtEndTime.MonthCalendar.MonthlyMarkedDates = new System.DateTime[0];
-            // 
-            // 
-            // 
-            this.dtEndTime.MonthCalendar.NavigationBackgroundStyle.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.dtEndTime.MonthCalendar.NavigationBackgroundStyle.BackColorGradientAngle = 90;
-            this.dtEndTime.MonthCalendar.NavigationBackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
-            this.dtEndTime.MonthCalendar.NavigationBackgroundStyle.Class = "";
-            this.dtEndTime.MonthCalendar.TodayButtonVisible = true;
-            this.dtEndTime.MonthCalendar.WeeklyMarkedDays = new System.DayOfWeek[0];
-            this.dtEndTime.Name = "dtEndTime";
-            this.dtEndTime.Size = new System.Drawing.Size(116, 21);
-            this.dtEndTime.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.dtEndTime.TabIndex = 3;
-            // 
             // frmOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -507,11 +507,11 @@
             this.Load += new System.EventHandler(this.frmOrder_Load);
             this.panelEx1.ResumeLayout(false);
             this.panelEx2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dtEndTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtStartTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderInfo)).EndInit();
             this.panelEx3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dtStartTime)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtEndTime)).EndInit();
             this.ResumeLayout(false);
 
         }

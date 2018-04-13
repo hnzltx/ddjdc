@@ -57,17 +57,41 @@
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager();
             this.command1 = new DevComponents.DotNetBar.Command(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.btnDeleteOneGoods = new DevComponents.DotNetBar.ButtonX();
+            this.bar1 = new DevComponents.DotNetBar.Bar();
+            this.btnHomePage = new DevComponents.DotNetBar.ButtonItem();
+            this.btnPreviousPage = new DevComponents.DotNetBar.ButtonItem();
+            this.btnNextPage = new DevComponents.DotNetBar.ButtonItem();
+            this.btnEndPage = new DevComponents.DotNetBar.ButtonItem();
+            this.labelItem4 = new DevComponents.DotNetBar.LabelItem();
+            this.labitem123 = new DevComponents.DotNetBar.LabelItem();
+            this.lblCount = new DevComponents.DotNetBar.LabelItem();
+            this.labelItem1 = new DevComponents.DotNetBar.LabelItem();
+            this.labelItem2 = new DevComponents.DotNetBar.LabelItem();
+            this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
+            this.cmbSelect = new DevComponents.DotNetBar.ComboBoxItem();
+            this.comboItem5 = new DevComponents.Editors.ComboItem();
+            this.comboItem1 = new DevComponents.Editors.ComboItem();
+            this.comboItem3 = new DevComponents.Editors.ComboItem();
+            this.comboItem2 = new DevComponents.Editors.ComboItem();
+            this.comboItem4 = new DevComponents.Editors.ComboItem();
+            this.labelItem3 = new DevComponents.DotNetBar.LabelItem();
+            this.panelEx3 = new DevComponents.DotNetBar.PanelEx();
             this.panelEx1.SuspendLayout();
             this.panelEx2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabGoodscategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShopcar)).BeginInit();
             this.dgvMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
+            this.panelEx3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelEx1
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx1.Controls.Add(this.panelEx3);
+            this.panelEx1.Controls.Add(this.btnDeleteOneGoods);
             this.panelEx1.Controls.Add(this.panelEx2);
             this.panelEx1.Controls.Add(this.ribbonControl1);
             this.panelEx1.Controls.Add(this.tabGoodscategory);
@@ -189,7 +213,7 @@
             this.tabGoodscategory.Name = "tabGoodscategory";
             this.tabGoodscategory.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
             this.tabGoodscategory.SelectedTabIndex = -1;
-            this.tabGoodscategory.Size = new System.Drawing.Size(582, 376);
+            this.tabGoodscategory.Size = new System.Drawing.Size(582, 324);
             this.tabGoodscategory.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Dock;
             this.tabGoodscategory.TabIndex = 6;
             this.tabGoodscategory.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
@@ -201,7 +225,7 @@
             this.emptyShopCar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.emptyShopCar.BackColor = System.Drawing.Color.Transparent;
             this.emptyShopCar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.emptyShopCar.Location = new System.Drawing.Point(398, 354);
+            this.emptyShopCar.Location = new System.Drawing.Point(401, 416);
             this.emptyShopCar.Name = "emptyShopCar";
             this.emptyShopCar.Size = new System.Drawing.Size(73, 58);
             this.emptyShopCar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -215,7 +239,7 @@
             this.alipay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.alipay.BackColor = System.Drawing.Color.Transparent;
             this.alipay.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.alipay.Location = new System.Drawing.Point(398, 267);
+            this.alipay.Location = new System.Drawing.Point(401, 249);
             this.alipay.Name = "alipay";
             this.alipay.Size = new System.Drawing.Size(73, 58);
             this.alipay.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -229,7 +253,7 @@
             this.weixinPay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.weixinPay.BackColor = System.Drawing.Color.Transparent;
             this.weixinPay.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.weixinPay.Location = new System.Drawing.Point(398, 183);
+            this.weixinPay.Location = new System.Drawing.Point(401, 165);
             this.weixinPay.Name = "weixinPay";
             this.weixinPay.Size = new System.Drawing.Size(73, 58);
             this.weixinPay.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -243,7 +267,7 @@
             this.submitOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.submitOrder.BackColor = System.Drawing.Color.Transparent;
             this.submitOrder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.submitOrder.Location = new System.Drawing.Point(398, 96);
+            this.submitOrder.Location = new System.Drawing.Point(401, 84);
             this.submitOrder.Name = "submitOrder";
             this.submitOrder.Size = new System.Drawing.Size(73, 58);
             this.submitOrder.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -280,8 +304,10 @@
             this.dgvShopcar.Location = new System.Drawing.Point(32, 96);
             this.dgvShopcar.MultiSelect = false;
             this.dgvShopcar.Name = "dgvShopcar";
+            this.dgvShopcar.ReadOnly = true;
             this.dgvShopcar.RowHeadersVisible = false;
             this.dgvShopcar.RowTemplate.Height = 23;
+            this.dgvShopcar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvShopcar.Size = new System.Drawing.Size(348, 324);
             this.dgvShopcar.TabIndex = 2;
             this.dgvShopcar.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvShopcar_CellMouseClick);
@@ -372,6 +398,149 @@
             // 
             this.serialPort1.PortName = "COM4";
             // 
+            // btnDeleteOneGoods
+            // 
+            this.btnDeleteOneGoods.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnDeleteOneGoods.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDeleteOneGoods.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnDeleteOneGoods.Location = new System.Drawing.Point(401, 334);
+            this.btnDeleteOneGoods.Name = "btnDeleteOneGoods";
+            this.btnDeleteOneGoods.Size = new System.Drawing.Size(73, 58);
+            this.btnDeleteOneGoods.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDeleteOneGoods.TabIndex = 10;
+            this.btnDeleteOneGoods.Text = "删除此项";
+            this.btnDeleteOneGoods.Click += new System.EventHandler(this.btnDeleteOneGoods_Click);
+            // 
+            // bar1
+            // 
+            this.bar1.AntiAlias = true;
+            this.bar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnHomePage,
+            this.btnPreviousPage,
+            this.btnNextPage,
+            this.btnEndPage,
+            this.labelItem4,
+            this.labitem123,
+            this.lblCount,
+            this.labelItem1,
+            this.labelItem2,
+            this.buttonItem5,
+            this.cmbSelect,
+            this.labelItem3});
+            this.bar1.Location = new System.Drawing.Point(-1, -1);
+            this.bar1.Name = "bar1";
+            this.bar1.Size = new System.Drawing.Size(583, 28);
+            this.bar1.Stretch = true;
+            this.bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.bar1.TabIndex = 11;
+            this.bar1.TabStop = false;
+            this.bar1.Text = "bar1";
+            // 
+            // btnHomePage
+            // 
+            this.btnHomePage.Name = "btnHomePage";
+            this.btnHomePage.Text = "首页";
+            // 
+            // btnPreviousPage
+            // 
+            this.btnPreviousPage.Name = "btnPreviousPage";
+            this.btnPreviousPage.Text = "上一页";
+            // 
+            // btnNextPage
+            // 
+            this.btnNextPage.Name = "btnNextPage";
+            this.btnNextPage.Text = "下一页";
+            // 
+            // btnEndPage
+            // 
+            this.btnEndPage.Name = "btnEndPage";
+            this.btnEndPage.Text = "尾页";
+            // 
+            // labelItem4
+            // 
+            this.labelItem4.Name = "labelItem4";
+            this.labelItem4.Text = " | ";
+            // 
+            // labitem123
+            // 
+            this.labitem123.Name = "labitem123";
+            this.labitem123.Text = "共有记录";
+            // 
+            // lblCount
+            // 
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Text = " ** ";
+            // 
+            // labelItem1
+            // 
+            this.labelItem1.Name = "labelItem1";
+            this.labelItem1.Text = "条";
+            // 
+            // labelItem2
+            // 
+            this.labelItem2.Name = "labelItem2";
+            this.labelItem2.Text = " | ";
+            // 
+            // buttonItem5
+            // 
+            this.buttonItem5.Name = "buttonItem5";
+            this.buttonItem5.Text = "每页显示";
+            // 
+            // cmbSelect
+            // 
+            this.cmbSelect.DropDownHeight = 106;
+            this.cmbSelect.ItemHeight = 17;
+            this.cmbSelect.Items.AddRange(new object[] {
+            this.comboItem5,
+            this.comboItem1,
+            this.comboItem3,
+            this.comboItem2,
+            this.comboItem4});
+            this.cmbSelect.Name = "cmbSelect";
+            // 
+            // comboItem5
+            // 
+            this.comboItem5.Text = "10";
+            // 
+            // comboItem1
+            // 
+            this.comboItem1.Text = "20";
+            // 
+            // comboItem3
+            // 
+            this.comboItem3.Text = "30";
+            // 
+            // comboItem2
+            // 
+            this.comboItem2.Text = "50";
+            // 
+            // comboItem4
+            // 
+            this.comboItem4.Text = "100";
+            // 
+            // labelItem3
+            // 
+            this.labelItem3.Name = "labelItem3";
+            this.labelItem3.Text = "条";
+            // 
+            // panelEx3
+            // 
+            this.panelEx3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.panelEx3.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx3.Controls.Add(this.bar1);
+            this.panelEx3.Location = new System.Drawing.Point(496, 432);
+            this.panelEx3.Name = "panelEx3";
+            this.panelEx3.Size = new System.Drawing.Size(582, 31);
+            this.panelEx3.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelEx3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
+            this.panelEx3.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelEx3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelEx3.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelEx3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelEx3.Style.GradientAngle = 90;
+            this.panelEx3.TabIndex = 12;
+            // 
             // frmScanCode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -388,6 +557,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabGoodscategory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShopcar)).EndInit();
             this.dgvMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bar1)).EndInit();
+            this.panelEx3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -422,5 +593,25 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn oneMoney;
         private System.Windows.Forms.DataGridViewTextBoxColumn sumMoney;
         private System.Windows.Forms.DataGridViewTextBoxColumn isBulkCargo;
+        private DevComponents.DotNetBar.ButtonX btnDeleteOneGoods;
+        private DevComponents.DotNetBar.Bar bar1;
+        private DevComponents.DotNetBar.ButtonItem btnHomePage;
+        private DevComponents.DotNetBar.ButtonItem btnPreviousPage;
+        private DevComponents.DotNetBar.ButtonItem btnNextPage;
+        private DevComponents.DotNetBar.ButtonItem btnEndPage;
+        private DevComponents.DotNetBar.LabelItem labelItem4;
+        private DevComponents.DotNetBar.LabelItem labitem123;
+        private DevComponents.DotNetBar.LabelItem lblCount;
+        private DevComponents.DotNetBar.LabelItem labelItem1;
+        private DevComponents.DotNetBar.LabelItem labelItem2;
+        private DevComponents.DotNetBar.ButtonItem buttonItem5;
+        private DevComponents.DotNetBar.ComboBoxItem cmbSelect;
+        private DevComponents.Editors.ComboItem comboItem5;
+        private DevComponents.Editors.ComboItem comboItem1;
+        private DevComponents.Editors.ComboItem comboItem3;
+        private DevComponents.Editors.ComboItem comboItem2;
+        private DevComponents.Editors.ComboItem comboItem4;
+        private DevComponents.DotNetBar.LabelItem labelItem3;
+        private DevComponents.DotNetBar.PanelEx panelEx3;
     }
 }

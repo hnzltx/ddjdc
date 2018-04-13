@@ -277,6 +277,13 @@ namespace ddjd_c.ct.ScanCode
                     
                     if (MessageBox.Show("下单成功，是否打印小票？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                     {
+                        common.LptControl lpt = new common.LptControl();
+                        //调用打印订单
+                        string printStatu = lpt.printOrderInfo(json["orderId"].ToString());
+                        if (!printStatu.Equals("success"))
+                        {
+                            MessageBox.Show(printStatu);
+                        }
                         this.Close();
                     }
                     else {
@@ -321,5 +328,16 @@ namespace ddjd_c.ct.ScanCode
             MessageBox.Show(msg);
         }
 
+
+        /// <summary>
+        /// 打开钱箱
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnOpenQX_Click(object sender, EventArgs e)
+        {
+            common.LptControl lpt = new common.LptControl();
+            lpt.openQX();
+        }
     }
 }

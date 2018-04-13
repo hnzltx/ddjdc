@@ -14,10 +14,10 @@ namespace ddjd_c.service.scanCode_service
         /// </summary>
         /// <param name="dic"></param>
         /// <returns></returns>
-        public static List<vo.goods.scanCodeGoods> queryGoodsWithCustomGoods(Dictionary<string, object> dic) {
+        public static vo.pageInfo<vo.goods.scanCodeGoods> queryGoodsWithCustomGoods(Dictionary<string, object> dic) {
             //添加店铺ID
             dic.Add("storeId", GlobalsInfo.storeId);
-            return common.JsonHelper.DeserializeJsonToList<vo.goods.scanCodeGoods>(http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.QueryGoodsWithCustomGoods, dic));
+            return common.JsonHelper.DeserializeJsonToObject<vo.pageInfo<vo.goods.scanCodeGoods>>(http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.QueryGoodsWithCustomGoods, dic));
         }
 
 

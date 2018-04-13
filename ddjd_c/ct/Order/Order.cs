@@ -339,43 +339,7 @@ namespace ddjd_c.ct.Order
 
         #region 打印功能
 
-        const int OPEN_EXISTING = 3;
-
-        string prnPort = "LPT1";
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr CreateFile(string lpFileName,
-        int dwDesiredAccess,
-        int dwShareMode,
-        int lpSecurityAttributes,
-        int dwCreationDisposition,
-        int dwFlagsAndAttributes,
-        int hTemplateFile);
-
-
-        public string PrintLine(string str)
-        {
-            IntPtr iHandle = CreateFile(prnPort, 0x50000000, 0, 0, OPEN_EXISTING, 0, 0);
-            if (iHandle.ToInt32() == -1)
-            {
-                Console.WriteLine(iHandle.ToString());
-                return "没有连接打印机或者打印机端口不是LPT1";
-            }
-            else
-            {
-                Console.WriteLine(iHandle.ToString());
-                FileStream fs = new FileStream(iHandle, FileAccess.ReadWrite);
-                StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.Default);
-                sw.WriteLine("           小票单");
-                sw.WriteLine();
-                sw.WriteLine(str);
-                sw.WriteLine("打印内容");
-                sw.WriteLine("---------------------------");
-
-                sw.Close();
-                fs.Close();
-                return "打印成功!";
-            }
-        }
+        
 
 
         /// <summary>
@@ -385,7 +349,21 @@ namespace ddjd_c.ct.Order
         /// <param name="e"></param>
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(PrintLine("哦哦哦哦")); 
+            if (commDgv.SelectedRows.Count > 0)
+            {
+
+                common.LptControl lpt = new common.LptControl();
+                string printStatu = lpt.printOrderInfo(commDgv.SelectedRows[0].Cells[0].Value.ToString());
+                if (!printStatu.Equals("success")) {
+                    MessageBox.Show(printStatu);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("没有选中订单!");
+            }
+            
         }
 
 
@@ -421,8 +399,8 @@ namespace ddjd_c.ct.Order
             commQueryPageInfo();
         }
 
+
         #endregion
-
-
+        
     }
 }

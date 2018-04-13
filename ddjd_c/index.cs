@@ -270,5 +270,16 @@ namespace ddjd_c
             ct.good.goodManagement frm = new ct.good.goodManagement();
             openWindow(frm, frm.Name);
         }
+
+        /// <summary>
+        /// 跳转打印机设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSetPrint_Click(object sender, EventArgs e)
+        {
+            ct.Set.frmSetPrint frm = new ct.Set.frmSetPrint();
+            openWindow(frm, frm.Name);
+        }
     }
 }

@@ -70,6 +70,8 @@
     <Compile Include="common\JsonHelper.cs" />
     <Compile Include="common\GetParam.cs" />
     <Compile Include="common\KeyboardHookLib.cs" />
+    <Compile Include="common\LptControl.cs" />
+    <Compile Include="common\Print.cs" />
     <Compile Include="common\serialport.cs" />
     <Compile Include="common\utils.cs" />
     <Compile Include="ct\AboutUs\AboutUs.cs">
@@ -126,6 +128,12 @@
     <Compile Include="ct\Set\SetCashierScale.Designer.cs">
       <DependentUpon>SetCashierScale.cs</DependentUpon>
     </Compile>
+    <Compile Include="ct\Set\SetPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\Set\SetPrint.Designer.cs">
+      <DependentUpon>SetPrint.cs</DependentUpon>
+    </Compile>
     <Compile Include="ct\store\frmStoreInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +147,7 @@
       <DependentUpon>test.cs</DependentUpon>
     </Compile>
     <Compile Include="db\SetCashierScale\SetCashierScale.cs" />
+    <Compile Include="db\SetPrint\SetPrint.cs" />
     <Compile Include="GlobalsInfo.cs" />
     <Compile Include="http\baseHttp.cs" />
     <Compile Include="index.cs">
@@ -211,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ct\Set\SetCashierScale.resx">
       <DependentUpon>SetCashierScale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\Set\SetPrint.resx">
+      <DependentUpon>SetPrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\store\frmStoreInfo.resx">
       <DependentUpon>frmStoreInfo.cs</DependentUpon>

@@ -32,28 +32,38 @@ namespace ddjd_c.ct.ScanCode
         /// <param name="e"></param>
         private void frmScanCode_Load(object sender, EventArgs e)
         {
+            
             if (!loadCashierScaleConfig())
             {
                 return;
             }
 
+            loagPageConfig();
+
 
             //将窗体全屏
-            Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
-            int width1 = ScreenArea.Width;
-            int height1 = ScreenArea.Height;
-            this.Width = width1;
-            this.Height = height1;
-            this.Top = 0;
-            this.Left = 0;
-            this.TopMost = true;
+            //Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
+            //int width1 = ScreenArea.Width;
+            //int height1 = ScreenArea.Height;
+            //this.Width = width1;
+            //this.Height = height1;
+            //this.Top = 0;
+            //this.Left = 0;
+            //this.TopMost = true;
 
 
             //获取当前店铺购物车的商品
             queryStoreshoppingcar();
 
-            //添加默认常用选项 ,并添加listview
-            addListView(this.tabGoodscategory.CreateTab("  常用  "), null);
+            //添加默认常用选项 ,并绑定点击事件，添加listview
+            TabItem cy = this.tabGoodscategory.CreateTab("  常用  ");
+            cy.Tag = 0;
+            cy.Click += new System.EventHandler(this.goodscategory_click);
+            addListView(cy, 0);
+
+            commItem = cy;
+            commGoodsCategoryId = 0;
+            
 
             //查询分类集合
             List<model.goodscategory> goodsCategoryList = service.goodsCategory_service.goodsCategoryService.queryGoodsCateGoryForOne();
@@ -61,7 +71,7 @@ namespace ddjd_c.ct.ScanCode
             if (goodsCategoryList.Count > 0) {
                 foreach (model.goodscategory g in goodsCategoryList) {
                     TabItem t = this.tabGoodscategory.CreateTab("  " + g.GoodsCategoryName + "  ");
-                    t.Name = "goodscategory_" + g.GoodsCategoryId;
+                    t.Tag = g.GoodsCategoryId;
                     t.Click += new System.EventHandler(this.goodscategory_click);
 
                 }
@@ -124,13 +134,21 @@ namespace ddjd_c.ct.ScanCode
         /// <param name="e"></param>
         private void goodscategory_click(object sender, EventArgs e)
         {
+            //每次切换分类， 都是从第一页开始
+            ct_pageNumber = 1;
+
             TabItem t = (TabItem)sender;
-            string[] strArray = t.Name.Split('_');
-            addListView(t, int.Parse(strArray[1]));
+            addListView(t, int.Parse(t.Tag.ToString()));
             SetTextCode();
+
+            commItem = t;
+            commGoodsCategoryId = int.Parse(t.Tag.ToString());
         }
 
-
+        //记录全局的tabItem; 分页时使用
+        TabItem commItem;
+        //记录全局的分类ID; 分页时使用
+        int? commGoodsCategoryId;
 
 
         /// <summary>
@@ -138,29 +156,40 @@ namespace ddjd_c.ct.ScanCode
         /// </summary>
         /// <param name="item"></param>
         private void addListView(TabItem item, int? goodsCategoryId) {
+            
             ListView lv = new ListView();
             lv.Dock = DockStyle.Fill;
             lv.Click += new System.EventHandler(this.goodsListView_click);
 
             //每个listView显示的图片
             ImageList il = new ImageList();
-            il.ImageSize = new Size(100, 100);
+            il.ImageSize = new Size(90, 90);
 
             //设置listView显示的图片
             lv.LargeImageList = il;
 
             Dictionary<String, object> d = new Dictionary<string, object>();
             if (null != goodsCategoryId) {
-                //添加分类ID
-                d.Add("fCategoryId", goodsCategoryId);
+                if (goodsCategoryId != 0) {
+                    //添加分类ID
+                    d.Add("fCategoryId", goodsCategoryId);
+                }
+                
             }
+            d.Add("pageSize", ct_pageSize);
+            d.Add("pageNumber", ct_pageNumber);
+
+            vo.pageInfo<vo.goods.scanCodeGoods> pg = new vo.pageInfo<vo.goods.scanCodeGoods>();
             //查询此分类下的商品
-            List<vo.goods.scanCodeGoods> listGoods = scanCodeService.queryGoodsWithCustomGoods(d);
+            pg = scanCodeService.queryGoodsWithCustomGoods(d);
+
+            //分页配置
+            pageInfoConfig(pg);
 
             //商品数量大于0，进行遍历
-            if (listGoods.Count > 0) {
+            if (pg.TotalRow > 0) {
                 int i = 0;
-                foreach (var goods in listGoods) {
+                foreach (var goods in pg.List) {
                     Image img = Image.FromStream(WebRequest.Create(http.baseHttp.getDdjdcUrl() + goods.GoodsPic).GetResponse().GetResponseStream());
 
                     il.Images.Add(img);
@@ -738,6 +767,199 @@ namespace ddjd_c.ct.ScanCode
                 return false;
             }
         }
+
+        /// <summary>
+        /// 删除某一商品
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDeleteOneGoods_Click(object sender, EventArgs e)
+        {
+            if (this.dgvShopcar.SelectedRows.Count > 0)
+            {
+                var storeShoppingcarId = this.dgvShopcar.SelectedRows[0].Cells[0].Value;
+                if (null != storeShoppingcarId)
+                {
+                    JObject json = service.scanCode_service.scanCodeService.deleteStoreshoppingcar(storeShoppingcarId.ToString());
+                    if (json["success"].ToString().Equals(GlobalsInfo.success))
+                    {
+                        this.dgvShopcar.Rows.Remove(this.dgvShopcar.SelectedRows[0]);
+                        displaySumCountAndSumMoney();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("删除失败,请刷新后重试！");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("删除异常,请刷新后重试！");
+                }
+            }
+            else
+            {
+                MessageBox.Show("没有选中商品!");
+            }
+        }
+
+
+
+
+        /// <summary>
+        /// 查询数据并配置分页
+        /// </summary>
+        private void commQueryPageInfo()
+        {
+            //移除当前分类下的listview，用以重新展示新数据
+            commItem.AttachedControl.Controls.RemoveAt(0);
+            //查询新数据
+            addListView(commItem,commGoodsCategoryId);
+
+        }
+
+
+
+        #region 分页代码
+        /** 目前分页需要改动的只有泛型对象， 
+         * 按道理将所有model都继承一个baseModel，稍作改动即可使分页更加通用，暂时记着，以后看改不改 —_—*/
+
+        //数据绑定到dataGridView的泛型集合，方便后期操作；   -- 此处的 T 需要改成你需要的对象
+        BindingList<vo.order.order> BList;
+        //当前窗体的每页查询条数
+        //int ct_pageSize = GlobalsInfo.pageSize;
+        int ct_pageSize = 2;
+        //当前窗体已经查询到第几页
+        int ct_pageNumber = GlobalsInfo.pageNumber;
+        //数据总页数
+        int ct_totalPage = 1;
+
+
+        /// <summary>
+        /// 绑定分页控件和事件代码的关系；  在窗体加载时调用
+        /// </summary>
+        private void loagPageConfig() {
+            //尾页事件
+            this.btnEndPage.Click += new EventHandler(this.btnEndPage_Click);
+            //首页事件
+            this.btnHomePage.Click += new EventHandler(this.btnHomePage_Click);
+            //下一页事件
+            this.btnNextPage.Click += new EventHandler(this.btnNextPage_Click);
+            //上一页事件
+            this.btnPreviousPage.Click += new EventHandler(this.btnPreviousPage_Click);
+            //绑定页面显示条数设置控件的TextChanged事件
+            this.cmbSelect.SelectedIndexChanged += new EventHandler(cmbSelect_TextChanged);
+        }
+
+
+        /// <summary>
+        /// 分页控件配置
+        /// </summary>
+        /// <param name="pg"></param>
+        private void pageInfoConfig(vo.pageInfo<vo.goods.scanCodeGoods> pg)
+        {
+
+            //数据总数
+            this.lblCount.Text = pg.TotalRow.ToString();
+            //总页数
+            ct_totalPage = pg.TotalPage.Value;
+
+            if (pg.LastPage)
+            {
+                //如果是最后一页，禁用下一页和尾页
+                btnNextPage.Enabled = false;
+                btnEndPage.Enabled = false;
+            }
+            else
+            {
+                btnNextPage.Enabled = true;
+                btnEndPage.Enabled = true;
+            }
+
+            if (pg.FirstPage)
+            {
+                //如果是第一页，禁用首页和上一页
+                btnHomePage.Enabled = false;
+                btnPreviousPage.Enabled = false;
+            }
+            else
+            {
+                btnHomePage.Enabled = true;
+                btnPreviousPage.Enabled = true;
+            }
+
+        }
+
+
+        /// <summary>
+        /// 首页按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnHomePage_Click(object sender, EventArgs e)
+        {
+            ct_pageNumber = 1;
+            commQueryPageInfo();
+        }
+
+        /// <summary>
+        /// 每页多少条的选择事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbSelect_TextChanged(object sender, EventArgs e)
+        {
+            //当前选择的每页多少条
+            int selectPageSize = int.Parse(this.cmbSelect.SelectedItem.ToString());
+            //设置公共每页多少条
+            ct_pageSize = selectPageSize;
+            //如果当前选择的数量  大于或等于 总的数据条数
+            if (selectPageSize >= int.Parse(this.lblCount.Text))
+            {
+                //回到第一页
+                ct_pageNumber = 1;
+            }
+            commQueryPageInfo();
+
+        }
+
+        /// <summary>
+        /// 上一页
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPreviousPage_Click(object sender, EventArgs e)
+        {
+            ct_pageNumber = ct_pageNumber - 1;
+            commQueryPageInfo();
+        }
+
+        /// <summary>
+        /// 下一页
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnNextPage_Click(object sender, EventArgs e)
+        {
+            ct_pageNumber = ct_pageNumber + 1;
+            commQueryPageInfo();
+        }
+
+
+        /// <summary>
+        /// 尾页
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEndPage_Click(object sender, EventArgs e)
+        {
+            ct_pageNumber = ct_totalPage;
+            commQueryPageInfo();
+        }
+
+
+        #endregion
+
 
     }
 }

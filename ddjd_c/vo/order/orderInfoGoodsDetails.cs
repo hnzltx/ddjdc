@@ -15,17 +15,21 @@ namespace ddjd_c.vo.order
         private string goodsName;
         private string goodsUnit;
         private string goodUcode;
-        private string goodsCount;
+        private int goodsCount;
         private string goodsMoney;
         private string goodsSumMoney;
         private string weight;
+        private int goodsStutas;
+        private string promotionMsg;
 
         public string GoodsName { get => goodsName; set => goodsName = value; }
         public string GoodsUnit { get => goodsUnit; set => goodsUnit = value; }
         public string GoodUcode { get => goodUcode; set => goodUcode = value; }
-        public string GoodsCount { get => goodsCount; set => goodsCount = value; }
         public string GoodsMoney { get => goodsMoney; set => goodsMoney = value; }
         public string GoodsSumMoney { get => goodsSumMoney; set => goodsSumMoney = value; }
         public string Weight { get => weight; set => weight = value; }
+        public int GoodsCount { get => goodsCount; set => goodsCount = value; }
+        public int GoodsStutas { get => goodsStutas; set => goodsStutas = value; }
+        public string PromotionMsg { get => promotionMsg; set => promotionMsg = value; }
     }
 }

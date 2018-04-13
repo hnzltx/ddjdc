@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
+            this.btnOpenQX = new DevComponents.DotNetBar.ButtonX();
             this.zhaoling = new DevComponents.DotNetBar.LabelX();
             this.shishou = new DevComponents.DotNetBar.LabelX();
             this.yingshou = new DevComponents.DotNetBar.LabelX();
@@ -54,7 +55,6 @@
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +62,7 @@
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelEx1.Controls.Add(this.buttonX1);
+            this.panelEx1.Controls.Add(this.btnOpenQX);
             this.panelEx1.Controls.Add(this.zhaoling);
             this.panelEx1.Controls.Add(this.shishou);
             this.panelEx1.Controls.Add(this.yingshou);
@@ -99,6 +99,19 @@
             this.panelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelEx1.Style.GradientAngle = 90;
             this.panelEx1.TabIndex = 0;
+            // 
+            // btnOpenQX
+            // 
+            this.btnOpenQX.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnOpenQX.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnOpenQX.Font = new System.Drawing.Font("宋体", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOpenQX.Location = new System.Drawing.Point(124, 241);
+            this.btnOpenQX.Name = "btnOpenQX";
+            this.btnOpenQX.Size = new System.Drawing.Size(76, 59);
+            this.btnOpenQX.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnOpenQX.TabIndex = 6;
+            this.btnOpenQX.Text = "打开钱箱";
+            this.btnOpenQX.Click += new System.EventHandler(this.btnOpenQX_Click);
             // 
             // zhaoling
             // 
@@ -430,18 +443,6 @@
             this.labelX1.TabIndex = 0;
             this.labelX1.Text = "应付：";
             // 
-            // buttonX1
-            // 
-            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX1.Font = new System.Drawing.Font("宋体", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonX1.Location = new System.Drawing.Point(124, 241);
-            this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(76, 59);
-            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX1.TabIndex = 6;
-            this.buttonX1.Text = "打开钱箱";
-            // 
             // frmSubmitOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -486,6 +487,6 @@
         private DevComponents.DotNetBar.LabelX zhaoling;
         private DevComponents.DotNetBar.LabelX shishou;
         private DevComponents.DotNetBar.LabelX yingshou;
-        private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.DotNetBar.ButtonX btnOpenQX;
     }
 }
