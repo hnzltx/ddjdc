@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ResponseResult.cs" />
     <Compile Include="common\AllRequest\goodRequest.cs" />
     <Compile Include="common\AllRequest\goodsCateGoryRequest.cs" />
     <Compile Include="common\AllRequest\loginRequest.cs" />
@@ -79,6 +80,12 @@
     </Compile>
     <Compile Include="ct\AboutUs\AboutUs.Designer.cs">
       <DependentUpon>AboutUs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ct\good\AddPromotiongoodForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\good\AddPromotiongoodForm.Designer.cs">
+      <DependentUpon>AddPromotiongoodForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ct\good\goodDetail.cs">
       <SubType>Form</SubType>
@@ -196,6 +203,9 @@
     <Compile Include="vo\serialPortInfo.cs" />
     <EmbeddedResource Include="ct\AboutUs\AboutUs.resx">
       <DependentUpon>AboutUs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\good\AddPromotiongoodForm.resx">
+      <DependentUpon>AddPromotiongoodForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\good\goodDetail.resx">
       <DependentUpon>goodDetail.cs</DependentUpon>

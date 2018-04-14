@@ -34,9 +34,9 @@ namespace ddjd_c.service.good
         /// </summary>
         /// <param name="dic"></param>
         /// <returns></returns>
-        public static goodEntity QueryStoreAndGoodsDetail(Dictionary<string, object> dic = null)
+        public static void QueryStoreAndGoodsDetail(Action<ResponseResult, System.Threading.SynchronizationContext> action,Dictionary<string, object> dic = null)
         {
-            return JsonHelper.DeserializeJsonToObject<goodEntity>(baseHttp.GetStrFunction(goodRequest.QueryStoreAndGoodsDetail.ToGetRequestURL(dic)));
+            baseHttp.GetStrFunction(goodRequest.QueryStoreAndGoodsDetail.ToGetRequestURL(dic), action);
         }
 
         /// <summary>

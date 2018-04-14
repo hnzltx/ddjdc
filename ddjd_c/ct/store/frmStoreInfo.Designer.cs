@@ -215,7 +215,6 @@
             this.dtStart.Size = new System.Drawing.Size(142, 21);
             this.dtStart.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dtStart.TabIndex = 6;
-            this.dtStart.Value = new System.DateTime(2018, 3, 31, 16, 14, 24, 108);
             // 
             // cbxIsOrderReceivingState
             // 

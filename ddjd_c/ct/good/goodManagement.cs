@@ -482,6 +482,17 @@ namespace ddjd_c.ct.good
                 }
                 
             }
+            if (ToolStripMenuItem3.Selected == true)
+            {
+                if(entity.GoodsStutas == 3)//移除促销
+                {
+
+                }
+                else //加入促销
+                {
+                    AddPromotiongood();
+                }
+            }
         }
 
         #region 商品操作
@@ -575,6 +586,15 @@ namespace ddjd_c.ct.good
                     MessageBox.Show("加入失败");
                     break;
             }
+        }
+
+        /// <summary>
+        /// 加入促销
+        /// </summary>
+        private void AddPromotiongood()
+        {
+            AddPromotiongoodForm frm = new AddPromotiongoodForm(1);
+            frm.ShowDialog();
         }
         /// <summary>
         /// GridView选中指定行
