@@ -34,9 +34,9 @@ namespace ddjd_c.service.good
         /// </summary>
         /// <param name="dic"></param>
         /// <returns></returns>
-        public static void QueryStoreAndGoodsDetail(ResponseDelegate responseDelegate,Dictionary<string, object> dic = null)
+        public static void QueryStoreAndGoodsDetail(Action<ResponseResult, System.Threading.SynchronizationContext> action,Dictionary<string, object> dic = null)
         {
-            baseHttp.GetFunction(goodRequest.QueryStoreAndGoodsDetail.ToGetRequestURL(dic),responseDelegate);
+            baseHttp.GetStrFunction(goodRequest.QueryStoreAndGoodsDetail.ToGetRequestURL(dic), action);
         }
 
         /// <summary>
