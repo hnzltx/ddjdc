@@ -9,9 +9,15 @@ using ddjd_c.common;
 namespace ddjd_c
 {
     /// <summary>
+    /// 响应结果委托
+    /// </summary>
+    /// <param name="result"></param>
+    /// <param name="sc"></param>
+    public delegate void ResponseResultDelegate(ResponseResult result, System.Threading.SynchronizationContext sc);
+    /// <summary>
     /// 网络请求响应结果
     /// </summary>
-    public class ResponseResult
+    public struct ResponseResult
     {
         /// <summary>
         /// 错误信息
@@ -29,6 +35,7 @@ namespace ddjd_c
         /// <returns></returns>
         public T ToEntity<T>() where T : class
         {
+            
             return JsonHelper.DeserializeJsonToObject<T>(JsonStr);
         }
         /// <summary>
@@ -38,8 +45,11 @@ namespace ddjd_c
         /// <returns></returns>
         public List<T> ToListEntity<T>() where T : class
         {
+           
             return JsonHelper.DeserializeJsonToList<T>(JsonStr);
         }
+        
+        
         /// <summary>
         /// 返回JObject直接用xxx["参数名"]
         /// </summary>

@@ -22,11 +22,11 @@ namespace ddjd_c.service.good
         /// 查询店铺商品
         /// </summary>
         /// <param name="dic">参数</param>
-        /// <returns></returns>
-        public static vo.pageInfo<model.good.goodEntity> QueryStoreAndGoodsList(Dictionary<string,object> dic=null)
+        /// 
+        public static void QueryStoreAndGoodsList(ResponseResultDelegate resultDelegate, Dictionary<string,object> dic=null)
         {
-         
-            return JsonHelper.DeserializeJsonToObject<vo.pageInfo<model.good.goodEntity>>(baseHttp.GetStrFunction(goodRequest.QueryStoreAndGoodsList.ToGetRequestURL(dic)));
+
+            baseHttp.GetStrFunction(goodRequest.QueryStoreAndGoodsList.ToGetRequestURL(dic), resultDelegate);
         }
 
         /// <summary>
@@ -34,9 +34,9 @@ namespace ddjd_c.service.good
         /// </summary>
         /// <param name="dic"></param>
         /// <returns></returns>
-        public static void QueryStoreAndGoodsDetail(Action<ResponseResult, System.Threading.SynchronizationContext> action,Dictionary<string, object> dic = null)
+        public static void QueryStoreAndGoodsDetail(ResponseResultDelegate resultDelegate, Dictionary<string, object> dic = null)
         {
-            baseHttp.GetStrFunction(goodRequest.QueryStoreAndGoodsDetail.ToGetRequestURL(dic), action);
+            baseHttp.GetStrFunction(goodRequest.QueryStoreAndGoodsDetail.ToGetRequestURL(dic), resultDelegate);
         }
 
         /// <summary>

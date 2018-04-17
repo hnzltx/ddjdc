@@ -12,20 +12,19 @@ using System.Runtime.InteropServices;
 using System.Net.NetworkInformation;
 namespace ddjd_c.http
 {
-    
     class baseHttp
     {
         private static baseHttp _Singleton = null;
         private static object Singleton_Lock = new object();
 
         //线上地址
-        private static String ddjdcUrl = "http://c.hnddjd.com/";
+        //private static String ddjdcUrl = "http://c.hnddjd.com/";
 
         //本地地址
-        //private static String ddjdcUrl = "http://192.168.199.215/";
+        private static String ddjdcUrl = "http://192.168.199.215/";
 
         ///保存返回结果
-        private static  ResponseResult responseResult;
+        private static ResponseResult responseResult;
 
         ///该类记录着线程的同步上下文对象，我们可以通过在GUI线程中调用SynchronizationContext.Current属性来获得GUI线程的同步上下文，然后当线程池线程需要更新窗体时，可以调用保存的SynchronizationContext派生对象的Post方法(Post方法会将回调函数送到GUI线程的队列中，每个线程都有各自的操作队列的，线程的执行都是从这个队列中拿方法去执行)，向Post方法传递要由GUI线程调用的方法(该方法的定义要匹配SendOrPostCallback委托的签名)，还需要想Post方法传递一个要传给回调方法的参数。
         private static System.Threading.SynchronizationContext sc;
@@ -122,7 +121,7 @@ namespace ddjd_c.http
         /// <param name="httpName">请求方法名；</param>
         /// <param name="dic">参数对象</param>
         /// <param name="response">返回结果委托</param>
-        public static void PostStrFunction(string httpName, Dictionary<string, object> dic, Action<ResponseResult, System.Threading.SynchronizationContext> response)
+        public static void PostStrFunction(string httpName, Dictionary<string, object> dic,ResponseResultDelegate response)
         {
             Action<string,Dictionary<string,object>> action = PostRequest;
             action(httpName,dic);
@@ -188,7 +187,7 @@ namespace ddjd_c.http
         /// </summary>
         /// <param name="httpName">路径</param>
         /// <param name="response">返回结果委托</param>
-        public static void GetStrFunction(String httpName,Action<ResponseResult,System.Threading.SynchronizationContext> response)
+        public static void GetStrFunction(String httpName, ResponseResultDelegate response)
         {
             
             Action<string> action = GetRequest;
@@ -242,11 +241,12 @@ namespace ddjd_c.http
             ///拿到异步调用委托
             Action<string> dn = (Action<string>)((System.Runtime.Remoting.Messaging.AsyncResult)ar).AsyncDelegate;
             ///拿到结果返回委托
-            Action<ResponseResult,System.Threading.SynchronizationContext> action=(Action<ResponseResult, System.Threading.SynchronizationContext>)ar.AsyncState;
+            ResponseResultDelegate action = (ResponseResultDelegate)ar.AsyncState;
             //返回结果
             action(responseResult,sc);
             //关闭异步调用 
             dn.EndInvoke(ar);
+            
         }
         
     }

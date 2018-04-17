@@ -34,6 +34,25 @@ namespace ddjd_c.common.extension
 			return id;
 		}
         /// <summary>
+        /// 转换为String类型
+        /// </summary>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static string ToStringP<T>(this T t)
+        {
+            string str;
+            try
+            {
+               str=t.ToString();
+            }
+            catch
+            {
+                str = "";
+            }
+            return str;
+        }
+        /// <summary>
         /// 将字符串转换为double
         /// </summary>
         /// <param name="t"></param>
