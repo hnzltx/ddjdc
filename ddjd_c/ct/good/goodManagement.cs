@@ -64,7 +64,7 @@ namespace ddjd_c.ct.good
         /// </summary>
         private void LoadData()
         {
-            vo.pageInfo<model.good.goodEntity> pg = new vo.pageInfo<model.good.goodEntity>();
+            
 
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("storeId", GlobalsInfo.storeId);
@@ -82,7 +82,31 @@ namespace ddjd_c.ct.good
                     dic.Add("goodsName",this.goodsName);
                 }
             }
-            pg = service.good.goodService.QueryStoreAndGoodsList(dic);
+            ResponseResultDelegate action = RequestGoodListCallback;
+            service.good.goodService.QueryStoreAndGoodsList(action,dic);
+            
+        }
+        /// <summary>
+        /// 商品请求回调
+        /// </summary>
+        private void RequestGoodListCallback(ResponseResult result, System.Threading.SynchronizationContext sc)
+        {
+            
+                if (result.Error != null)
+                {
+                    MessageBox.Show(result.Error);
+                    return;
+                }
+                sc.Post(RequestGoodListPostCallback,result);
+            
+        }
+        /// <summary>
+        /// 异步线程同步
+        /// </summary>
+        /// <param name="obj"></param>
+        private void RequestGoodListPostCallback(object obj)
+        {
+            vo.pageInfo<model.good.goodEntity> pg = ((ResponseResult)obj).ToEntity<vo.pageInfo<model.good.goodEntity>>();
             this.list = pg.List;
             //分页配置
             pageInfoConfig(pg);
@@ -91,16 +115,42 @@ namespace ddjd_c.ct.good
             //显示数据
             commDgv.DataSource = BList;
         }
-
         /// <summary>
         /// 加载分类数据
         /// </summary>
         private void LoadCategory()
         {
+            ResponseResultDelegate action=CategoryCallback;
             //查询分类集合
-            JArray obj = service.goodsCategory_service.goodsCategoryService.queryGoodsAllCateGory();
+            service.goodsCategory_service.goodsCategoryService.queryGoodsAllCateGory(action); 
+        }
+
+        /// <summary>
+        /// 分类请求回调
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="sc"></param>
+        private void CategoryCallback(ResponseResult result, System.Threading.SynchronizationContext sc)
+        {
+           
+                if (result.Error != null)
+                {
+                    MessageBox.Show(result.Error);
+                    return;
+                }
+                sc.Post(CategoryPostCallback, result);
+            
+        }
+        /// <summary>
+        /// 异步线程同步
+        /// </summary>
+        /// <param name="obj"></param>
+        private void CategoryPostCallback(object obj)
+        {
+            ResponseResult result = (ResponseResult)obj;
+            JArray ja = JArray.Parse(result.JsonStr);
             //拿到一级分类
-            this.goodscategoriesList.AddRange(JsonHelper.DeserializeJsonToList<model.goodscategory>(obj.ToString()));
+            this.goodscategoriesList.AddRange(JsonHelper.DeserializeJsonToList<model.goodscategory>(ja.ToString()));
 
             ///显示的值
             this.cbx1.DisplayMember = "GoodsCategoryName";
@@ -113,23 +163,20 @@ namespace ddjd_c.ct.good
             ///给23级分类赋值
             for (var i = 0; i < goodscategoriesList.Count; i++)
             {
-                JObject j = JObject.Parse(obj[i].ToString());
+                JObject j = JObject.Parse(ja[i].ToString());
                 this.goodscategoriesList[i].List = JsonHelper.DeserializeJsonToList<model.goodscategory>(j["list"].ToString());
-
-                for (var ii = 0; ii < this.goodscategoriesList[i].List.Count; ii++)
+                if (this.goodscategoriesList[i].List != null)
                 {
-                    JObject jj = JObject.Parse(JArray.Parse(j["list"].ToString())[ii].ToString());
-                    this.goodscategoriesList[i].List[ii].List = JsonHelper.DeserializeJsonToList<model.goodscategory>(jj["list"].ToString());
+                    for (var ii = 0; ii < this.goodscategoriesList[i].List.Count; ii++)
+                    {
+                        JObject jj = JObject.Parse(JArray.Parse(j["list"].ToString())[ii].ToString());
+                        this.goodscategoriesList[i].List[ii].List = JsonHelper.DeserializeJsonToList<model.goodscategory>(jj["list"].ToString());
 
+                    }
                 }
+                
             }
-
-
-
-
         }
-
-
         /// <summary>
         /// tab切换
         /// </summary>

@@ -44,9 +44,9 @@ namespace ddjd_c.ct.good
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("storeAndGoodsId",this.storeAndGoodsId);
             dic.Add("storeId", ddjd_c.GlobalsInfo.storeId);
-
-            Action<ResponseResult, System.Threading.SynchronizationContext> action = Callback;
-            goodService.QueryStoreAndGoodsDetail(action, dic);
+            
+            ResponseResultDelegate action = Callback;
+            goodService.QueryStoreAndGoodsDetail(action,dic);
         }
         /// <summary>
         /// 网络请求回调
@@ -65,20 +65,24 @@ namespace ddjd_c.ct.good
         private void ShowState(object result)
         {
             ddjd_c.model.good.goodEntity entity = ((ResponseResult)result).ToEntity<model.good.goodEntity>();
-            this.txtPurchasePrice.Text = entity.PurchasePrice.ToString();
-            this.txtOfflineStock.Text = entity.OfflineStock.ToString();
-            this.txtStock.Text = entity.Stock.ToString();
-            this.txtStoreGoodsPrice.Text = entity.StoreGoodsPrice.ToString();
-            this.lblBrand.Text = entity.Brand;
-            this.lblGoodName.Text = entity.GoodsName;
-            this.lblGoodsCategoryName.Text = entity.GoodsCategoryName;
-            this.lblGoodsCode.Text = entity.GoodsCode;
-            this.lblGoodsLift.Text = entity.GoodsLift.ToString() + "天";
-            this.lblGoodsMixed.Text = entity.GoodsMixed;
-            this.lblGoodUcode.Text = entity.GoodUcode;
-            this.lblGoodUnit.Text = entity.GoodsUnit;
-            this.cbxGoodFlag.SelectedIndex = entity.GoodsFlag == 1 ? this.cbxGoodFlag.SelectedIndex = 0 : this.cbxGoodFlag.SelectedIndex = 1;
-            this.pbGoodPic.Image = ddjd_c.common.extension.ExtensionImage.HttpGetImage(ddjd_c.http.baseHttp.getDdjdcUrl() + entity.GoodsPic, common.extension.DefaultImgType.Good);
+            if (entity != null)
+            {
+                this.txtPurchasePrice.Text = entity.PurchasePrice.ToString();
+                this.txtOfflineStock.Text = entity.OfflineStock.ToString();
+                this.txtStock.Text = entity.Stock.ToString();
+                this.txtStoreGoodsPrice.Text = entity.StoreGoodsPrice.ToString();
+                this.lblBrand.Text = entity.Brand;
+                this.lblGoodName.Text = entity.GoodsName;
+                this.lblGoodsCategoryName.Text = entity.GoodsCategoryName;
+                this.lblGoodsCode.Text = entity.GoodsCode;
+                this.lblGoodsLift.Text = entity.GoodsLift.ToString() + "天";
+                this.lblGoodsMixed.Text = entity.GoodsMixed;
+                this.lblGoodUcode.Text = entity.GoodUcode;
+                this.lblGoodUnit.Text = entity.GoodsUnit;
+                this.cbxGoodFlag.SelectedIndex = entity.GoodsFlag == 1 ? this.cbxGoodFlag.SelectedIndex = 0 : this.cbxGoodFlag.SelectedIndex = 1;
+                this.pbGoodPic.Image = ddjd_c.common.extension.ExtensionImage.HttpGetImage(ddjd_c.http.baseHttp.getDdjdcUrl() + entity.GoodsPic, common.extension.DefaultImgType.Good);
+            }
+            
         }
         private void btnSubmit_Click(object sender, EventArgs e)
         {

@@ -28,9 +28,9 @@ namespace ddjd_c.service.goodsCategory_service
         /// 查询所有分类
         /// </summary>
         /// <returns></returns>
-        public static JArray queryGoodsAllCateGory()
+        public static void queryGoodsAllCateGory(ResponseResultDelegate resultDelegate)
         {
-            return JsonHelper.getJArray(baseHttp.GetStrFunction(goodsCateGoryRequest.QueryGoodsCateGoryList));
+            baseHttp.GetStrFunction(goodsCateGoryRequest.QueryGoodsCateGoryList, resultDelegate);
         }
     }
 }
