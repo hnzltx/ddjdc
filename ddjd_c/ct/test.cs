@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,15 +15,84 @@ namespace ddjd_c.ct
 {
     public partial class frmTest : Form
     {
-        private KeyboardHookLib _keyboardHook = null;
+        //private Class1 listener = new Class1();
+
+        //public frmTest()
+        //{
+        //    InitializeComponent();
+        //    listener.BarCodeEvent += Listener_ScanerEvent;
+        //}
+
+
+        //private void Listener_ScanerEvent(Class1.BarCodes codes)
+        //{
+        //    textBox1.Text = codes.BarCode;
+
+        //}
+
+
+
+
+        //private void pictureBox1_Click(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    listener.Start();
+        //}
+
+
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    listener.Stop();
+        //}
+
+        //private void frmTest_Load(object sender, EventArgs e)
+        //{
+        //    listener.Start();
+        //}
+
+
+
+
+        BardCodeHooK BarCode = new BardCodeHooK();
 
         public frmTest()
         {
             InitializeComponent();
+            BarCode.BarCodeEvent += new BardCodeHooK.BardCodeDeletegate(BarCode_BarCodeEvent);
+        }
+        
+        private delegate void ShowInfoDelegate(BardCodeHooK.BarCodes barCode);
+        private void ShowInfo(BardCodeHooK.BarCodes barCode)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new ShowInfoDelegate(ShowInfo), new object[] { barCode });
+            }
+            else
+            {
+                //textBox1.Text = barCode.KeyName;
+                //textBox2.Text = barCode.VirtKey.ToString();
+                //textBox3.Text = barCode.ScanCode.ToString();
+                //textBox4.Text = barCode.Ascll.ToString();
+                //textBox5.Text = barCode.Chr.ToString();
+
+                //textBox7.Text += barCode.KeyName;
+                
+                textBox1.Text = barCode.IsValid ? barCode.BarCode : "";//是否为扫描枪输入，如果为true则是 否则为键盘输入  
+                
+                //MessageBox.Show(barCode.IsValid.ToString());  
+            }
         }
 
-        
 
+        void BarCode_BarCodeEvent(BardCodeHooK.BarCodes barCode)
+        {
+            ShowInfo(barCode);
+        }
 
 
 
@@ -34,33 +105,38 @@ namespace ddjd_c.ct
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //安装勾子
-            _keyboardHook = new KeyboardHookLib();
-            _keyboardHook.InstallHook(this.OnKeyPress);
-            textBox1.Text += "你按下:";
+            BarCode.Start();
         }
 
-
-        private string AllKey = "";
-
-        public void OnKeyPress(KeyboardHookLib.HookStruct hookStruct, out bool handle)
-        {
-            handle = false; //预设不拦截任何键
-            Keys key = (Keys)hookStruct.vkCode;
-
-            //  textBox1.Text = key.ToString();
-            string keyName = key.ToString();
-            AllKey = AllKey + (key == Keys.None ? "" : keyName);
-            textBox1.Text = AllKey;
-            return;
-
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //取消勾子
-            if (_keyboardHook != null) _keyboardHook.UninstallHook();
+            BarCode.Stop();
         }
+
+        private void frmTest_Load(object sender, EventArgs e)
+        {
+            BarCode.Start();
+        }
+
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    
+                    return true;
+                case Keys.Enter:
+                    textBox2.Text = textBox1.Text; 
+                    Console.WriteLine("123:" + textBox2.Text);
+                    return true;
+                default:
+                    return base.ProcessCmdKey(ref msg, keyData);
+            }
+        }
+
+
+
     }
 }
