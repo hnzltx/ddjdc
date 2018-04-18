@@ -67,8 +67,8 @@
     <Compile Include="common\AllRequest\orderInfoRequest.cs" />
     <Compile Include="common\AllRequest\scanCodeRequest.cs" />
     <Compile Include="common\AllRequest\storeRequest.cs" />
-    <Compile Include="common\extension\ExtensionImage.cs" />
-    <Compile Include="common\extension\ExtensionString.cs" />
+    <Compile Include="ExtensionImage.cs" />
+    <Compile Include="ExtensionString.cs" />
     <Compile Include="common\JsonHelper.cs" />
     <Compile Include="common\GetParam.cs" />
     <Compile Include="common\KeyboardHookLib.cs" />
