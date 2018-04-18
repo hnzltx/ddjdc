@@ -1,8 +1,10 @@
-﻿using ddjd_c.service.scanCode_service;
+﻿using ddjd_c.common;
+using ddjd_c.service.scanCode_service;
 using ddjd_c.vo.addShopCar;
 using DevComponents.DotNetBar;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,11 +21,21 @@ namespace ddjd_c.ct.ScanCode
 {
     public partial class frmScanCode : Form
     {
+        //定义键盘钩子 ； 用来无焦点状态下获取扫描枪扫描的条码
+        private KeyboardHookLib listener = new KeyboardHookLib();
+
         public frmScanCode()
         {
             InitializeComponent();
+            listener.ScanerEvent += Listener_ScanerEvent;
         }
-
+        
+        private void Listener_ScanerEvent(KeyboardHookLib.ScanerCodes codes)
+        {
+            //键盘钩子获取的条码，赋值到文本框中
+            textCode.Text = codes.Result;
+            
+        }
 
         /// <summary>
         /// 窗体加载
@@ -32,25 +44,43 @@ namespace ddjd_c.ct.ScanCode
         /// <param name="e"></param>
         private void frmScanCode_Load(object sender, EventArgs e)
         {
-            
+
+            //将窗体全屏
+            Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
+            int width1 = ScreenArea.Width;
+            int height1 = ScreenArea.Height;
+            this.Width = width1;
+            this.Height = height1;
+            this.Top = 0;
+            this.Left = 0;
+            this.TopMost = true;
+
+            //加载键盘钩子
+            listener.Start();
+
+            ///隐藏最大化和关闭按钮
+            ArrayList items = ribbonControl1.RibbonStrip.GetItems("", typeof(SystemCaptionItem));
+            foreach (SystemCaptionItem sci in items)
+            {
+                if (!sci.IsSystemIcon)
+                {
+
+                    //sci.MinimizeVisible = false;
+                    sci.RestoreMaximizeVisible = false;
+                    sci.CloseVisible = false;
+                    break;
+                }
+            }
+
+            //加载收银秤配置
             if (!loadCashierScaleConfig())
             {
                 return;
             }
 
+            //加载分页配置
             loagPageConfig();
-
-
-            //将窗体全屏
-            //Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
-            //int width1 = ScreenArea.Width;
-            //int height1 = ScreenArea.Height;
-            //this.Width = width1;
-            //this.Height = height1;
-            //this.Top = 0;
-            //this.Left = 0;
-            //this.TopMost = true;
-
+           
 
             //获取当前店铺购物车的商品
             queryStoreshoppingcar();
@@ -63,7 +93,7 @@ namespace ddjd_c.ct.ScanCode
 
             commItem = cy;
             commGoodsCategoryId = 0;
-            
+
 
             //查询分类集合
             List<model.goodscategory> goodsCategoryList = service.goodsCategory_service.goodsCategoryService.queryGoodsCateGoryForOne();
@@ -114,8 +144,8 @@ namespace ddjd_c.ct.ScanCode
                         row.Cells[4].Value = count * storeGoodsPrice;
                     }
                     else {
-                        row.Cells[2].Value = goods.Weight; 
-                        row.Cells[4].Value = common.utils.CutDecimalWithN(new decimal(double.Parse(goods.Weight)) * storeGoodsPrice,2);
+                        row.Cells[2].Value = goods.Weight;
+                        row.Cells[4].Value = common.utils.CutDecimalWithN(new decimal(double.Parse(goods.Weight)) * storeGoodsPrice, 2);
                     }
                     row.Cells[3].Value = goods.StoreGoodsPrice;
                     row.Cells[5].Value = goods.IsBulkCargo;
@@ -138,11 +168,18 @@ namespace ddjd_c.ct.ScanCode
             ct_pageNumber = 1;
 
             TabItem t = (TabItem)sender;
-            addListView(t, int.Parse(t.Tag.ToString()));
-            SetTextCode();
 
             commItem = t;
             commGoodsCategoryId = int.Parse(t.Tag.ToString());
+
+            //commItem.AttachedControl.Controls.RemoveAt(0);
+            commItem.AttachedControl.Controls.Clear();
+
+
+            addListView(t, int.Parse(t.Tag.ToString()));
+            SetTextCode();
+
+
         }
 
         //记录全局的tabItem; 分页时使用
@@ -156,7 +193,7 @@ namespace ddjd_c.ct.ScanCode
         /// </summary>
         /// <param name="item"></param>
         private void addListView(TabItem item, int? goodsCategoryId) {
-            
+
             ListView lv = new ListView();
             lv.Dock = DockStyle.Fill;
             lv.Click += new System.EventHandler(this.goodsListView_click);
@@ -174,7 +211,7 @@ namespace ddjd_c.ct.ScanCode
                     //添加分类ID
                     d.Add("fCategoryId", goodsCategoryId);
                 }
-                
+
             }
             d.Add("pageSize", ct_pageSize);
             d.Add("pageNumber", ct_pageNumber);
@@ -238,11 +275,12 @@ namespace ddjd_c.ct.ScanCode
                 case Keys.Escape:
                     if (MessageBox.Show("确认退出收银界面?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                     {
-                        this.Close();
+                        exitAndClose();
                     }
                     return true;
                 case Keys.Enter:
-                    addGoods();
+                    //addGoods();
+                    
                     return true;
                 default:
                     return base.ProcessCmdKey(ref msg, keyData);
@@ -289,11 +327,22 @@ namespace ddjd_c.ct.ScanCode
                             if (!InitPort()) {
                                 return;
                             }
+                            //发送指令，获取重量
+                            com.Write("ESCP");
                             //暂停下再拿
-                            Thread.Sleep(500);
+                            Thread.Sleep(200);
 
                             //获取收银秤重量
-                            bulkCargoWeight = getWeight();
+                            bulkCargoWeight = weight.ToString();
+                            //如果没有获取到，设置重量=0
+                            if (bulkCargoWeight.Length <= 0)
+                            {
+                                bulkCargoWeight = "0";
+                            }
+                            else {
+                                //最终重量
+                                bulkCargoWeight = bulkCargoWeight.Substring(0, bulkCargoWeight.Length - 3).Insert(1, ".") + bulkCargoWeight.Substring(bulkCargoWeight.Length - 3);
+                            }
 
                             //清空重量变量
                             weight.Clear();
@@ -632,18 +681,6 @@ namespace ddjd_c.ct.ScanCode
         }
 
 
-        private string getWeight() {
-            try
-            {
-                double ss = double.Parse(weight.ToString());
-                return ss.ToString();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message + "--" + weight.ToString());
-                return "0";
-            }
-        }
 
 
         #region 串口获取重量
@@ -653,6 +690,8 @@ namespace ddjd_c.ct.ScanCode
         SerialPort com = new SerialPort();
         private bool InitPort()
         {
+            //清空重量变量
+            weight.Clear();
             try
             {
                 if (!com.IsOpen)
@@ -684,25 +723,7 @@ namespace ddjd_c.ct.ScanCode
 
         }
 
-        //定义委托处理数据
-        private delegate void MyDelegate(string str);
-        private void DisplayData(string str)
-        {
-            weight.Append(str);
-            if (weight.ToString().Length >= 4)
-            {
-                Console.WriteLine(" oo -" + weight.ToString());
-                if (com.IsOpen)
-                {
-                    com.DataReceived -= new SerialDataReceivedEventHandler(com_DataReceived);
-                    com.Close();
-                }
-                weight = weight.Insert(1, ".");
 
-            }
-        }
-
-        
         private void com_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
@@ -710,6 +731,7 @@ namespace ddjd_c.ct.ScanCode
                 if (!com.IsOpen)
                 {
                     com.Open();
+
                 }
                 com.ReadTimeout = 500;
                 string res = "";
@@ -717,13 +739,10 @@ namespace ddjd_c.ct.ScanCode
                 com.Read(buffer, 0, buffer.Length);
                 res = System.Text.Encoding.ASCII.GetString(buffer);
                 res = System.Text.RegularExpressions.Regex.Replace(res, @"[^\d]*", "");
-                res = res.Replace("\n", "");
-                res = res.Replace("\r", "");
-                res = res.Replace("\t", "");
-                res = res.Replace(" ", "");
-                res = res.Replace("?", "");
-                res = res.Replace(".", "");
-                DisplayData(res);
+                if (res != "")
+                {
+                    weight.Append(res);
+                }
 
             }
             catch (Exception ex)
@@ -731,6 +750,19 @@ namespace ddjd_c.ct.ScanCode
                 MessageBox.Show(ex.Message);
             }
         }
+
+
+        /// <summary>
+        /// 关闭串口连接
+        /// </summary>
+        private void CloseSerialPort() {
+            if (com.IsOpen)
+            {
+                com.Close();
+            }
+            
+        }
+
         #endregion
 
 
@@ -812,7 +844,8 @@ namespace ddjd_c.ct.ScanCode
         private void commQueryPageInfo()
         {
             //移除当前分类下的listview，用以重新展示新数据
-            commItem.AttachedControl.Controls.RemoveAt(0);
+            //commItem.AttachedControl.Controls.RemoveAt(0);
+            commItem.AttachedControl.Controls.Clear();
             //查询新数据
             addListView(commItem,commGoodsCategoryId);
 
@@ -828,7 +861,7 @@ namespace ddjd_c.ct.ScanCode
         BindingList<vo.order.order> BList;
         //当前窗体的每页查询条数
         //int ct_pageSize = GlobalsInfo.pageSize;
-        int ct_pageSize = 2;
+        int ct_pageSize = GlobalsInfo.pageSize;
         //当前窗体已经查询到第几页
         int ct_pageNumber = GlobalsInfo.pageNumber;
         //数据总页数
@@ -847,6 +880,8 @@ namespace ddjd_c.ct.ScanCode
             this.btnNextPage.Click += new EventHandler(this.btnNextPage_Click);
             //上一页事件
             this.btnPreviousPage.Click += new EventHandler(this.btnPreviousPage_Click);
+            //页面条数显示框默认显示条数
+            this.cmbSelect.Text = ct_pageSize.ToString();
             //绑定页面显示条数设置控件的TextChanged事件
             this.cmbSelect.SelectedIndexChanged += new EventHandler(cmbSelect_TextChanged);
         }
@@ -958,8 +993,32 @@ namespace ddjd_c.ct.ScanCode
         }
 
 
+
         #endregion
 
+
+        /// <summary>
+        /// 退出按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            exitAndClose();
+        }
+
+
+        /// <summary>
+        /// 退出的操作
+        /// </summary>
+        private void exitAndClose() {
+            //关闭键盘钩子
+            listener.Stop();
+            //关闭收银秤的串口连接
+            CloseSerialPort();
+            //关闭本窗体
+            this.Close();
+        }
 
     }
 }

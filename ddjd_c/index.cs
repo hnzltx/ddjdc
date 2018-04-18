@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ddjd_c.ct;
+using System.Collections;
 
 namespace ddjd_c
 {
@@ -23,7 +24,22 @@ namespace ddjd_c
         {
             this.Text = this.Text + " --【" + GlobalsInfo.storeName + "】";
             //lblDate.Text = DateTime.Now.Date.ToString("yyyy年MM月dd日 HH:mm:ss");
-            
+
+            ///隐藏最大化和关闭按钮
+            ArrayList items = ribbonControl1.RibbonStrip.GetItems("", typeof(SystemCaptionItem));
+            foreach (SystemCaptionItem sci in items)
+            {
+                if (!sci.IsSystemIcon)
+                {
+
+                    //sci.MinimizeVisible = false;
+                    sci.RestoreMaximizeVisible = false;
+                    sci.CloseVisible = false;
+                    break;
+                }
+            }
+
+
             loadAppConfig();
         }
 
@@ -224,7 +240,10 @@ namespace ddjd_c
         /// <param name="e"></param>
         private void btnSignOut_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (MessageBox.Show("确认退出本程序?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
 
@@ -281,5 +300,62 @@ namespace ddjd_c
             ct.Set.frmSetPrint frm = new ct.Set.frmSetPrint();
             openWindow(frm, frm.Name);
         }
+
+
+
+        #region 退出程序
+        
+        /// <summary>
+        /// 退出程序按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确认退出本程序?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            
+        }
+
+        private void tabItemClose_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确认退出本程序?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+
+        }
+        #endregion
+
+
+
+        #region 页面键盘捕捉
+        /// <summary>
+        /// 页面键盘捕捉
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    if (MessageBox.Show("确认退出本程序?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                    {
+                        Application.Exit();
+                    }
+                    return true;
+                case Keys.Enter:
+                    
+                    return true;
+                default:
+                    return base.ProcessCmdKey(ref msg, keyData);
+            }
+        }
+        #endregion
+
     }
 }

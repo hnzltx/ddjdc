@@ -59,6 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="common\BardCodeHooK.cs" />
+    <Compile Include="common\Class1.cs" />
     <Compile Include="ResponseResult.cs" />
     <Compile Include="common\AllRequest\goodRequest.cs" />
     <Compile Include="common\AllRequest\goodsCateGoryRequest.cs" />

@@ -76,12 +76,13 @@ namespace ddjd_c.ct.Order
             }
         }
 
-
+        
+        
         /// <summary>
         /// 查询数据并配置分页
         /// </summary>
         /// <param name="searchDic">传了search的情况下，可以根据条件搜索。</param>
-        private void commQueryPageInfo(Dictionary<string, object> searchDic = null) {
+        private void commQueryPageInfo() {
             vo.pageInfo<vo.order.order> pg = new vo.pageInfo<vo.order.order>();
 
             //本次查询数据需要的参数
@@ -108,11 +109,21 @@ namespace ddjd_c.ct.Order
             //显示数据
             commDgv.DataSource = BList;
         }
-        
+
 
         #region 分页代码
         /** 目前分页需要改动的只有泛型对象， 
          * 按道理将所有model都继承一个baseModel，稍作改动即可使分页更加通用，暂时记着，以后看改不改 —_—*/
+
+        /// <summary>
+        /// searchDic
+        /// 公共的搜索参数； 如果分页需要加入搜索条件，就增加此项的参数；
+        /// 如:  searchDic = new Dictionary<string, object>();
+        ///      searchDic.Add("startTime",dtStartTime.Text);
+        ///      searchDic.Add("endTime",dtEndTime.Text);
+        ///      commQueryPageInfo();
+        /// </summary>
+        Dictionary<string, object> searchDic = null;
 
         //公共的DataGridView；为了分页通用，在窗体加载时，将需要分页的DataGridView传递给此对象；
         DataGridView commDgv;
@@ -381,10 +392,13 @@ namespace ddjd_c.ct.Order
         /// <param name="e"></param>
         private void btnSeatchOrder_Click(object sender, EventArgs e)
         {
-            Dictionary<string, object> search = new Dictionary<string, object>();
-            search.Add("startTime",dtStartTime.Text);
-            search.Add("endTime",dtEndTime.Text);
-            commQueryPageInfo(search);
+            searchDic = new Dictionary<string, object>();
+            searchDic.Add("startTime",dtStartTime.Text);
+            searchDic.Add("endTime",dtEndTime.Text);
+            searchDic.Add("name", dtEndTime.Text);
+
+
+            commQueryPageInfo();
         }
 
 
@@ -395,6 +409,11 @@ namespace ddjd_c.ct.Order
         /// <param name="e"></param>
         private void btnShowAllOrder_Click(object sender, EventArgs e)
         {
+            //清空搜索条件
+            searchDic = null;
+            this.dtStartTime.Text = "";
+            this.dtEndTime.Text = "";
+
             ct_pageNumber = 1;
             commQueryPageInfo();
         }

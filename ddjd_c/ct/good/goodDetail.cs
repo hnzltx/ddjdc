@@ -44,9 +44,9 @@ namespace ddjd_c.ct.good
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("storeAndGoodsId",this.storeAndGoodsId);
             dic.Add("storeId", ddjd_c.GlobalsInfo.storeId);
-            
+
             Action<ResponseResult, System.Threading.SynchronizationContext> action = Callback;
-            goodService.QueryStoreAndGoodsDetail(action,dic);
+            goodService.QueryStoreAndGoodsDetail(action, dic);
         }
         /// <summary>
         /// 网络请求回调

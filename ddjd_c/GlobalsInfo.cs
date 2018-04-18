@@ -20,7 +20,7 @@ namespace ddjd_c
 
 
         //分页，默认每页查询多少条数据
-        public static int pageSize = 10;
+        public static int pageSize = 20;
         //分页，默认查询第几页
         public static int pageNumber = 1;
 
