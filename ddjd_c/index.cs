@@ -373,5 +373,6 @@ namespace ddjd_c
             ct.good.PromotionGoodForm frm = new ct.good.PromotionGoodForm();
             openWindow(frm, frm.Name);
         }
+
     }
 }
