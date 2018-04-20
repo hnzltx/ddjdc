@@ -1,4 +1,5 @@
 ﻿using ddjd_c.common;
+using ddjd_c.common.extension;
 using ddjd_c.service.scanCode_service;
 using ddjd_c.vo.addShopCar;
 using DevComponents.DotNetBar;
@@ -29,13 +30,39 @@ namespace ddjd_c.ct.ScanCode
             InitializeComponent();
             listener.ScanerEvent += Listener_ScanerEvent;
         }
-        
+
         private void Listener_ScanerEvent(KeyboardHookLib.ScanerCodes codes)
         {
             //键盘钩子获取的条码，赋值到文本框中
             textCode.Text = codes.Result;
-            
+
         }
+
+
+        /// <summary>
+        /// 页面键盘捕捉
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Escape:
+                    if (MessageBox.Show("确认退出收银界面?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                    {
+                        exitAndClose();
+                    }
+                    return true;
+                case Keys.Enter:
+                    addGoods();
+                    return true;
+                default:
+                    return base.ProcessCmdKey(ref msg, keyData);
+            }
+        }
+
 
         /// <summary>
         /// 窗体加载
@@ -80,7 +107,7 @@ namespace ddjd_c.ct.ScanCode
 
             //加载分页配置
             loagPageConfig();
-           
+
 
             //获取当前店铺购物车的商品
             queryStoreshoppingcar();
@@ -227,9 +254,8 @@ namespace ddjd_c.ct.ScanCode
             if (pg.TotalRow > 0) {
                 int i = 0;
                 foreach (var goods in pg.List) {
-                    Image img = Image.FromStream(WebRequest.Create(http.baseHttp.getDdjdcUrl() + goods.GoodsPic).GetResponse().GetResponseStream());
 
-                    il.Images.Add(img);
+                    il.Images.Add(ExtensionImage.HttpGetImage(http.baseHttp.getDdjdcUrl() + goods.GoodsPic, DefaultImgType.Good));
                     lv.Items.Add(System.IO.Path.GetFileName(i.ToString()), i);
                     lv.Items[i].ImageIndex = i;
                     lv.Items[i].Name = goods.GoodsCode;
@@ -262,30 +288,7 @@ namespace ddjd_c.ct.ScanCode
 
 
 
-        /// <summary>
-        /// 页面键盘捕捉
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="keyData"></param>
-        /// <returns></returns>
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            switch (keyData)
-            {
-                case Keys.Escape:
-                    if (MessageBox.Show("确认退出收银界面?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-                    {
-                        exitAndClose();
-                    }
-                    return true;
-                case Keys.Enter:
-                    //addGoods();
-                    
-                    return true;
-                default:
-                    return base.ProcessCmdKey(ref msg, keyData);
-            }
-        }
+
 
 
 
@@ -325,6 +328,8 @@ namespace ddjd_c.ct.ScanCode
                         {
                             //如果是散货，打开电脑与收银秤的串口连接
                             if (!InitPort()) {
+                                //删除刚刚加入的商品
+                                service.scanCode_service.scanCodeService.deleteStoreshoppingcar(statuInfo.StoreShoppingcarId);
                                 return;
                             }
                             //发送指令，获取重量
@@ -643,23 +648,7 @@ namespace ddjd_c.ct.ScanCode
         /// <param name="e"></param>
         private void deleteGoodsBystoreAndGoodsId_Click(object sender, EventArgs e)
         {
-            var storeShoppingcarId = this.dgvShopcar.SelectedRows[0].Cells[0].Value;
-            if (null != storeShoppingcarId)
-            {
-                JObject json = service.scanCode_service.scanCodeService.deleteStoreshoppingcar(storeShoppingcarId.ToString());
-                if (json["success"].ToString().Equals(GlobalsInfo.success))
-                {
-                    this.dgvShopcar.Rows.Remove(this.dgvShopcar.SelectedRows[0]);
-                    displaySumCountAndSumMoney();
-
-                }
-                else {
-                    MessageBox.Show("删除失败,请刷新后重试！");
-                }
-            }
-            else {
-                MessageBox.Show("删除异常,请刷新后重试！");
-            }
+            deleteOneGoods();
         }
 
 
@@ -760,7 +749,7 @@ namespace ddjd_c.ct.ScanCode
             {
                 com.Close();
             }
-            
+
         }
 
         #endregion
@@ -801,12 +790,20 @@ namespace ddjd_c.ct.ScanCode
         }
 
         /// <summary>
-        /// 删除某一商品
+        /// 点击按钮，删除某一商品
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnDeleteOneGoods_Click(object sender, EventArgs e)
         {
+            deleteOneGoods();
+        }
+
+
+        /// <summary>
+        /// 删除某选中商品
+        /// </summary>
+        private void deleteOneGoods() {
             if (this.dgvShopcar.SelectedRows.Count > 0)
             {
                 var storeShoppingcarId = this.dgvShopcar.SelectedRows[0].Cells[0].Value;
@@ -834,7 +831,6 @@ namespace ddjd_c.ct.ScanCode
                 MessageBox.Show("没有选中商品!");
             }
         }
-
 
 
 
@@ -1020,5 +1016,26 @@ namespace ddjd_c.ct.ScanCode
             this.Close();
         }
 
+        /// <summary>
+        /// 挂单按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGuadan_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("挂单成功!");
+        }
+
+        /// <summary>
+        /// 取出挂单按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGetGuadan_Click(object sender, EventArgs e)
+        {
+            frmGuadan guadan = new frmGuadan(this);
+            guadan.TopMost = true;
+            guadan.ShowDialog();
+        }
     }
 }

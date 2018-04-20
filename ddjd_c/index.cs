@@ -10,14 +10,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ddjd_c.ct;
 using System.Collections;
+using ddjd_c.http;
 
 namespace ddjd_c
 {
     public partial class indexName : Form
     {
+        
+        private void Listener_ScanerEvent(baseHttp.exInfo ex)
+        {
+            if (ex != null)
+            {
+                MessageBox.Show("全局异常：" + ex.ExMsg + "【" + ex.HttpName + "】", "错误提示");
+            }
+        }
+
         public indexName()
         {
             InitializeComponent();
+            baseHttp.ScanerEvent += Listener_ScanerEvent;
         }
 
         private void indexName_Load(object sender, EventArgs e)
@@ -186,6 +197,38 @@ namespace ddjd_c
             }
         }
 
+        
+
+        /// <summary>
+        /// 左上角退出程序按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSignOut_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确认退出本程序?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+
+
+        /// <summary>
+        /// 加载一些配置文件
+        /// </summary>
+        private void loadAppConfig() {
+            
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblDate.Text = DateTime.Now.ToString();
+        }
+
+
+        #region 所有跳转点击按钮
+
         /// <summary>
         /// 点击跳转到店铺信息界面
         /// </summary>
@@ -218,47 +261,21 @@ namespace ddjd_c
         private void btnAboutUs_Click(object sender, EventArgs e)
         {
             ct.AboutUs.frmAboutUs frm = new ct.AboutUs.frmAboutUs();
-            openWindow(frm,frm.Name);
+            openWindow(frm, frm.Name);
         }
 
 
-       /// <summary>
-       /// 跳转到收银秤设置界面
-       /// </summary>
-       /// <param name="sender"></param>
-       /// <param name="e"></param>
+        /// <summary>
+        /// 跳转到收银秤设置界面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSetCashierScale_Click(object sender, EventArgs e)
         {
             ct.Set.frmSetCashierScale frm = new ct.Set.frmSetCashierScale();
             openWindow(frm, frm.Name);
         }
 
-        /// <summary>
-        /// 左上角退出程序按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnSignOut_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("确认退出本程序?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-        }
-
-
-
-        /// <summary>
-        /// 加载一些配置文件
-        /// </summary>
-        private void loadAppConfig() {
-            
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lblDate.Text = DateTime.Now.ToString();
-        }
 
         /// <summary>
         /// 订单待发货按钮
@@ -268,9 +285,9 @@ namespace ddjd_c
         private void btnOrder1_Click(object sender, EventArgs e)
         {
             ct.Order.frmOrder frm = new ct.Order.frmOrder(2);
-            openWindow(frm, frm.Name,true,"待发货");
+            openWindow(frm, frm.Name, true, "待发货");
         }
-        
+
 
         private void btnOrder2_Click(object sender, EventArgs e)
         {
@@ -289,6 +306,20 @@ namespace ddjd_c
             ct.good.goodManagement frm = new ct.good.goodManagement();
             openWindow(frm, frm.Name);
         }
+
+        /// <summary>
+        /// 跳转到我的粉丝
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnStoreAndMember_Click(object sender, EventArgs e)
+        {
+            ct.store.frmStoreAndMember frm = new ct.store.frmStoreAndMember();
+            openWindow(frm, frm.Name);
+        }
+        #endregion
+
+
 
         /// <summary>
         /// 跳转打印机设置
@@ -357,5 +388,6 @@ namespace ddjd_c
         }
         #endregion
 
+        
     }
 }

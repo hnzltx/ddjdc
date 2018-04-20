@@ -23,6 +23,13 @@ namespace ddjd_c.common.AllRequest
 		/// </summary>
 		private static string updateStoreInfo = "front/storeInfo/updateStoreInfo";
 		public static string UpdateStoreInfo { get => updateStoreInfo; }
-	
-	}
+
+
+        /// <summary>
+        /// 包括绑定了店铺的总会员数量； 其中包括多少合伙人数量，多少会员数量
+        /// </summary>
+        private static string queryBindStoreMemberCount = "front/storeAndMember/queryBindStoreMemberCount";
+        public static string QueryBindStoreMemberCount { get => queryBindStoreMemberCount; }
+
+    }
 }

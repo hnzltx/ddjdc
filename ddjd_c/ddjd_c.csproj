@@ -59,7 +59,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="common\BardCodeHooK.cs" />
+    <Compile Include="ct\ScanCode\Guadan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\ScanCode\Guadan.Designer.cs">
+      <DependentUpon>Guadan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ct\store\storeAndMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\store\storeAndMember.Designer.cs">
+      <DependentUpon>storeAndMember.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResponseResult.cs" />
     <Compile Include="common\AllRequest\goodRequest.cs" />
     <Compile Include="common\AllRequest\goodsCateGoryRequest.cs" />
@@ -223,6 +234,9 @@
     <EmbeddedResource Include="ct\Order\OrderDetail.resx">
       <DependentUpon>OrderDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ct\ScanCode\Guadan.resx">
+      <DependentUpon>Guadan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ct\ScanCode\ScanCode.resx">
       <DependentUpon>ScanCode.cs</DependentUpon>
     </EmbeddedResource>
@@ -234,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ct\Set\SetPrint.resx">
       <DependentUpon>SetPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\store\storeAndMember.resx">
+      <DependentUpon>storeAndMember.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\store\frmStoreInfo.resx">
       <DependentUpon>frmStoreInfo.cs</DependentUpon>
