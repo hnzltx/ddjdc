@@ -292,7 +292,11 @@ namespace ddjd_c.ct.good
          
             ///加载数据
             LoadData();
-            GridViewSelectedSpecifiedRow(rowIndex);
+            if(goodFlag == this.goodsFlag)
+            {
+                GridViewSelectedSpecifiedRow(rowIndex);
+            }
+       
             
 
         }
@@ -533,11 +537,11 @@ namespace ddjd_c.ct.good
             {
                 if(entity.GoodsStutas == 3)//移除促销
                 {
-
+                    RemovePromotiongoods(entity.StoreAndGoodsId, this.dataGridViewX1.CurrentCell.RowIndex);
                 }
                 else //加入促销
                 {
-                    AddPromotiongood();
+                    AddPromotiongood(entity.StoreAndGoodsId, this.dataGridViewX1.CurrentCell.RowIndex);
                 }
             }
         }
@@ -638,18 +642,53 @@ namespace ddjd_c.ct.good
         /// <summary>
         /// 加入促销
         /// </summary>
-        private void AddPromotiongood()
+        private void AddPromotiongood(int? storeAndGoodsId, int rowIndex)
         {
-            AddPromotiongoodForm frm = new AddPromotiongoodForm(1);
+            AddPromotiongoodForm frm = new AddPromotiongoodForm(storeAndGoodsId,rowIndex);
+            frm.UpdateGoodList = Frm_UpdateGoodList;
             frm.ShowDialog();
+        }
+        /// <summary>
+        /// 移除促销商品
+        /// </summary>
+        /// <param name="storeAndGoodsId"></param>
+        /// <param name="rowIndex"></param>
+        private void RemovePromotiongoods(int? storeAndGoodsId, int rowIndex)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("storeAndGoodsId", storeAndGoodsId);
+            dic.Add("storeId", GlobalsInfo.storeId);
+            JObject obj = service.good.goodService.RemovePromotiongoods(dic);
+            string success = obj["success"].ToString();
+            switch (success)
+            {
+                case "success":
+                    contextMenuStrip1.Close();
+                    MessageBox.Show("移除成功");
+                    LoadData();
+                    GridViewSelectedSpecifiedRow(rowIndex);
+                    break;
+                case "notExist":
+                    MessageBox.Show("商品不存在");
+                    break;
+                case "storeDifferent":
+                    MessageBox.Show("商品不是这个店铺的，不能移除");
+                    break;
+                case "notcuxiao":
+                    MessageBox.Show("商品不是搞促销的，不能移除");
+                    break;
+                default:
+                    MessageBox.Show("移除促销商品失败");
+                    break;
+            }
         }
         /// <summary>
         /// GridView选中指定行
         /// </summary>
         private void GridViewSelectedSpecifiedRow(int rowIndex)
         {
-            this.dataGridViewX1.Rows[rowIndex].Selected = true;
-            this.dataGridViewX1.FirstDisplayedScrollingRowIndex = rowIndex;
+            this.commDgv.Rows[rowIndex].Selected = true;
+            this.commDgv.FirstDisplayedScrollingRowIndex = rowIndex;
         }
         #endregion
     }

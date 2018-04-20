@@ -42,8 +42,12 @@ namespace ddjd_c.common.AllRequest
         /// </summary>
         public static string RemoveIndexGoods { get => removeIndexGoods; }
 
+        private static string indexGoodsList = "front/goods/indexGoods";
+        /// <summary>
+        /// 查询店铺商品list
+        /// </summary>
+        public static string IndexGoodsList { get => indexGoodsList; }
 
-        
         private static string removePromotiongoods = "front/promotiongoods/removePromotiongoods";
         /// <summary>
         /// 删除促销商品
@@ -56,8 +60,16 @@ namespace ddjd_c.common.AllRequest
         /// </summary>
         public static string AddPromotiongoods { get => addPromotiongoods; }
 
+
         private static string updateGoodsFlagByStoreAndGoodsId = "front/storeAndGoods/updateGoodsFlagByStoreAndGoodsId";
         ///店铺将商品修改为上架或下架
         public static string UpdateGoodsFlagByStoreAndGoodsId { get => updateGoodsFlagByStoreAndGoodsId; }
+
+        private static string queryPromotiongoodsPaginateStore = "front/promotiongoods/queryPromotiongoodsPaginateStore";
+
+        /// <summary>
+        /// 查询促销商品
+        /// </summary>
+        public static string QueryPromotiongoodsPaginateStore { get => queryPromotiongoodsPaginateStore; }
     }
 }

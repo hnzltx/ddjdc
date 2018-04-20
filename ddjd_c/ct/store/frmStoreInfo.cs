@@ -89,7 +89,16 @@ namespace ddjd_c.ct.store
                 MessageBox.Show("最低起送额必须大于1元");
                 return;
             }
-            
+            if (startTime.StrIsNull())
+            {
+                MessageBox.Show("配送开始不能为空");
+                return;
+            }
+            if (endTime.StrIsNull())
+            {
+                MessageBox.Show("配送结束时间不能为空");
+                return;
+            }
             Dictionary<string,object> d = new Dictionary<string,object>();
             d.Add("storeId", GlobalsInfo.storeId);
             d.Add("distributionScope", distributionScope.ToInt());
@@ -160,6 +169,17 @@ namespace ddjd_c.ct.store
 
 
         /******************end***************************/
+
+        private void TxtNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\b')//这是允许输入退格键
+            {
+                if ((e.KeyChar < '0') || (e.KeyChar > '9'))//这是允许输入0-9数字
+                {
+                    e.Handled = true;
+                }
+            }
+        }
 
     }
 }

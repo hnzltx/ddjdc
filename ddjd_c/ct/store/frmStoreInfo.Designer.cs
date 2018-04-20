@@ -252,9 +252,9 @@
             // 
             this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSave.Location = new System.Drawing.Point(90, 381);
+            this.btnSave.Location = new System.Drawing.Point(30, 372);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(202, 32);
             this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "保存";
@@ -274,6 +274,7 @@
             this.txtMemberDiscount.Name = "txtMemberDiscount";
             this.txtMemberDiscount.Size = new System.Drawing.Size(142, 21);
             this.txtMemberDiscount.TabIndex = 0;
+            this.txtMemberDiscount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNumber_KeyPress);
             // 
             // txtLowestMoney
             // 
@@ -281,6 +282,7 @@
             this.txtLowestMoney.Name = "txtLowestMoney";
             this.txtLowestMoney.Size = new System.Drawing.Size(142, 21);
             this.txtLowestMoney.TabIndex = 0;
+            this.txtLowestMoney.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNumber_KeyPress);
             // 
             // txtDistributionScope
             // 
@@ -288,6 +290,7 @@
             this.txtDistributionScope.Name = "txtDistributionScope";
             this.txtDistributionScope.Size = new System.Drawing.Size(142, 21);
             this.txtDistributionScope.TabIndex = 0;
+            this.txtDistributionScope.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNumber_KeyPress);
             // 
             // txtTel
             // 
@@ -295,6 +298,7 @@
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(142, 21);
             this.txtTel.TabIndex = 0;
+            this.txtTel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNumber_KeyPress);
             // 
             // address
             // 

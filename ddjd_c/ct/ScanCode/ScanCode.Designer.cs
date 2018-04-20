@@ -60,6 +60,7 @@
             this.emptyShopCar = new DevComponents.DotNetBar.ButtonX();
             this.alipay = new DevComponents.DotNetBar.ButtonX();
             this.weixinPay = new DevComponents.DotNetBar.ButtonX();
+            this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.submitOrder = new DevComponents.DotNetBar.ButtonX();
             this.lblTime = new DevComponents.DotNetBar.LabelX();
             this.dgvShopcar = new System.Windows.Forms.DataGridView();
@@ -77,7 +78,6 @@
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager();
             this.command1 = new DevComponents.DotNetBar.Command(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.panelEx1.SuspendLayout();
             this.panelEx3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
@@ -117,6 +117,7 @@
             this.panelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelEx1.Style.GradientAngle = 90;
             this.panelEx1.TabIndex = 0;
+            
             // 
             // panelEx3
             // 
@@ -406,6 +407,21 @@
             this.weixinPay.Text = "微信支付";
             this.weixinPay.Click += new System.EventHandler(this.weixinPay_Click);
             // 
+            // btnClose
+            // 
+            this.btnClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnClose.BackColor = System.Drawing.Color.Transparent;
+            this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClose.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnClose.Location = new System.Drawing.Point(401, 422);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(73, 49);
+            this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClose.TabIndex = 5;
+            this.btnClose.Text = "退出";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // submitOrder
             // 
             this.submitOrder.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -548,21 +564,6 @@
             // serialPort1
             // 
             this.serialPort1.PortName = "COM4";
-            // 
-            // btnClose
-            // 
-            this.btnClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClose.BackColor = System.Drawing.Color.Transparent;
-            this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClose.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClose.Location = new System.Drawing.Point(401, 422);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(73, 49);
-            this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClose.TabIndex = 5;
-            this.btnClose.Text = "退出";
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // frmScanCode
             // 
