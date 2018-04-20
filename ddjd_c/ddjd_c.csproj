@@ -59,6 +59,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ct\good\IndexRecommendGoodForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\good\IndexRecommendGoodForm.Designer.cs">
+      <DependentUpon>IndexRecommendGoodForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ct\good\PromotionGoodForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\good\PromotionGoodForm.Designer.cs">
+      <DependentUpon>PromotionGoodForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ct\ScanCode\Guadan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,8 +237,14 @@
     <EmbeddedResource Include="ct\good\goodManagement.resx">
       <DependentUpon>goodManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ct\good\IndexRecommendGoodForm.resx">
+      <DependentUpon>IndexRecommendGoodForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ct\good\inputTxtSort.resx">
       <DependentUpon>inputTxtSort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\good\PromotionGoodForm.resx">
+      <DependentUpon>PromotionGoodForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\Order\Order.resx">
       <DependentUpon>Order.cs</DependentUpon>
