@@ -115,5 +115,24 @@ namespace ddjd_c.service.good
         {
             baseHttp.GetStrFunction(goodRequest.QueryPromotiongoodsPaginateStore.ToGetRequestURL(dic), resultDelegate);
         }
+
+        /// <summary>
+        /// 查询店铺各种审核状态的商品
+        /// </summary>
+        /// <param name="resultDelegate"></param>
+        /// <param name="dic"></param>
+        public static void QueryExamineGoodsByStoreId(ResponseResultDelegate resultDelegate, Dictionary<string, object> dic)
+        {
+            baseHttp.GetStrFunction(goodRequest.QueryExamineGoodsByStoreId.ToGetRequestURL(dic), resultDelegate);
+        }
+
+        /// <summary>
+        /// 审核失败，修改审核商品
+        /// </summary>
+        /// <param name="resultDelegate"></param>
+        /// <param name="dic"></param>
+        public static void UpdateExamineGoodsByStoreId(ResponseResultDelegate resultDelegate, Dictionary<string, object> dic){
+            baseHttp.PostStrFunction(goodRequest.UpdateExamineGoodsByStoreId,dic,resultDelegate);
+        }
     }
 }

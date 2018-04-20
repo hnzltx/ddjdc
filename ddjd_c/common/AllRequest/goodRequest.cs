@@ -65,11 +65,26 @@ namespace ddjd_c.common.AllRequest
         ///店铺将商品修改为上架或下架
         public static string UpdateGoodsFlagByStoreAndGoodsId { get => updateGoodsFlagByStoreAndGoodsId; }
 
+
         private static string queryPromotiongoodsPaginateStore = "front/promotiongoods/queryPromotiongoodsPaginateStore";
 
         /// <summary>
         /// 查询促销商品
         /// </summary>
         public static string QueryPromotiongoodsPaginateStore { get => queryPromotiongoodsPaginateStore; }
+
+
+        private static string queryExamineGoodsByStoreId = "front/storeUploadGoods/queryExamineGoodsByStoreId";
+        /// <summary>
+        /// 查询店铺各种审核状态的商品
+        /// </summary>
+        public static string QueryExamineGoodsByStoreId { get => queryExamineGoodsByStoreId; }
+
+
+        private static string updateExamineGoodsByStoreId = "front/storeUploadGoods/updateExamineGoodsByStoreId";
+        /// <summary>
+        /// 审核失败，修改审核商品
+        /// </summary>
+        public static string UpdateExamineGoodsByStoreId { get => updateExamineGoodsByStoreId; }
     }
 }
