@@ -192,27 +192,31 @@ namespace ddjd_c.http
         /// <param name="response">返回结果委托</param>
         public static void PostStrFunction(string httpName, Dictionary<string, object> dic,ResponseResultDelegate response)
         {
-            Action<string,Dictionary<string,object>> action = PostRequest;
-            action(httpName,dic);
+            Action<Dictionary<string,object>> action = PostRequest;
+            Dictionary<string, object> dicVale = new Dictionary<string, object>();
+            dicVale.Add("url",httpName);
+            dicVale.Add("dic",dic);
+            action(dic);
             //发起异步请求
-            action.BeginInvoke(httpName, dic,new AsyncCallback(CallBackMethod), response);
+            action.BeginInvoke(dic,new AsyncCallback(CallBackMethod), response);
             // 捕捉调用线程的同步上下文派生对象
             sc = System.Threading.SynchronizationContext.Current;
+            
         }
         /// <summary>
         /// post请求
         /// </summary>
-        /// <param name="url">路径</param>
         /// <param name="dic">参数</param>
-        private static void PostRequest(string url, Dictionary<string, object> dic)
+        private static void PostRequest(Dictionary<string,object> objDic)
         {
+            string url = objDic["url"].ToString();
+            var dic = (Dictionary<string, object>)objDic["dic"];
             responseResult = new ResponseResult();
             if (Internet.IsConnectInternet())//检查是否可以连接互联网
             {
                 try
                 {
                     string serviceAddress = ddjdcUrl + url;
-                    string result = "";
                     HttpWebRequest req = (HttpWebRequest)WebRequest.Create(serviceAddress);
                     req.Method = "POST";
                     req.ContentType = "application/x-www-form-urlencoded";
@@ -239,7 +243,7 @@ namespace ddjd_c.http
                     //获取响应内容  
                     using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
                     {
-                        result = reader.ReadToEnd();
+                        responseResult.JsonStr = reader.ReadToEnd();
                     }
                 }
                 catch (Exception e)
@@ -258,11 +262,13 @@ namespace ddjd_c.http
         /// <param name="response">返回结果委托</param>
         public static void GetStrFunction(String httpName, ResponseResultDelegate response)
         {
-            
-            Action<string> action = GetRequest;
-            action(httpName);
+
+            Action<Dictionary<string, object>> action = GetRequest;
+            Dictionary<string, object> dicVale = new Dictionary<string, object>();
+            dicVale.Add("url", httpName);
+            action(dicVale);
             //发起异步请求
-            action.BeginInvoke(httpName, new AsyncCallback(CallBackMethod), response);
+            action.BeginInvoke(dicVale, new AsyncCallback(CallBackMethod), response);
             // 捕捉调用线程的同步上下文派生对象
             sc = System.Threading.SynchronizationContext.Current;
         }
@@ -271,9 +277,9 @@ namespace ddjd_c.http
         /// 网络异步get请求
         /// </summary>
         /// <param name="url"></param>
-        private static void GetRequest(string url)
+        private static void GetRequest(Dictionary<string, object> dic)
         {
-
+            var url = dic["url"].ToString();
             responseResult = new ResponseResult();
             if (Internet.IsConnectInternet())//检查是否可以连接互联网
             {
@@ -308,7 +314,7 @@ namespace ddjd_c.http
         private static void CallBackMethod(IAsyncResult ar)
         {
             ///拿到异步调用委托
-            Action<string> dn = (Action<string>)((System.Runtime.Remoting.Messaging.AsyncResult)ar).AsyncDelegate;
+            Action<Dictionary<string, object>> dn = (Action<Dictionary<string, object>>)((System.Runtime.Remoting.Messaging.AsyncResult)ar).AsyncDelegate;
             ///拿到结果返回委托
             ResponseResultDelegate action = (ResponseResultDelegate)ar.AsyncState;
             //返回结果

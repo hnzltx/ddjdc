@@ -387,11 +387,16 @@ namespace ddjd_c
             ct.good.IndexRecommendGoodForm frm = new ct.good.IndexRecommendGoodForm();
             openWindow(frm, frm.Name);
         }
-
+        /// <summary>
+        /// 跳转到首页推荐区
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonItem4_Click(object sender, EventArgs e)
         {
             ct.good.PromotionGoodForm frm = new ct.good.PromotionGoodForm();
             openWindow(frm, frm.Name);
         }
+
     }
 }
