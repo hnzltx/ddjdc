@@ -73,14 +73,14 @@ namespace ddjd_c.ct.ScanCode
         {
 
             //将窗体全屏
-            Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
-            int width1 = ScreenArea.Width;
-            int height1 = ScreenArea.Height;
-            this.Width = width1;
-            this.Height = height1;
-            this.Top = 0;
-            this.Left = 0;
-            this.TopMost = true;
+            //Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
+            //int width1 = ScreenArea.Width;
+            //int height1 = ScreenArea.Height;
+            //this.Width = width1;
+            //this.Height = height1;
+            //this.Top = 0;
+            //this.Left = 0;
+            //this.TopMost = true;
 
             //加载键盘钩子
             listener.Start();
@@ -652,17 +652,7 @@ namespace ddjd_c.ct.ScanCode
         }
 
 
-        /// <summary>
-        /// 用来给子窗体调用
-        /// </summary>
-        public void emptyOther() {
-
-            this.dgvShopcar.Rows.Clear();
-            this.lblSumCount.Text = "0";
-            this.lblSumMoney.Text = "0";
-
-            SetTextCode();
-        }
+        
 
         private void frmScanCode_Activated(object sender, EventArgs e)
         {
@@ -1023,7 +1013,22 @@ namespace ddjd_c.ct.ScanCode
         /// <param name="e"></param>
         private void btnGuadan_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("挂单成功!");
+            JObject json =  service.scanCode_service.scanCodeService.guadan();
+            if (!string.IsNullOrEmpty(json.ToString()))
+            {
+                if (json["success"].ToString().Equals(GlobalsInfo.success))
+                {
+                    this.dgvShopcar.Rows.Clear();
+                    MessageBox.Show("挂单成功!");
+                }
+                else {
+                    MessageBox.Show("挂单失败!当前没有待结算的商品也会挂单失败哦！");
+                }
+            }
+            else {
+                MessageBox.Show("挂单失败!请重试!");
+            }
+           
         }
 
         /// <summary>
@@ -1037,5 +1042,38 @@ namespace ddjd_c.ct.ScanCode
             guadan.TopMost = true;
             guadan.ShowDialog();
         }
+
+
+        #region 给子窗体调用
+        /// <summary>
+        /// 刷新首页界面待结算商品
+        /// </summary>
+        public void queryStoreshoppingcar_zi()
+        {
+            queryStoreshoppingcar();
+            //显示总数和总价
+            displaySumCountAndSumMoney();
+            //输入框选中
+            SetTextCode();
+        }
+
+
+        /// <summary>
+        /// 用来给子窗体调用 ; 清空当前待结算商品。清空数量和金额；
+        /// </summary>
+        public void emptyOther()
+        {
+
+            this.dgvShopcar.Rows.Clear();
+            this.lblSumCount.Text = "0";
+            this.lblSumMoney.Text = "0";
+
+            SetTextCode();
+        }
+        #endregion
+
+
+
+
     }
 }

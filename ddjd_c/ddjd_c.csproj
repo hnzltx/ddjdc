@@ -54,6 +54,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="websocket-sharp-with-proxy-support, Version=1.0.2.28248, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\packages\websocket-sharp-with-proxy-support.1.9.1\lib\net35-client\websocket-sharp-with-proxy-support.dll</HintPath>
+    </Reference>
     <Reference Include="WHC.Pager.WinControlEx">
       <HintPath>D:\inset\QQ\QQ消息记录\348043717\FileRecv\WHC.Pager.WinControlEx.dll</HintPath>
     </Reference>
@@ -76,6 +79,12 @@
     </Compile>
     <Compile Include="ct\ScanCode\Guadan.Designer.cs">
       <DependentUpon>Guadan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ct\socketTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\socketTest.Designer.cs">
+      <DependentUpon>socketTest.cs</DependentUpon>
     </Compile>
     <Compile Include="ct\store\storeAndMember.cs">
       <SubType>Form</SubType>
@@ -224,6 +233,7 @@
     <Compile Include="vo\order\order.cs" />
     <Compile Include="vo\order\orderInfoGoodsDetails.cs" />
     <Compile Include="vo\pageInfo.cs" />
+    <Compile Include="vo\scanCode\queryGuadanNumber.cs" />
     <Compile Include="vo\serialPortInfo.cs" />
     <EmbeddedResource Include="ct\AboutUs\AboutUs.resx">
       <DependentUpon>AboutUs.cs</DependentUpon>
@@ -266,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ct\Set\SetPrint.resx">
       <DependentUpon>SetPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\socketTest.resx">
+      <DependentUpon>socketTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\store\storeAndMember.resx">
       <DependentUpon>storeAndMember.cs</DependentUpon>

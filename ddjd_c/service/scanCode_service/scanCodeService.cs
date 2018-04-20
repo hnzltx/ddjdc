@@ -101,5 +101,113 @@ namespace ddjd_c.service.scanCode_service
 
         }
 
+
+        /// <summary>
+        /// 执行挂单
+        /// </summary>
+        /// <returns></returns>
+        public static JObject guadan() {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("storeId", GlobalsInfo.storeId);
+
+            return common.JsonHelper.getJObject(http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.Guadan, dic));
+        }
+
+
+        /// <summary>
+        /// 查询所有的挂单号
+        /// </summary>
+        /// <returns></returns>
+        public static List<vo.scanCode.queryGuadanNumber> queryGuadanNumber() {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("storeId", GlobalsInfo.storeId);
+
+            return common.JsonHelper.DeserializeJsonToList<vo.scanCode.queryGuadanNumber>(
+                http.baseHttp.GetStrFunction(
+                    common.AllRequest.scanCodeRequest.QueryGuddanNumber + common.GetParam.GetStrParam(dic)));
+        }
+
+
+        /// <summary>
+        /// 根据挂单编号查询挂单的商品
+        /// </summary>
+        /// <param name="guadanNumber"></param>
+        /// <returns></returns>
+        public static List<vo.addShopCar.addShopCarGoods> queryGoodsInfoByGuddanNumber(object guadanNumber) {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("storeId", GlobalsInfo.storeId);
+            dic.Add("guadanNumber", guadanNumber);
+
+            return common.JsonHelper.DeserializeJsonToList<vo.addShopCar.addShopCarGoods>(
+                http.baseHttp.GetStrFunction(
+                    common.AllRequest.scanCodeRequest.QueryGoodsInfoByGuddanNumber + common.GetParam.GetStrParam(dic)));
+        }
+
+
+
+        /// <summary>
+        /// 删除某挂单
+        /// </summary>
+        /// <param name="guadanNumber"></param>
+        /// <returns></returns>
+        public static bool deleteGuadanNumbe(object guadanNumber) {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("storeId", GlobalsInfo.storeId);
+            dic.Add("guadanNumber", guadanNumber);
+
+            //验证是否返回相应信息，
+            string getStr = http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.DeleteGuadanNumbe, dic);
+            if(getStr != "") {
+                //有返回才执行json转换
+                JObject json = common.JsonHelper.getJObject(getStr);
+                if (json["success"].ToString().Equals(ddjd_c.GlobalsInfo.success))
+                {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+
+        }
+
+
+
+        /// <summary>
+        /// 取出挂单商品
+        /// </summary>
+        /// <param name="guadanNumber"></param>
+        /// <returns></returns>
+        public static bool getGuadan(object guadanNumber) {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("storeId", GlobalsInfo.storeId);
+            dic.Add("guadanNumber", guadanNumber);
+
+            //验证是否返回相应信息，
+            string getStr = http.baseHttp.PostStrFunction(common.AllRequest.scanCodeRequest.GetGuadan, dic);
+            if (getStr != "")
+            {
+                //有返回才执行json转换
+                JObject json = common.JsonHelper.getJObject(getStr);
+                if (json["success"].ToString().Equals(ddjd_c.GlobalsInfo.success))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
     }
 }

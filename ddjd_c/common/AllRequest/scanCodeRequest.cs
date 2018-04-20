@@ -75,5 +75,51 @@ namespace ddjd_c.common.AllRequest
         public static string UpdateStoreCar { get => updateStoreCar; }
         #endregion
 
+
+        #region 挂单
+        /// <summary>
+        /// 挂单
+        /// </summary>
+        private static string guadan = "code/guadan";
+        public static string Guadan { get => guadan; }
+        #endregion
+
+
+        #region 查询挂单编号
+        /// <summary>
+        /// 查询挂单编号
+        /// </summary>
+        private static string queryGuddanNumber = "code/queryGuddanNumber";
+        public static string QueryGuddanNumber { get => queryGuddanNumber;}
+        #endregion
+
+
+        #region 根据挂单编号查询挂单的商品
+        /// <summary>
+        /// 根据挂单编号查询挂单的商品
+        /// </summary>
+        private static string queryGoodsInfoByGuddanNumber = "code/queryGoodsInfoByGuddanNumber";
+        public static string QueryGoodsInfoByGuddanNumber { get => queryGoodsInfoByGuddanNumber; }
+
+        #endregion
+
+
+        #region 删除某挂单
+        /// <summary>
+        /// 删除某挂单
+        /// </summary>
+        private static string deleteGuadanNumbe = "code/deleteGuadanNumbe";
+        public static string DeleteGuadanNumbe { get => deleteGuadanNumbe; }
+        #endregion
+
+
+        #region 取出挂单商品 - 根据挂单号
+        /// <summary>
+        /// 取出挂单商品 - 根据挂单号
+        /// </summary>
+        private static string getGuadan = "code/getGuadan";
+        public static string GetGuadan { get => getGuadan; }
+        #endregion
+
     }
 }

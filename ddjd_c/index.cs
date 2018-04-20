@@ -10,14 +10,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ddjd_c.ct;
 using System.Collections;
+using ddjd_c.http;
 
 namespace ddjd_c
 {
     public partial class indexName : Form
     {
+        private void Listener_ScanerEvent(baseHttp.exInfo ex)
+        {
+            if (ex != null)
+            {
+                MessageBox.Show("全局异常：" + ex.ExMsg + "【" + ex.HttpName + "】", "错误提示");
+            }
+        }
+
         public indexName()
         {
             InitializeComponent();
+            baseHttp.ScanerEvent += Listener_ScanerEvent;
         }
 
         private void indexName_Load(object sender, EventArgs e)
@@ -301,10 +311,20 @@ namespace ddjd_c
             openWindow(frm, frm.Name);
         }
 
+        /// <summary>
+        /// 跳转到我的粉丝
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnStoreAndMember_Click(object sender, EventArgs e)
+        {
+            ct.store.frmStoreAndMember frm = new ct.store.frmStoreAndMember();
+            openWindow(frm, frm.Name);
+        }
 
 
         #region 退出程序
-        
+
         /// <summary>
         /// 退出程序按钮
         /// </summary>
@@ -373,6 +393,5 @@ namespace ddjd_c
             ct.good.PromotionGoodForm frm = new ct.good.PromotionGoodForm();
             openWindow(frm, frm.Name);
         }
-
     }
 }

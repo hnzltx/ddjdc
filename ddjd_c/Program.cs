@@ -18,8 +18,8 @@ namespace ddjd_c
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new login());
-            //Application.Run(new frmTest());
+            //Application.Run(new login());
+            Application.Run(new socketTest());
         }
     }
 }
