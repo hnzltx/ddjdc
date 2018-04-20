@@ -59,19 +59,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="common\BardCodeHooK.cs" />
-    <Compile Include="common\Class1.cs" />
-    <Compile Include="ct\good\IndexRecommendGoodForm.cs">
+    <Compile Include="ct\ScanCode\Guadan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ct\good\IndexRecommendGoodForm.Designer.cs">
-      <DependentUpon>IndexRecommendGoodForm.cs</DependentUpon>
+    <Compile Include="ct\ScanCode\Guadan.Designer.cs">
+      <DependentUpon>Guadan.cs</DependentUpon>
     </Compile>
-    <Compile Include="ct\good\PromotionGoodForm.cs">
+    <Compile Include="ct\store\storeAndMember.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ct\good\PromotionGoodForm.Designer.cs">
-      <DependentUpon>PromotionGoodForm.cs</DependentUpon>
+    <Compile Include="ct\store\storeAndMember.Designer.cs">
+      <DependentUpon>storeAndMember.cs</DependentUpon>
     </Compile>
     <Compile Include="ResponseResult.cs" />
     <Compile Include="common\AllRequest\goodRequest.cs" />
@@ -227,20 +225,17 @@
     <EmbeddedResource Include="ct\good\goodManagement.resx">
       <DependentUpon>goodManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ct\good\IndexRecommendGoodForm.resx">
-      <DependentUpon>IndexRecommendGoodForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ct\good\inputTxtSort.resx">
       <DependentUpon>inputTxtSort.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ct\good\PromotionGoodForm.resx">
-      <DependentUpon>PromotionGoodForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\Order\Order.resx">
       <DependentUpon>Order.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\Order\OrderDetail.resx">
       <DependentUpon>OrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\ScanCode\Guadan.resx">
+      <DependentUpon>Guadan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\ScanCode\ScanCode.resx">
       <DependentUpon>ScanCode.cs</DependentUpon>
@@ -253,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ct\Set\SetPrint.resx">
       <DependentUpon>SetPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\store\storeAndMember.resx">
+      <DependentUpon>storeAndMember.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\store\frmStoreInfo.resx">
       <DependentUpon>frmStoreInfo.cs</DependentUpon>

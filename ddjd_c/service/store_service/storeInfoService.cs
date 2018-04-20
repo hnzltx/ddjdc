@@ -33,7 +33,15 @@ namespace ddjd_c.service.store_service
 		}
 
 
+        /// <summary>
+        /// 查询店铺粉丝总数 . 包括绑定了店铺的总会员数量； 其中包括多少合伙人数量，多少会员数量
+        /// </summary>
+        /// <returns></returns>
+        public static JObject queryBindStoreMemberCount() {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("storeId", GlobalsInfo.storeId);
+            return JsonHelper.getJObject(baseHttp.PostStrFunction(storeRequest.QueryBindStoreMemberCount, dic));
+        }
 
-
-	}
+    }
 }

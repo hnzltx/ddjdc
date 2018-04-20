@@ -15,87 +15,24 @@ namespace ddjd_c.ct
 {
     public partial class frmTest : Form
     {
-        //private Class1 listener = new Class1();
-
-        //public frmTest()
-        //{
-        //    InitializeComponent();
-        //    listener.BarCodeEvent += Listener_ScanerEvent;
-        //}
-
-
-        //private void Listener_ScanerEvent(Class1.BarCodes codes)
-        //{
-        //    textBox1.Text = codes.BarCode;
-
-        //}
-
-
-
-
-        //private void pictureBox1_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    listener.Start();
-        //}
-
-
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    listener.Stop();
-        //}
-
-        //private void frmTest_Load(object sender, EventArgs e)
-        //{
-        //    listener.Start();
-        //}
-
-
-
-
-        BardCodeHooK BarCode = new BardCodeHooK();
+        private KeyboardHookLib listener = new KeyboardHookLib();
 
         public frmTest()
         {
             InitializeComponent();
-            BarCode.BarCodeEvent += new BardCodeHooK.BardCodeDeletegate(BarCode_BarCodeEvent);
+            listener.ScanerEvent += Listener_ScanerEvent;
         }
-        
-        private delegate void ShowInfoDelegate(BardCodeHooK.BarCodes barCode);
-        private void ShowInfo(BardCodeHooK.BarCodes barCode)
+
+
+        private void Listener_ScanerEvent(KeyboardHookLib.ScanerCodes codes)
         {
-            if (this.InvokeRequired)
-            {
-                this.BeginInvoke(new ShowInfoDelegate(ShowInfo), new object[] { barCode });
-            }
-            else
-            {
-                //textBox1.Text = barCode.KeyName;
-                //textBox2.Text = barCode.VirtKey.ToString();
-                //textBox3.Text = barCode.ScanCode.ToString();
-                //textBox4.Text = barCode.Ascll.ToString();
-                //textBox5.Text = barCode.Chr.ToString();
+            //键盘钩子获取的条码，赋值到文本框中
+            textBox1.Text = codes.Result;
+            Console.WriteLine("codes.Result：" + codes.Result);
 
-                //textBox7.Text += barCode.KeyName;
-                
-                textBox1.Text = barCode.IsValid ? barCode.BarCode : "";//是否为扫描枪输入，如果为true则是 否则为键盘输入  
-                
-                //MessageBox.Show(barCode.IsValid.ToString());  
-            }
         }
 
-
-        void BarCode_BarCodeEvent(BardCodeHooK.BarCodes barCode)
-        {
-            ShowInfo(barCode);
-        }
-
-
-
+       
 
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -105,19 +42,24 @@ namespace ddjd_c.ct
 
         private void button1_Click(object sender, EventArgs e)
         {
-            BarCode.Start();
+            listener.Start();
         }
 
 
         private void button2_Click(object sender, EventArgs e)
         {
-            BarCode.Stop();
+            listener.Stop();
         }
 
         private void frmTest_Load(object sender, EventArgs e)
         {
-            BarCode.Start();
+            listener.Start();
         }
+
+
+
+
+        
 
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -128,8 +70,8 @@ namespace ddjd_c.ct
                     
                     return true;
                 case Keys.Enter:
-                    textBox2.Text = textBox1.Text; 
-                    Console.WriteLine("123:" + textBox2.Text);
+                   
+                    Console.WriteLine("结果:" + textBox1.Text);
                     return true;
                 default:
                     return base.ProcessCmdKey(ref msg, keyData);
