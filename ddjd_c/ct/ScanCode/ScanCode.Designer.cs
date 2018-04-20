@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.panelEx3 = new DevComponents.DotNetBar.PanelEx();
             this.bar1 = new DevComponents.DotNetBar.Bar();
@@ -64,12 +66,6 @@
             this.submitOrder = new DevComponents.DotNetBar.ButtonX();
             this.lblTime = new DevComponents.DotNetBar.LabelX();
             this.dgvShopcar = new System.Windows.Forms.DataGridView();
-            this.storeShoppingcarId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.goodsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oneMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sumMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isBulkCargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddGoods = new DevComponents.DotNetBar.ButtonX();
             this.textCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -78,6 +74,14 @@
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager();
             this.command1 = new DevComponents.DotNetBar.Command(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.btnGetGuadan = new DevComponents.DotNetBar.ButtonX();
+            this.btnGuadan = new DevComponents.DotNetBar.ButtonX();
+            this.storeShoppingcarId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.goodsName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oneMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sumMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isBulkCargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelEx1.SuspendLayout();
             this.panelEx3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
@@ -100,6 +104,8 @@
             this.panelEx1.Controls.Add(this.alipay);
             this.panelEx1.Controls.Add(this.weixinPay);
             this.panelEx1.Controls.Add(this.btnClose);
+            this.panelEx1.Controls.Add(this.btnGuadan);
+            this.panelEx1.Controls.Add(this.btnGetGuadan);
             this.panelEx1.Controls.Add(this.submitOrder);
             this.panelEx1.Controls.Add(this.lblTime);
             this.panelEx1.Controls.Add(this.dgvShopcar);
@@ -108,7 +114,7 @@
             this.panelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEx1.Location = new System.Drawing.Point(0, 0);
             this.panelEx1.Name = "panelEx1";
-            this.panelEx1.Size = new System.Drawing.Size(1090, 484);
+            this.panelEx1.Size = new System.Drawing.Size(1085, 595);
             this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -117,7 +123,6 @@
             this.panelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelEx1.Style.GradientAngle = 90;
             this.panelEx1.TabIndex = 0;
-            
             // 
             // panelEx3
             // 
@@ -125,7 +130,7 @@
             this.panelEx3.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.panelEx3.Controls.Add(this.bar1);
-            this.panelEx3.Location = new System.Drawing.Point(496, 432);
+            this.panelEx3.Location = new System.Drawing.Point(493, 543);
             this.panelEx3.Name = "panelEx3";
             this.panelEx3.Size = new System.Drawing.Size(582, 31);
             this.panelEx3.Style.Alignment = System.Drawing.StringAlignment.Center;
@@ -254,7 +259,7 @@
             this.btnDeleteOneGoods.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDeleteOneGoods.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDeleteOneGoods.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDeleteOneGoods.Location = new System.Drawing.Point(401, 296);
+            this.btnDeleteOneGoods.Location = new System.Drawing.Point(401, 407);
             this.btnDeleteOneGoods.Name = "btnDeleteOneGoods";
             this.btnDeleteOneGoods.Size = new System.Drawing.Size(73, 58);
             this.btnDeleteOneGoods.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -271,7 +276,7 @@
             this.panelEx2.Controls.Add(this.lblSumMoney);
             this.panelEx2.Controls.Add(this.lblSumCount);
             this.panelEx2.Controls.Add(this.labelX4);
-            this.panelEx2.Location = new System.Drawing.Point(32, 432);
+            this.panelEx2.Location = new System.Drawing.Point(32, 543);
             this.panelEx2.Name = "panelEx2";
             this.panelEx2.Size = new System.Drawing.Size(348, 40);
             this.panelEx2.Style.Alignment = System.Drawing.StringAlignment.Center;
@@ -343,7 +348,7 @@
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.ribbonControl1.Size = new System.Drawing.Size(1090, 24);
+            this.ribbonControl1.Size = new System.Drawing.Size(1085, 23);
             this.ribbonControl1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ribbonControl1.TabGroupHeight = 14;
             this.ribbonControl1.TabIndex = 7;
@@ -359,7 +364,7 @@
             this.tabGoodscategory.Name = "tabGoodscategory";
             this.tabGoodscategory.SelectedTabFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold);
             this.tabGoodscategory.SelectedTabIndex = -1;
-            this.tabGoodscategory.Size = new System.Drawing.Size(582, 324);
+            this.tabGoodscategory.Size = new System.Drawing.Size(577, 435);
             this.tabGoodscategory.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Dock;
             this.tabGoodscategory.TabIndex = 6;
             this.tabGoodscategory.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
@@ -371,7 +376,7 @@
             this.emptyShopCar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.emptyShopCar.BackColor = System.Drawing.Color.Transparent;
             this.emptyShopCar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.emptyShopCar.Location = new System.Drawing.Point(401, 350);
+            this.emptyShopCar.Location = new System.Drawing.Point(401, 461);
             this.emptyShopCar.Name = "emptyShopCar";
             this.emptyShopCar.Size = new System.Drawing.Size(73, 58);
             this.emptyShopCar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -385,7 +390,7 @@
             this.alipay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.alipay.BackColor = System.Drawing.Color.Transparent;
             this.alipay.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.alipay.Location = new System.Drawing.Point(401, 224);
+            this.alipay.Location = new System.Drawing.Point(401, 335);
             this.alipay.Name = "alipay";
             this.alipay.Size = new System.Drawing.Size(73, 58);
             this.alipay.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -399,7 +404,7 @@
             this.weixinPay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.weixinPay.BackColor = System.Drawing.Color.Transparent;
             this.weixinPay.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.weixinPay.Location = new System.Drawing.Point(401, 169);
+            this.weixinPay.Location = new System.Drawing.Point(401, 280);
             this.weixinPay.Name = "weixinPay";
             this.weixinPay.Size = new System.Drawing.Size(73, 58);
             this.weixinPay.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -414,7 +419,7 @@
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
             this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnClose.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClose.Location = new System.Drawing.Point(401, 422);
+            this.btnClose.Location = new System.Drawing.Point(401, 533);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(73, 49);
             this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -428,7 +433,7 @@
             this.submitOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.submitOrder.BackColor = System.Drawing.Color.Transparent;
             this.submitOrder.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.submitOrder.Location = new System.Drawing.Point(401, 104);
+            this.submitOrder.Location = new System.Drawing.Point(401, 101);
             this.submitOrder.Name = "submitOrder";
             this.submitOrder.Size = new System.Drawing.Size(73, 50);
             this.submitOrder.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -443,7 +448,7 @@
             // 
             // 
             this.lblTime.BackgroundStyle.Class = "";
-            this.lblTime.Location = new System.Drawing.Point(867, 56);
+            this.lblTime.Location = new System.Drawing.Point(862, 56);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(211, 23);
             this.lblTime.TabIndex = 3;
@@ -452,8 +457,18 @@
             // dgvShopcar
             // 
             this.dgvShopcar.AllowUserToAddRows = false;
+            this.dgvShopcar.AllowUserToResizeColumns = false;
             this.dgvShopcar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvShopcar.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvShopcar.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvShopcar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShopcar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.storeShoppingcarId,
@@ -462,6 +477,14 @@
             this.oneMoney,
             this.sumMoney,
             this.isBulkCargo});
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvShopcar.DefaultCellStyle = dataGridViewCellStyle18;
             this.dgvShopcar.Location = new System.Drawing.Point(32, 96);
             this.dgvShopcar.MultiSelect = false;
             this.dgvShopcar.Name = "dgvShopcar";
@@ -469,59 +492,17 @@
             this.dgvShopcar.RowHeadersVisible = false;
             this.dgvShopcar.RowTemplate.Height = 23;
             this.dgvShopcar.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvShopcar.Size = new System.Drawing.Size(348, 324);
+            this.dgvShopcar.Size = new System.Drawing.Size(348, 435);
             this.dgvShopcar.TabIndex = 2;
             this.dgvShopcar.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvShopcar_CellMouseClick);
-            // 
-            // storeShoppingcarId
-            // 
-            this.storeShoppingcarId.HeaderText = "购物车ID";
-            this.storeShoppingcarId.Name = "storeShoppingcarId";
-            this.storeShoppingcarId.ReadOnly = true;
-            this.storeShoppingcarId.Visible = false;
-            // 
-            // goodsName
-            // 
-            this.goodsName.HeaderText = "商品名称";
-            this.goodsName.Name = "goodsName";
-            this.goodsName.ReadOnly = true;
-            this.goodsName.Width = 150;
-            // 
-            // num
-            // 
-            this.num.HeaderText = "数量/重量";
-            this.num.Name = "num";
-            this.num.ReadOnly = true;
-            this.num.Width = 70;
-            // 
-            // oneMoney
-            // 
-            this.oneMoney.HeaderText = "单价";
-            this.oneMoney.Name = "oneMoney";
-            this.oneMoney.ReadOnly = true;
-            this.oneMoney.Width = 70;
-            // 
-            // sumMoney
-            // 
-            this.sumMoney.HeaderText = "小计";
-            this.sumMoney.Name = "sumMoney";
-            this.sumMoney.ReadOnly = true;
-            this.sumMoney.Width = 55;
-            // 
-            // isBulkCargo
-            // 
-            this.isBulkCargo.HeaderText = "是否散货";
-            this.isBulkCargo.Name = "isBulkCargo";
-            this.isBulkCargo.ReadOnly = true;
-            this.isBulkCargo.Visible = false;
             // 
             // btnAddGoods
             // 
             this.btnAddGoods.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnAddGoods.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnAddGoods.Location = new System.Drawing.Point(228, 56);
+            this.btnAddGoods.Location = new System.Drawing.Point(303, 50);
             this.btnAddGoods.Name = "btnAddGoods";
-            this.btnAddGoods.Size = new System.Drawing.Size(74, 23);
+            this.btnAddGoods.Size = new System.Drawing.Size(74, 34);
             this.btnAddGoods.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnAddGoods.TabIndex = 1;
             this.btnAddGoods.Text = "确定";
@@ -535,7 +516,7 @@
             this.textCode.Border.Class = "TextBoxBorder";
             this.textCode.Location = new System.Drawing.Point(32, 56);
             this.textCode.Name = "textCode";
-            this.textCode.Size = new System.Drawing.Size(173, 21);
+            this.textCode.Size = new System.Drawing.Size(253, 21);
             this.textCode.TabIndex = 0;
             // 
             // timer1
@@ -565,11 +546,85 @@
             // 
             this.serialPort1.PortName = "COM4";
             // 
+            // btnGetGuadan
+            // 
+            this.btnGetGuadan.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGetGuadan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnGetGuadan.BackColor = System.Drawing.Color.Transparent;
+            this.btnGetGuadan.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGetGuadan.Location = new System.Drawing.Point(401, 214);
+            this.btnGetGuadan.Name = "btnGetGuadan";
+            this.btnGetGuadan.Size = new System.Drawing.Size(73, 50);
+            this.btnGetGuadan.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGetGuadan.TabIndex = 5;
+            this.btnGetGuadan.Text = "取出挂单";
+            this.btnGetGuadan.Click += new System.EventHandler(this.btnGetGuadan_Click);
+            // 
+            // btnGuadan
+            // 
+            this.btnGuadan.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnGuadan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnGuadan.BackColor = System.Drawing.Color.Transparent;
+            this.btnGuadan.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnGuadan.Location = new System.Drawing.Point(401, 167);
+            this.btnGuadan.Name = "btnGuadan";
+            this.btnGuadan.Size = new System.Drawing.Size(73, 50);
+            this.btnGuadan.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnGuadan.TabIndex = 5;
+            this.btnGuadan.Text = "挂单";
+            this.btnGuadan.Click += new System.EventHandler(this.btnGuadan_Click);
+            // 
+            // storeShoppingcarId
+            // 
+            this.storeShoppingcarId.HeaderText = "购物车ID";
+            this.storeShoppingcarId.Name = "storeShoppingcarId";
+            this.storeShoppingcarId.ReadOnly = true;
+            this.storeShoppingcarId.Visible = false;
+            // 
+            // goodsName
+            // 
+            this.goodsName.HeaderText = "商品名称";
+            this.goodsName.Name = "goodsName";
+            this.goodsName.ReadOnly = true;
+            this.goodsName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.goodsName.Width = 150;
+            // 
+            // num
+            // 
+            this.num.HeaderText = "数量/重量";
+            this.num.Name = "num";
+            this.num.ReadOnly = true;
+            this.num.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.num.Width = 70;
+            // 
+            // oneMoney
+            // 
+            this.oneMoney.HeaderText = "单价";
+            this.oneMoney.Name = "oneMoney";
+            this.oneMoney.ReadOnly = true;
+            this.oneMoney.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.oneMoney.Width = 70;
+            // 
+            // sumMoney
+            // 
+            this.sumMoney.HeaderText = "小计";
+            this.sumMoney.Name = "sumMoney";
+            this.sumMoney.ReadOnly = true;
+            this.sumMoney.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sumMoney.Width = 55;
+            // 
+            // isBulkCargo
+            // 
+            this.isBulkCargo.HeaderText = "是否散货";
+            this.isBulkCargo.Name = "isBulkCargo";
+            this.isBulkCargo.ReadOnly = true;
+            this.isBulkCargo.Visible = false;
+            // 
             // frmScanCode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1090, 484);
+            this.ClientSize = new System.Drawing.Size(1085, 595);
             this.Controls.Add(this.panelEx1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmScanCode";
@@ -611,12 +666,6 @@
         private DevComponents.DotNetBar.LabelX lblSumCount;
         private DevComponents.DotNetBar.Command command1;
         private System.IO.Ports.SerialPort serialPort1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn storeShoppingcarId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn goodsName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn oneMoney;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sumMoney;
-        private System.Windows.Forms.DataGridViewTextBoxColumn isBulkCargo;
         private DevComponents.DotNetBar.ButtonX btnDeleteOneGoods;
         private DevComponents.DotNetBar.Bar bar1;
         private DevComponents.DotNetBar.ButtonItem btnHomePage;
@@ -638,5 +687,13 @@
         private DevComponents.DotNetBar.LabelItem labelItem3;
         private DevComponents.DotNetBar.PanelEx panelEx3;
         private DevComponents.DotNetBar.ButtonX btnClose;
+        private DevComponents.DotNetBar.ButtonX btnGetGuadan;
+        private DevComponents.DotNetBar.ButtonX btnGuadan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn storeShoppingcarId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn goodsName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oneMoney;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sumMoney;
+        private System.Windows.Forms.DataGridViewTextBoxColumn isBulkCargo;
     }
 }

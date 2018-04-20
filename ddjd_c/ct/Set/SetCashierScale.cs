@@ -19,21 +19,37 @@ namespace ddjd_c.ct.Set
             InitializeComponent();
         }
 
+        //设置收银秤的文件名称
+        string SetCashierScale = "SetCashierScale.json";
+
         private void frmSetCashierScale_Load(object sender, EventArgs e)
         {
-            //获取系统当前所有的串口
-            string[] allPort = common.serialport.getAllPortList();
-            if (allPort.Length <= 0) {
-                MessageBox.Show("没有检测到收银秤!");
+            //检查是否有设置的文件
+            if (common.utils.FileExists(SetCashierScale))
+            {
+                JObject json =  common.utils.getFile(SetCashierScale);
+                cmbPortList.Text = json["PortName"].ToString();
+                cmbBaudRate.Text = json["BaudRate"].ToString();
+                cmbDataBits.Text = json["DataBits"].ToString();
+                cmbParity.Text = json["Parity"].ToString();
+                cmbStopBits.Text = json["StopBits"].ToString();
             }
+            else {
+                //获取系统当前所有的串口
+                string[] allPort = common.serialport.getAllPortList();
+                if (allPort.Length <= 0)
+                {
+                    MessageBox.Show("没有检测到收银秤!");
+                }
 
-            cmbPortList.DataSource = allPort;
+                cmbPortList.DataSource = allPort;
 
-            //选中第一个波特率
-            cmbBaudRate.SelectedIndex = 0;
-            cmbDataBits.SelectedIndex = 0;
-            cmbParity.SelectedIndex = 0;
-            cmbStopBits.SelectedIndex = 0;
+                //选中第一个波特率
+                cmbBaudRate.SelectedIndex = 0;
+                cmbDataBits.SelectedIndex = 0;
+                cmbParity.SelectedIndex = 0;
+                cmbStopBits.SelectedIndex = 0;
+            }
         }
 
 
@@ -50,7 +66,7 @@ namespace ddjd_c.ct.Set
             source.Add("Parity", cmbParity.Text);
             source.Add("DataBits", cmbDataBits.Text);
 
-            if (common.utils.writeFile("SetCashierScale.json", source))
+            if (common.utils.writeFile(SetCashierScale, source))
             {
                 db.SetCashierScale.SetCashierScale.BaudRate = int.Parse(cmbBaudRate.Text);
                 db.SetCashierScale.SetCashierScale.PortName = cmbPortList.Text;

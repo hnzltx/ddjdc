@@ -20,6 +20,20 @@ namespace ddjd_c
         public login()
         {
             InitializeComponent();
+            //baseHttp.ScanerDelegate s = new baseHttp.ScanerDelegate(Listener_ScanerEvent);
+            baseHttp.ScanerEvent += Listener_ScanerEvent;
+        }
+
+
+        private void Listener_ScanerEvent(baseHttp.exInfo ex)
+        {
+            if (ex != null) {
+
+                if (MessageBox.Show(ex.ExMsg + "【"+ex.HttpName+"】" + ",是否退出", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    this.Close();
+                }
+            }
         }
 
         //记住密码的文件
@@ -61,8 +75,11 @@ namespace ddjd_c
         }
 
 
+
+
         private void _Login() {
             
+
             string userAccount = this.userAccount.Text;
             string userPossword = this.userPossword.Text;
             //登录
@@ -92,6 +109,8 @@ namespace ddjd_c
                     //是否记住密码操作
                     cbPassword(userAccount, userPossword);
 
+
+                    baseHttp.ScanerEvent -= Listener_ScanerEvent;
 
                     //跳转首页
                     indexName index = new indexName();
