@@ -38,6 +38,7 @@
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.dtStartTime = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
+            this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtEndTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtStartTime)).BeginInit();
@@ -47,6 +48,7 @@
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx1.Controls.Add(this.labelX5);
             this.panelEx1.Controls.Add(this.btnSubmit);
             this.panelEx1.Controls.Add(this.txtInfo);
             this.panelEx1.Controls.Add(this.labelX4);
@@ -59,7 +61,7 @@
             this.panelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEx1.Location = new System.Drawing.Point(0, 0);
             this.panelEx1.Name = "panelEx1";
-            this.panelEx1.Size = new System.Drawing.Size(286, 292);
+            this.panelEx1.Size = new System.Drawing.Size(286, 298);
             this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -73,7 +75,7 @@
             // 
             this.btnSubmit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSubmit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSubmit.Location = new System.Drawing.Point(13, 243);
+            this.btnSubmit.Location = new System.Drawing.Point(13, 252);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(257, 34);
             this.btnSubmit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -87,11 +89,12 @@
             // 
             // 
             this.txtInfo.Border.Class = "TextBoxBorder";
-            this.txtInfo.Location = new System.Drawing.Point(93, 105);
+            this.txtInfo.Location = new System.Drawing.Point(93, 104);
             this.txtInfo.Multiline = true;
             this.txtInfo.Name = "txtInfo";
             this.txtInfo.Size = new System.Drawing.Size(177, 122);
             this.txtInfo.TabIndex = 7;
+            this.txtInfo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInfo_KeyPress);
             // 
             // labelX4
             // 
@@ -99,7 +102,7 @@
             // 
             // 
             this.labelX4.BackgroundStyle.Class = "";
-            this.labelX4.Location = new System.Drawing.Point(13, 102);
+            this.labelX4.Location = new System.Drawing.Point(13, 104);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(81, 23);
             this.labelX4.TabIndex = 6;
@@ -251,11 +254,25 @@
             this.labelX1.TabIndex = 0;
             this.labelX1.Text = "促销开始时间:";
             // 
+            // labelX5
+            // 
+            // 
+            // 
+            // 
+            this.labelX5.BackgroundStyle.Class = "";
+            this.labelX5.Font = new System.Drawing.Font("宋体", 7F);
+            this.labelX5.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.labelX5.Location = new System.Drawing.Point(93, 232);
+            this.labelX5.Name = "labelX5";
+            this.labelX5.Size = new System.Drawing.Size(177, 14);
+            this.labelX5.TabIndex = 9;
+            this.labelX5.Text = "最多输入100个字符";
+            // 
             // AddPromotiongoodForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(286, 292);
+            this.ClientSize = new System.Drawing.Size(286, 298);
             this.Controls.Add(this.panelEx1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -284,5 +301,6 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dtEndTime;
         private DevComponents.DotNetBar.LabelX labelX2;
         private DevComponents.Editors.DateTimeAdv.DateTimeInput dtStartTime;
+        private DevComponents.DotNetBar.LabelX labelX5;
     }
 }

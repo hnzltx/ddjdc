@@ -96,5 +96,24 @@ namespace ddjd_c.service.good
         {
             return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.AddIndexGoods, dic));
         }
+        /// <summary>
+        /// 查询首页推荐商品
+        /// </summary>
+        /// <param name="resultDelegate"></param>
+        /// <param name="dic"></param>
+        public static void IndexGoodsList(ResponseResultDelegate resultDelegate, Dictionary<string, object> dic)
+        {
+            baseHttp.GetStrFunction(goodRequest.IndexGoodsList.ToGetRequestURL(dic),resultDelegate);
+        }
+
+        /// <summary>
+        /// 查询促销商品
+        /// </summary>
+        /// <param name="resultDelegate"></param>
+        /// <param name="dic"></param>
+        public static void QueryPromotiongoodsPaginateStore(ResponseResultDelegate resultDelegate, Dictionary<string, object> dic)
+        {
+            baseHttp.GetStrFunction(goodRequest.QueryPromotiongoodsPaginateStore.ToGetRequestURL(dic), resultDelegate);
+        }
     }
 }

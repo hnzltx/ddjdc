@@ -357,5 +357,21 @@ namespace ddjd_c
         }
         #endregion
 
+        /// <summary>
+        /// 跳转到首页推荐商品
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonItem17_Click(object sender, EventArgs e)
+        {
+            ct.good.IndexRecommendGoodForm frm = new ct.good.IndexRecommendGoodForm();
+            openWindow(frm, frm.Name);
+        }
+
+        private void buttonItem4_Click(object sender, EventArgs e)
+        {
+            ct.good.PromotionGoodForm frm = new ct.good.PromotionGoodForm();
+            openWindow(frm, frm.Name);
+        }
     }
 }

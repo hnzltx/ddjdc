@@ -38,19 +38,25 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tab = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
-            this.comboItem11 = new DevComponents.Editors.ComboItem();
-            this.comboItem12 = new DevComponents.Editors.ComboItem();
-            this.comboItem13 = new DevComponents.Editors.ComboItem();
-            this.comboItem14 = new DevComponents.Editors.ComboItem();
-            this.comboItem15 = new DevComponents.Editors.ComboItem();
+            this.bar1 = new DevComponents.DotNetBar.Bar();
+            this.btnHomePage = new DevComponents.DotNetBar.ButtonItem();
+            this.btnPreviousPage = new DevComponents.DotNetBar.ButtonItem();
+            this.btnNextPage = new DevComponents.DotNetBar.ButtonItem();
+            this.btnEndPage = new DevComponents.DotNetBar.ButtonItem();
+            this.labelItem5 = new DevComponents.DotNetBar.LabelItem();
+            this.labelItem6 = new DevComponents.DotNetBar.LabelItem();
+            this.lblCount = new DevComponents.DotNetBar.LabelItem();
+            this.labelItem7 = new DevComponents.DotNetBar.LabelItem();
+            this.labelItem8 = new DevComponents.DotNetBar.LabelItem();
+            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.cmbSelect = new DevComponents.DotNetBar.ComboBoxItem();
+            this.comboItem16 = new DevComponents.Editors.ComboItem();
+            this.comboItem17 = new DevComponents.Editors.ComboItem();
+            this.comboItem18 = new DevComponents.Editors.ComboItem();
+            this.comboItem19 = new DevComponents.Editors.ComboItem();
+            this.comboItem20 = new DevComponents.Editors.ComboItem();
+            this.labelItem9 = new DevComponents.DotNetBar.LabelItem();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.goodsStutas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.indexGoodsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.cbx3 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
@@ -64,6 +70,11 @@
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.comboItem11 = new DevComponents.Editors.ComboItem();
+            this.comboItem12 = new DevComponents.Editors.ComboItem();
+            this.comboItem13 = new DevComponents.Editors.ComboItem();
+            this.comboItem14 = new DevComponents.Editors.ComboItem();
+            this.comboItem15 = new DevComponents.Editors.ComboItem();
             this.comboItem6 = new DevComponents.Editors.ComboItem();
             this.comboItem7 = new DevComponents.Editors.ComboItem();
             this.comboItem8 = new DevComponents.Editors.ComboItem();
@@ -84,30 +95,20 @@
             this.labelItem1 = new DevComponents.DotNetBar.LabelItem();
             this.labitem123 = new DevComponents.DotNetBar.LabelItem();
             this.labelItem4 = new DevComponents.DotNetBar.LabelItem();
-            this.bar1 = new DevComponents.DotNetBar.Bar();
-            this.btnHomePage = new DevComponents.DotNetBar.ButtonItem();
-            this.btnPreviousPage = new DevComponents.DotNetBar.ButtonItem();
-            this.btnNextPage = new DevComponents.DotNetBar.ButtonItem();
-            this.btnEndPage = new DevComponents.DotNetBar.ButtonItem();
-            this.labelItem5 = new DevComponents.DotNetBar.LabelItem();
-            this.labelItem6 = new DevComponents.DotNetBar.LabelItem();
-            this.lblCount = new DevComponents.DotNetBar.LabelItem();
-            this.labelItem7 = new DevComponents.DotNetBar.LabelItem();
-            this.labelItem8 = new DevComponents.DotNetBar.LabelItem();
-            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
-            this.cmbSelect = new DevComponents.DotNetBar.ComboBoxItem();
-            this.comboItem16 = new DevComponents.Editors.ComboItem();
-            this.comboItem17 = new DevComponents.Editors.ComboItem();
-            this.comboItem18 = new DevComponents.Editors.ComboItem();
-            this.comboItem19 = new DevComponents.Editors.ComboItem();
-            this.comboItem20 = new DevComponents.Editors.ComboItem();
-            this.labelItem9 = new DevComponents.DotNetBar.LabelItem();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.goodsStutas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.indexGoodsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tab)).BeginInit();
             this.tab.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelX1
@@ -170,25 +171,123 @@
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.tabItem1;
             // 
-            // comboItem11
+            // bar1
             // 
-            this.comboItem11.Text = "10";
+            this.bar1.AntiAlias = true;
+            this.bar1.BackColor = System.Drawing.Color.Transparent;
+            this.bar1.DockSide = DevComponents.DotNetBar.eDockSide.Document;
+            this.bar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnHomePage,
+            this.btnPreviousPage,
+            this.btnNextPage,
+            this.btnEndPage,
+            this.labelItem5,
+            this.labelItem6,
+            this.lblCount,
+            this.labelItem7,
+            this.labelItem8,
+            this.buttonItem1,
+            this.cmbSelect,
+            this.labelItem9});
+            this.bar1.Location = new System.Drawing.Point(12, 85);
+            this.bar1.Name = "bar1";
+            this.bar1.Size = new System.Drawing.Size(682, 28);
+            this.bar1.Stretch = true;
+            this.bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.bar1.TabIndex = 11;
+            this.bar1.TabStop = false;
+            this.bar1.Text = "bar1";
             // 
-            // comboItem12
+            // btnHomePage
             // 
-            this.comboItem12.Text = "20";
+            this.btnHomePage.Name = "btnHomePage";
+            this.btnHomePage.Text = "首页";
+            this.btnHomePage.Click += new System.EventHandler(this.btnHomePage_Click);
             // 
-            // comboItem13
+            // btnPreviousPage
             // 
-            this.comboItem13.Text = "30";
+            this.btnPreviousPage.Name = "btnPreviousPage";
+            this.btnPreviousPage.Text = "上一页";
+            this.btnPreviousPage.Click += new System.EventHandler(this.btnPreviousPage_Click);
             // 
-            // comboItem14
+            // btnNextPage
             // 
-            this.comboItem14.Text = "50";
+            this.btnNextPage.Name = "btnNextPage";
+            this.btnNextPage.Text = "下一页";
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
             // 
-            // comboItem15
+            // btnEndPage
             // 
-            this.comboItem15.Text = "100";
+            this.btnEndPage.Name = "btnEndPage";
+            this.btnEndPage.Text = "尾页";
+            this.btnEndPage.Click += new System.EventHandler(this.btnEndPage_Click);
+            // 
+            // labelItem5
+            // 
+            this.labelItem5.Name = "labelItem5";
+            this.labelItem5.Text = " | ";
+            // 
+            // labelItem6
+            // 
+            this.labelItem6.Name = "labelItem6";
+            this.labelItem6.Text = "共有记录";
+            // 
+            // lblCount
+            // 
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Text = " ** ";
+            // 
+            // labelItem7
+            // 
+            this.labelItem7.Name = "labelItem7";
+            this.labelItem7.Text = "条";
+            // 
+            // labelItem8
+            // 
+            this.labelItem8.Name = "labelItem8";
+            this.labelItem8.Text = " | ";
+            // 
+            // buttonItem1
+            // 
+            this.buttonItem1.Name = "buttonItem1";
+            this.buttonItem1.Text = "每页显示";
+            // 
+            // cmbSelect
+            // 
+            this.cmbSelect.DropDownHeight = 106;
+            this.cmbSelect.ItemHeight = 17;
+            this.cmbSelect.Items.AddRange(new object[] {
+            this.comboItem16,
+            this.comboItem17,
+            this.comboItem18,
+            this.comboItem19,
+            this.comboItem20});
+            this.cmbSelect.Name = "cmbSelect";
+            // 
+            // comboItem16
+            // 
+            this.comboItem16.Text = "10";
+            // 
+            // comboItem17
+            // 
+            this.comboItem17.Text = "20";
+            // 
+            // comboItem18
+            // 
+            this.comboItem18.Text = "30";
+            // 
+            // comboItem19
+            // 
+            this.comboItem19.Text = "50";
+            // 
+            // comboItem20
+            // 
+            this.comboItem20.Text = "100";
+            // 
+            // labelItem9
+            // 
+            this.labelItem9.Name = "labelItem9";
+            this.labelItem9.Text = "条";
             // 
             // dataGridViewX1
             // 
@@ -204,6 +303,7 @@
             this.dataGridViewX1.BackgroundColor = System.Drawing.SystemColors.InactiveCaption;
             this.dataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewX1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
             this.name,
             this.Column2,
             this.Column3,
@@ -233,62 +333,6 @@
             this.dataGridViewX1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewX1_CellFormatting);
             this.dataGridViewX1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewX1_CellMouseDown);
             this.dataGridViewX1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "GoodsName";
-            this.name.HeaderText = "商品名称";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "StoreGoodsPrice";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = "0.00";
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column2.HeaderText = "商品零售价";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "SalesCount";
-            this.Column3.HeaderText = "销量";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "GoodsUnit";
-            this.Column4.HeaderText = "单位";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "Stock";
-            this.Column5.HeaderText = "库存";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // goodsStutas
-            // 
-            this.goodsStutas.DataPropertyName = "GoodsStutas";
-            dataGridViewCellStyle3.NullValue = "0";
-            this.goodsStutas.DefaultCellStyle = dataGridViewCellStyle3;
-            this.goodsStutas.HeaderText = "是否为促销商品";
-            this.goodsStutas.Name = "goodsStutas";
-            this.goodsStutas.ReadOnly = true;
-            // 
-            // indexGoodsId
-            // 
-            this.indexGoodsId.DataPropertyName = "IndexGoodsId";
-            dataGridViewCellStyle4.NullValue = "0";
-            this.indexGoodsId.DefaultCellStyle = dataGridViewCellStyle4;
-            this.indexGoodsId.HeaderText = "是否为首页推荐商品";
-            this.indexGoodsId.Name = "indexGoodsId";
-            this.indexGoodsId.ReadOnly = true;
             // 
             // buttonX1
             // 
@@ -447,6 +491,26 @@
             this.tabItem2.Name = "tabItem2";
             this.tabItem2.Text = "下架";
             // 
+            // comboItem11
+            // 
+            this.comboItem11.Text = "10";
+            // 
+            // comboItem12
+            // 
+            this.comboItem12.Text = "20";
+            // 
+            // comboItem13
+            // 
+            this.comboItem13.Text = "30";
+            // 
+            // comboItem14
+            // 
+            this.comboItem14.Text = "50";
+            // 
+            // comboItem15
+            // 
+            this.comboItem15.Text = "100";
+            // 
             // comboItem6
             // 
             this.comboItem6.Text = "10";
@@ -545,122 +609,69 @@
             this.labelItem4.Name = "labelItem4";
             this.labelItem4.Text = " | ";
             // 
-            // bar1
+            // Column1
             // 
-            this.bar1.AntiAlias = true;
-            this.bar1.BackColor = System.Drawing.Color.Transparent;
-            this.bar1.DockSide = DevComponents.DotNetBar.eDockSide.Document;
-            this.bar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnHomePage,
-            this.btnPreviousPage,
-            this.btnNextPage,
-            this.btnEndPage,
-            this.labelItem5,
-            this.labelItem6,
-            this.lblCount,
-            this.labelItem7,
-            this.labelItem8,
-            this.buttonItem1,
-            this.cmbSelect,
-            this.labelItem9});
-            this.bar1.Location = new System.Drawing.Point(12, 85);
-            this.bar1.Name = "bar1";
-            this.bar1.Size = new System.Drawing.Size(682, 28);
-            this.bar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.bar1.TabIndex = 11;
-            this.bar1.TabStop = false;
-            this.bar1.Text = "bar1";
+            this.Column1.DataPropertyName = "StoreAndGoodsId";
+            this.Column1.HeaderText = "店铺商品Id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
             // 
-            // btnHomePage
+            // name
             // 
-            this.btnHomePage.Name = "btnHomePage";
-            this.btnHomePage.Text = "首页";
-            this.btnHomePage.Click += new System.EventHandler(this.btnHomePage_Click);
+            this.name.DataPropertyName = "GoodsName";
+            this.name.HeaderText = "商品名称";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
             // 
-            // btnPreviousPage
+            // Column2
             // 
-            this.btnPreviousPage.Name = "btnPreviousPage";
-            this.btnPreviousPage.Text = "上一页";
-            this.btnPreviousPage.Click += new System.EventHandler(this.btnPreviousPage_Click);
+            this.Column2.DataPropertyName = "StoreGoodsPrice";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = "0.00";
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column2.HeaderText = "商品零售价";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
-            // btnNextPage
+            // Column3
             // 
-            this.btnNextPage.Name = "btnNextPage";
-            this.btnNextPage.Text = "下一页";
-            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
+            this.Column3.DataPropertyName = "SalesCount";
+            this.Column3.HeaderText = "销量";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
-            // btnEndPage
+            // Column4
             // 
-            this.btnEndPage.Name = "btnEndPage";
-            this.btnEndPage.Text = "尾页";
-            this.btnEndPage.Click += new System.EventHandler(this.btnEndPage_Click);
+            this.Column4.DataPropertyName = "GoodsUnit";
+            this.Column4.HeaderText = "单位";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
-            // labelItem5
+            // Column5
             // 
-            this.labelItem5.Name = "labelItem5";
-            this.labelItem5.Text = " | ";
+            this.Column5.DataPropertyName = "Stock";
+            this.Column5.HeaderText = "库存";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             // 
-            // labelItem6
+            // goodsStutas
             // 
-            this.labelItem6.Name = "labelItem6";
-            this.labelItem6.Text = "共有记录";
+            this.goodsStutas.DataPropertyName = "GoodsStutas";
+            dataGridViewCellStyle3.NullValue = "0";
+            this.goodsStutas.DefaultCellStyle = dataGridViewCellStyle3;
+            this.goodsStutas.HeaderText = "是否为促销商品";
+            this.goodsStutas.Name = "goodsStutas";
+            this.goodsStutas.ReadOnly = true;
             // 
-            // lblCount
+            // indexGoodsId
             // 
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Text = " ** ";
-            // 
-            // labelItem7
-            // 
-            this.labelItem7.Name = "labelItem7";
-            this.labelItem7.Text = "条";
-            // 
-            // labelItem8
-            // 
-            this.labelItem8.Name = "labelItem8";
-            this.labelItem8.Text = " | ";
-            // 
-            // buttonItem1
-            // 
-            this.buttonItem1.Name = "buttonItem1";
-            this.buttonItem1.Text = "每页显示";
-            // 
-            // cmbSelect
-            // 
-            this.cmbSelect.DropDownHeight = 106;
-            this.cmbSelect.ItemHeight = 17;
-            this.cmbSelect.Items.AddRange(new object[] {
-            this.comboItem16,
-            this.comboItem17,
-            this.comboItem18,
-            this.comboItem19,
-            this.comboItem20});
-            this.cmbSelect.Name = "cmbSelect";
-            // 
-            // comboItem16
-            // 
-            this.comboItem16.Text = "10";
-            // 
-            // comboItem17
-            // 
-            this.comboItem17.Text = "20";
-            // 
-            // comboItem18
-            // 
-            this.comboItem18.Text = "30";
-            // 
-            // comboItem19
-            // 
-            this.comboItem19.Text = "50";
-            // 
-            // comboItem20
-            // 
-            this.comboItem20.Text = "100";
-            // 
-            // labelItem9
-            // 
-            this.labelItem9.Name = "labelItem9";
-            this.labelItem9.Text = "条";
+            this.indexGoodsId.DataPropertyName = "IndexGoodsId";
+            dataGridViewCellStyle4.NullValue = "0";
+            this.indexGoodsId.DefaultCellStyle = dataGridViewCellStyle4;
+            this.indexGoodsId.HeaderText = "是否为首页推荐商品";
+            this.indexGoodsId.Name = "indexGoodsId";
+            this.indexGoodsId.ReadOnly = true;
             // 
             // goodManagement
             // 
@@ -676,9 +687,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.tab)).EndInit();
             this.tab.ResumeLayout(false);
             this.tabControlPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -706,13 +717,6 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem3;
         private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn goodsStutas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn indexGoodsId;
         private DevComponents.DotNetBar.ButtonX buttonX1;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbx3;
         private DevComponents.DotNetBar.LabelX labelX5;
@@ -755,5 +759,13 @@
         private DevComponents.Editors.ComboItem comboItem19;
         private DevComponents.Editors.ComboItem comboItem20;
         private DevComponents.DotNetBar.LabelItem labelItem9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn goodsStutas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn indexGoodsId;
     }
 }
