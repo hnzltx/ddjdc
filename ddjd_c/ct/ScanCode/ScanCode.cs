@@ -73,14 +73,14 @@ namespace ddjd_c.ct.ScanCode
         {
 
             //将窗体全屏
-            //Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
-            //int width1 = ScreenArea.Width;
-            //int height1 = ScreenArea.Height;
-            //this.Width = width1;
-            //this.Height = height1;
-            //this.Top = 0;
-            //this.Left = 0;
-            //this.TopMost = true;
+            Rectangle ScreenArea = System.Windows.Forms.Screen.GetBounds(this);
+            int width1 = ScreenArea.Width;
+            int height1 = ScreenArea.Height;
+            this.Width = width1;
+            this.Height = height1;
+            this.Top = 0;
+            this.Left = 0;
+            this.TopMost = true;
 
             //加载键盘钩子
             listener.Start();
