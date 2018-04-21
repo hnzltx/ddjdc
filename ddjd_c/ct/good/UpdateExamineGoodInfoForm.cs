@@ -12,6 +12,8 @@ using ddjd_c.common;
 using ddjd_c.common.extension;
 using ddjd_c.service;
 using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Collections.Specialized;
 
 namespace ddjd_c.ct.good
 {
@@ -31,6 +33,8 @@ namespace ddjd_c.ct.good
 
         private void UpdateExamineGoodInfoForm_Load(object sender, EventArgs e)
         {
+            ///上传图片 用到
+            this.AllowDrop = true;
             LoadCategory();
             LoadData();
         }
@@ -160,12 +164,13 @@ namespace ddjd_c.ct.good
             ///value 值
             this.cbx3.ValueMember = "GoodsCategoryId";
         }
+       
         /// <summary>
         /// 选择3级分类
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cbx3_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbx3_SelectionChangeCommitted(object sender, EventArgs e)
         {
             this.lblGoodsCategoryName.Text = cbx3.Text;
             this.entity.FCategoryId = int.Parse(cbx1.SelectedValue.ToString());
@@ -174,15 +179,7 @@ namespace ddjd_c.ct.good
         }
         #endregion
 
-        /// <summary>
-        /// 图片点击
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pbGoodPic_Click(object sender, EventArgs e)
-        {
-
-        }
+        
         #region 提交修改信息
         private void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -242,10 +239,6 @@ namespace ddjd_c.ct.good
                 MessageBox.Show("商品进货价必须大于0");
                 return;
             }
-            if (goodsPrice.ToDouble() < purchasePrice.ToDouble())
-            {
-                MessageBox.Show("商品零售价小于进货价","知道了",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-            }
             if (stock.StrIsNull())
             {
                 MessageBox.Show("库存不能为空");
@@ -301,8 +294,7 @@ namespace ddjd_c.ct.good
                 return;
             }
             Console.Write(result.JsonStr);
-            this.btnSubmit.Text = "提交";
-            this.btnSubmit.Enabled = true;
+           
         }
         #endregion
         #region 输入框设置
@@ -350,6 +342,185 @@ namespace ddjd_c.ct.good
             }
 
         }
+
         #endregion
+
+       
+
+
+        private void pbGoodPic_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                
+                //获取用户选择文件的后缀名 
+                string extension = Path.GetExtension(openFileDialog.FileName);
+                //声明允许的后缀名 
+                string[] str = new string[] {".jpg", ".png" };
+                if (!str.Contains(extension))
+                {
+                    MessageBox.Show("仅能上传png,jpg格式的图片！");
+                    return;
+                }
+                else
+                {
+                    //获取用户选择的文件，并判断文件大小不能超过500K，fileInfo.Length是以字节为单位的 
+                    FileInfo fileInfo = new FileInfo(openFileDialog.FileName);
+                    if (fileInfo.Length > 1048*500)
+                    {
+                        MessageBox.Show("上传的图片不能大于500K");
+                        return;
+                    }
+                    else
+                    {
+                        //PictureBox控件显示图片
+                        this.pbGoodPic.Load(openFileDialog.FileName);
+                        //绝对路径
+                        string imageUrl = openFileDialog.FileName;
+                        //  是指XXX.jpg
+                        string picpath = openFileDialog.SafeFileName;
+
+                        //NameValueCollection data = new NameValueCollection();
+                        //data.Add("path","goodsImages");
+
+                        Upload_Request(http.baseHttp.getDdjdcUrl() + "upload/start", imageUrl, picpath);
+                        //http.baseHttp.HttpUploadFile(http.baseHttp.getDdjdcUrl()+ "upload/start", new string[] { imageUrl,picpath }, data);
+
+
+                       
+                    }
+                }
+            }
+        }
+
+
+        // <summary>  
+        /// 将本地文件上传到指定的服务器(HttpWebRequest方法)  
+        /// </summary>  
+        /// <param name="address">文件上传到的服务器</param>  
+        /// <param name="fileNamePath">要上传的本地文件（全路径）</param>  
+        /// <param name="saveName">文件上传后的名称</param>  
+        /// <param name="progressBar">上传进度条</param>  
+        /// <returns>成功返回1，失败返回0</returns>  
+        private int Upload_Request(string address, string fileNamePath, string saveName)
+        {
+            int returnValue = 0;
+
+            // 要上传的文件  
+            FileStream fs = new FileStream(fileNamePath, FileMode.Open, FileAccess.Read);
+            BinaryReader r = new BinaryReader(fs);
+
+            //时间戳  
+            string strBoundary = "----------" + DateTime.Now.Ticks.ToString("x");
+            byte[] boundaryBytes = Encoding.ASCII.GetBytes("/r/n--" + strBoundary + "/r/n");
+            
+            //请求头部信息  
+            StringBuilder sb = new StringBuilder();
+            sb.Append("--");
+            sb.Append(strBoundary);
+            sb.Append("/r/n");
+            sb.Append("Content-Disposition: form-data; name=/");  
+            sb.Append("file");
+            sb.Append("/filename=/");
+            sb.Append(saveName);
+            sb.Append("/path=/");
+            sb.Append("goodsImages");  
+            sb.Append("/r/n");
+            sb.Append("Content-Type: ");
+            sb.Append("application/octet-stream");
+            sb.Append("/r/n");
+            sb.Append("/r/n");
+            string strPostHeader = sb.ToString();
+            byte[] postHeaderBytes = Encoding.UTF8.GetBytes(strPostHeader);
+
+            // 根据uri创建HttpWebRequest对象  
+            var httpReq = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(new Uri(address));
+            httpReq.Method = "POST";
+
+            //对发送的数据不使用缓存  
+            httpReq.AllowWriteStreamBuffering = false;
+
+            //设置获得响应的超时时间（300秒）  
+            httpReq.Timeout = 300000;
+            httpReq.ContentType = "multipart/form-data; boundary=" + strBoundary;
+            long length = fs.Length + postHeaderBytes.Length + boundaryBytes.Length;
+            long fileLength = fs.Length;
+            httpReq.ContentLength = length;
+            try
+            {
+                //progressBar.Maximum = int.MaxValue;
+                //progressBar.Minimum = 0;
+                //progressBar.Value = 0;
+
+                //每次上传4k  
+                int bufferLength = 4096;
+                byte[] buffer = new byte[bufferLength];
+
+                //已上传的字节数  
+                long offset = 0;
+
+                //开始上传时间  
+                DateTime startTime = DateTime.Now;
+                int size = r.Read(buffer, 0, bufferLength);
+                Stream postStream = httpReq.GetRequestStream();
+                //发送请求头部消息  
+                postStream.Write(postHeaderBytes, 0, postHeaderBytes.Length);
+                while (size > 0)
+                {
+                    postStream.Write(buffer, 0, size);
+                    offset += size;
+                    //progressBar.Value = (int)(offset * (int.MaxValue / length));
+                    TimeSpan span = DateTime.Now - startTime;
+                    double second = span.TotalSeconds;
+                    //lblTime.Text = "已用时：" + second.ToString("F2") + "秒";
+                    if (second > 0.001)
+                    {
+                        //lblSpeed.Text = " 平均速度：" + (offset / 1024 / second).ToString("0.00") + "KB/秒";
+                    }
+                    else
+                    {
+                        //lblSpeed.Text = " 正在连接…";
+                    }
+                    //lblState.Text = "已上传：" + (offset * 100.0 / length).ToString("F2") + "%";
+                    //lblSize.Text = (offset / 1048576.0).ToString("F2") + "M/" + (fileLength / 1048576.0).ToString("F2") + "M";
+                    Application.DoEvents();
+                    size = r.Read(buffer, 0, bufferLength);
+                }
+                //添加尾部的时间戳  
+                postStream.Write(boundaryBytes, 0, boundaryBytes.Length);
+                postStream.Close();
+
+                //获取服务器端的响应  
+                var webRespon = httpReq.GetResponse();
+                Stream s = webRespon.GetResponseStream();
+                StreamReader sr = new StreamReader(s);
+
+                //读取服务器端返回的消息  
+                String sReturnString = sr.ReadLine();
+                s.Close();
+                sr.Close();
+                if (sReturnString == "Success")
+                {
+                    returnValue = 1;
+                }
+                else if (sReturnString == "Error")
+                {
+                    returnValue = 0;
+                }
+
+            }
+            catch
+            {
+                returnValue = 0;
+            }
+            finally
+            {
+                fs.Close();
+                r.Close();
+            }
+
+            return returnValue;
+        }
+
     }
 }

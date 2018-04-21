@@ -34,12 +34,12 @@
             this.ribbonControl1 = new DevComponents.DotNetBar.RibbonControl();
             this.ribbonPanel2 = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBar2 = new DevComponents.DotNetBar.RibbonBar();
-            this.buttonItem16 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem17 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem9 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem10 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem11 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem12 = new DevComponents.DotNetBar.ButtonItem();
+            this.btnAllGood = new DevComponents.DotNetBar.ButtonItem();
+            this.btnIndexRecommendGood = new DevComponents.DotNetBar.ButtonItem();
+            this.btnPromotion = new DevComponents.DotNetBar.ButtonItem();
+            this.btnExamine = new DevComponents.DotNetBar.ButtonItem();
+            this.BtnGoodUpload = new DevComponents.DotNetBar.ButtonItem();
+            this.btnPublicGoodLibrary = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanel3 = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBar3 = new DevComponents.DotNetBar.RibbonBar();
             this.btnOrder1 = new DevComponents.DotNetBar.ButtonItem();
@@ -69,6 +69,14 @@
             this.ribbonTabItem4 = new DevComponents.DotNetBar.RibbonTabItem();
             this.ribbonTabItem5 = new DevComponents.DotNetBar.RibbonTabItem();
             this.tabItemClose = new DevComponents.DotNetBar.RibbonTabItem();
+            this.office2007StartButton1 = new DevComponents.DotNetBar.Office2007StartButton();
+            this.itemContainer1 = new DevComponents.DotNetBar.ItemContainer();
+            this.itemContainer2 = new DevComponents.DotNetBar.ItemContainer();
+            this.itemContainer3 = new DevComponents.DotNetBar.ItemContainer();
+            this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
+            this.itemContainer4 = new DevComponents.DotNetBar.ItemContainer();
+            this.btnSignOut = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
             this.styleManager2 = new DevComponents.DotNetBar.StyleManager();
             this.tabMain = new DevComponents.DotNetBar.TabControl();
@@ -102,14 +110,6 @@
             this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem7 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem8 = new DevComponents.DotNetBar.ButtonItem();
-            this.office2007StartButton1 = new DevComponents.DotNetBar.Office2007StartButton();
-            this.itemContainer1 = new DevComponents.DotNetBar.ItemContainer();
-            this.itemContainer2 = new DevComponents.DotNetBar.ItemContainer();
-            this.itemContainer3 = new DevComponents.DotNetBar.ItemContainer();
-            this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
-            this.itemContainer4 = new DevComponents.DotNetBar.ItemContainer();
-            this.btnSignOut = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
             this.ribbonPanel3.SuspendLayout();
@@ -201,12 +201,12 @@
             this.ribbonBar2.ContainerControlProcessDialogKey = true;
             this.ribbonBar2.Dock = System.Windows.Forms.DockStyle.Left;
             this.ribbonBar2.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem16,
-            this.buttonItem17,
-            this.buttonItem9,
-            this.buttonItem10,
-            this.buttonItem11,
-            this.buttonItem12});
+            this.btnAllGood,
+            this.btnIndexRecommendGood,
+            this.btnPromotion,
+            this.btnExamine,
+            this.BtnGoodUpload,
+            this.btnPublicGoodLibrary});
             this.ribbonBar2.Location = new System.Drawing.Point(3, 0);
             this.ribbonBar2.Name = "ribbonBar2";
             this.ribbonBar2.Size = new System.Drawing.Size(836, 70);
@@ -221,47 +221,47 @@
             // 
             this.ribbonBar2.TitleStyleMouseOver.Class = "";
             // 
-            // buttonItem16
+            // btnAllGood
             // 
-            this.buttonItem16.Name = "buttonItem16";
-            this.buttonItem16.SubItemsExpandWidth = 14;
-            this.buttonItem16.Text = "所有商品";
-            this.buttonItem16.Click += new System.EventHandler(this.buttonItem16_Click);
+            this.btnAllGood.Name = "btnAllGood";
+            this.btnAllGood.SubItemsExpandWidth = 14;
+            this.btnAllGood.Text = "所有商品";
+            this.btnAllGood.Click += new System.EventHandler(this.btnAllGood_Click);
             // 
-            // buttonItem17
+            // btnIndexRecommendGood
             // 
-            this.buttonItem17.Name = "buttonItem17";
-            this.buttonItem17.SubItemsExpandWidth = 14;
-            this.buttonItem17.Text = "首页推荐商品";
-            this.buttonItem17.Click += new System.EventHandler(this.buttonItem17_Click);
+            this.btnIndexRecommendGood.Name = "btnIndexRecommendGood";
+            this.btnIndexRecommendGood.SubItemsExpandWidth = 14;
+            this.btnIndexRecommendGood.Text = "首页推荐商品";
+            this.btnIndexRecommendGood.Click += new System.EventHandler(this.btnIndexRecommendGood_Click);
             // 
-            // buttonItem9
+            // btnPromotion
             // 
-            this.buttonItem9.Name = "buttonItem9";
-            this.buttonItem9.SubItemsExpandWidth = 14;
-            this.buttonItem9.Text = "促销商品区";
-            this.buttonItem9.Click += new System.EventHandler(this.buttonItem4_Click);
+            this.btnPromotion.Name = "btnPromotion";
+            this.btnPromotion.SubItemsExpandWidth = 14;
+            this.btnPromotion.Text = "促销商品区";
+            this.btnPromotion.Click += new System.EventHandler(this.btnPromotion_Click);
             // 
-            // buttonItem10
+            // btnExamine
             // 
-            this.buttonItem10.Name = "buttonItem10";
-            this.buttonItem10.SubItemsExpandWidth = 14;
-            this.buttonItem10.Text = "审核商品区";
-            this.buttonItem10.Click += new System.EventHandler(this.buttonItem10_Click);
+            this.btnExamine.Name = "btnExamine";
+            this.btnExamine.SubItemsExpandWidth = 14;
+            this.btnExamine.Text = "审核商品区";
+            this.btnExamine.Click += new System.EventHandler(this.btnExamine_Click);
             // 
-            // buttonItem11
+            // BtnGoodUpload
             // 
-            this.buttonItem11.Name = "buttonItem11";
-            this.buttonItem11.SubItemsExpandWidth = 14;
-            this.buttonItem11.Text = "商品上传";
-            this.buttonItem11.Click += new System.EventHandler(this.buttonItem11_Click);
+            this.BtnGoodUpload.Name = "BtnGoodUpload";
+            this.BtnGoodUpload.SubItemsExpandWidth = 14;
+            this.BtnGoodUpload.Text = "商品上传";
+            this.BtnGoodUpload.Click += new System.EventHandler(this.btnGoodUpload_Click);
             // 
-            // buttonItem12
+            // btnPublicGoodLibrary
             // 
-            this.buttonItem12.Name = "buttonItem12";
-            this.buttonItem12.SubItemsExpandWidth = 14;
-            this.buttonItem12.Text = "平台商品库";
-            this.buttonItem12.Click += new System.EventHandler(this.buttonItem12_Click);
+            this.btnPublicGoodLibrary.Name = "btnPublicGoodLibrary";
+            this.btnPublicGoodLibrary.SubItemsExpandWidth = 14;
+            this.btnPublicGoodLibrary.Text = "平台商品库";
+            this.btnPublicGoodLibrary.Click += new System.EventHandler(this.btnPublicGoodLibrary_Click);
             // 
             // ribbonPanel3
             // 
@@ -683,6 +683,94 @@
             this.tabItemClose.Text = "退出程序";
             this.tabItemClose.Click += new System.EventHandler(this.tabItemClose_Click);
             // 
+            // office2007StartButton1
+            // 
+            this.office2007StartButton1.AutoExpandOnClick = true;
+            this.office2007StartButton1.CanCustomize = false;
+            this.office2007StartButton1.HotTrackingStyle = DevComponents.DotNetBar.eHotTrackingStyle.Image;
+            this.office2007StartButton1.Image = ((System.Drawing.Image)(resources.GetObject("office2007StartButton1.Image")));
+            this.office2007StartButton1.ImagePaddingHorizontal = 2;
+            this.office2007StartButton1.ImagePaddingVertical = 2;
+            this.office2007StartButton1.Name = "office2007StartButton1";
+            this.office2007StartButton1.ShowSubItems = false;
+            this.office2007StartButton1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainer1});
+            this.office2007StartButton1.Text = "&File";
+            // 
+            // itemContainer1
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer1.BackgroundStyle.Class = "RibbonFileMenuContainer";
+            this.itemContainer1.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainer1.MinimumSize = new System.Drawing.Size(0, 0);
+            this.itemContainer1.Name = "itemContainer1";
+            this.itemContainer1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainer2,
+            this.itemContainer4});
+            // 
+            // itemContainer2
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer2.BackgroundStyle.Class = "RibbonFileMenuTwoColumnContainer";
+            this.itemContainer2.ItemSpacing = 0;
+            this.itemContainer2.MinimumSize = new System.Drawing.Size(0, 0);
+            this.itemContainer2.Name = "itemContainer2";
+            this.itemContainer2.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainer3});
+            // 
+            // itemContainer3
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer3.BackgroundStyle.Class = "RibbonFileMenuColumnOneContainer";
+            this.itemContainer3.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainer3.MinimumSize = new System.Drawing.Size(120, 0);
+            this.itemContainer3.Name = "itemContainer3";
+            this.itemContainer3.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem2,
+            this.buttonItem3});
+            // 
+            // buttonItem2
+            // 
+            this.buttonItem2.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem2.Name = "buttonItem2";
+            this.buttonItem2.SubItemsExpandWidth = 24;
+            this.buttonItem2.Text = "设置";
+            this.buttonItem2.Click += new System.EventHandler(this.buttonItem2_Click);
+            // 
+            // buttonItem3
+            // 
+            this.buttonItem3.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem3.Name = "buttonItem3";
+            this.buttonItem3.SubItemsExpandWidth = 24;
+            this.buttonItem3.Text = "版本升级";
+            // 
+            // itemContainer4
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer4.BackgroundStyle.Class = "RibbonFileMenuBottomContainer";
+            this.itemContainer4.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Right;
+            this.itemContainer4.MinimumSize = new System.Drawing.Size(0, 0);
+            this.itemContainer4.Name = "itemContainer4";
+            this.itemContainer4.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnSignOut});
+            // 
+            // btnSignOut
+            // 
+            this.btnSignOut.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.btnSignOut.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnSignOut.Name = "btnSignOut";
+            this.btnSignOut.SubItemsExpandWidth = 24;
+            this.btnSignOut.Text = "退出程序";
+            this.btnSignOut.Click += new System.EventHandler(this.btnSignOut_Click);
+            // 
             // buttonItem1
             // 
             this.buttonItem1.Name = "buttonItem1";
@@ -1020,7 +1108,6 @@
             this.buttonItem4.Name = "buttonItem4";
             this.buttonItem4.SubItemsExpandWidth = 14;
             this.buttonItem4.Text = "促销商品";
-            this.buttonItem4.Click += new System.EventHandler(this.buttonItem4_Click);
             // 
             // buttonItem5
             // 
@@ -1039,94 +1126,6 @@
             this.buttonItem8.Name = "buttonItem8";
             this.buttonItem8.SubItemsExpandWidth = 14;
             this.buttonItem8.Text = "公共商品库";
-            // 
-            // office2007StartButton1
-            // 
-            this.office2007StartButton1.AutoExpandOnClick = true;
-            this.office2007StartButton1.CanCustomize = false;
-            this.office2007StartButton1.HotTrackingStyle = DevComponents.DotNetBar.eHotTrackingStyle.Image;
-            this.office2007StartButton1.Image = ((System.Drawing.Image)(resources.GetObject("office2007StartButton1.Image")));
-            this.office2007StartButton1.ImagePaddingHorizontal = 2;
-            this.office2007StartButton1.ImagePaddingVertical = 2;
-            this.office2007StartButton1.Name = "office2007StartButton1";
-            this.office2007StartButton1.ShowSubItems = false;
-            this.office2007StartButton1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.itemContainer1});
-            this.office2007StartButton1.Text = "&File";
-            // 
-            // itemContainer1
-            // 
-            // 
-            // 
-            // 
-            this.itemContainer1.BackgroundStyle.Class = "RibbonFileMenuContainer";
-            this.itemContainer1.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-            this.itemContainer1.MinimumSize = new System.Drawing.Size(0, 0);
-            this.itemContainer1.Name = "itemContainer1";
-            this.itemContainer1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.itemContainer2,
-            this.itemContainer4});
-            // 
-            // itemContainer2
-            // 
-            // 
-            // 
-            // 
-            this.itemContainer2.BackgroundStyle.Class = "RibbonFileMenuTwoColumnContainer";
-            this.itemContainer2.ItemSpacing = 0;
-            this.itemContainer2.MinimumSize = new System.Drawing.Size(0, 0);
-            this.itemContainer2.Name = "itemContainer2";
-            this.itemContainer2.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.itemContainer3});
-            // 
-            // itemContainer3
-            // 
-            // 
-            // 
-            // 
-            this.itemContainer3.BackgroundStyle.Class = "RibbonFileMenuColumnOneContainer";
-            this.itemContainer3.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-            this.itemContainer3.MinimumSize = new System.Drawing.Size(120, 0);
-            this.itemContainer3.Name = "itemContainer3";
-            this.itemContainer3.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem2,
-            this.buttonItem3});
-            // 
-            // buttonItem2
-            // 
-            this.buttonItem2.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem2.Name = "buttonItem2";
-            this.buttonItem2.SubItemsExpandWidth = 24;
-            this.buttonItem2.Text = "设置";
-            this.buttonItem2.Click += new System.EventHandler(this.buttonItem2_Click);
-            // 
-            // buttonItem3
-            // 
-            this.buttonItem3.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem3.Name = "buttonItem3";
-            this.buttonItem3.SubItemsExpandWidth = 24;
-            this.buttonItem3.Text = "版本升级";
-            // 
-            // itemContainer4
-            // 
-            // 
-            // 
-            // 
-            this.itemContainer4.BackgroundStyle.Class = "RibbonFileMenuBottomContainer";
-            this.itemContainer4.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Right;
-            this.itemContainer4.MinimumSize = new System.Drawing.Size(0, 0);
-            this.itemContainer4.Name = "itemContainer4";
-            this.itemContainer4.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnSignOut});
-            // 
-            // btnSignOut
-            // 
-            this.btnSignOut.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.btnSignOut.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSignOut.Name = "btnSignOut";
-            this.btnSignOut.SubItemsExpandWidth = 24;
-            this.btnSignOut.Text = "退出程序";
-            this.btnSignOut.Click += new System.EventHandler(this.btnSignOut_Click);
             // 
             // indexName
             // 
@@ -1186,8 +1185,8 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem15;
         private DevComponents.DotNetBar.ButtonItem btnStoreInfo;
         private DevComponents.DotNetBar.RibbonBar ribbonBar2;
-        private DevComponents.DotNetBar.ButtonItem buttonItem16;
-        private DevComponents.DotNetBar.ButtonItem buttonItem17;
+        private DevComponents.DotNetBar.ButtonItem btnAllGood;
+        private DevComponents.DotNetBar.ButtonItem btnIndexRecommendGood;
         private DevComponents.DotNetBar.RibbonPanel ribbonPanel3;
         private DevComponents.DotNetBar.RibbonBar ribbonBar3;
         private DevComponents.DotNetBar.ButtonItem btnOrder1;
@@ -1241,9 +1240,9 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem5;
         private DevComponents.DotNetBar.ButtonItem buttonItem7;
         private DevComponents.DotNetBar.ButtonItem buttonItem8;
-        private DevComponents.DotNetBar.ButtonItem buttonItem9;
-        private DevComponents.DotNetBar.ButtonItem buttonItem10;
-        private DevComponents.DotNetBar.ButtonItem buttonItem11;
-        private DevComponents.DotNetBar.ButtonItem buttonItem12;
+        private DevComponents.DotNetBar.ButtonItem btnPromotion;
+        private DevComponents.DotNetBar.ButtonItem btnExamine;
+        private DevComponents.DotNetBar.ButtonItem BtnGoodUpload;
+        private DevComponents.DotNetBar.ButtonItem btnPublicGoodLibrary;
     }
 }

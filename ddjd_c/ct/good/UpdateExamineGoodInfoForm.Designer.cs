@@ -66,6 +66,7 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.txtGoodUnit = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtGoodName = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodPic)).BeginInit();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -74,7 +75,7 @@
             // 
             this.btnSubmit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSubmit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSubmit.Location = new System.Drawing.Point(15, 471);
+            this.btnSubmit.Location = new System.Drawing.Point(16, 486);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(187, 40);
             this.btnSubmit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -366,7 +367,7 @@
             this.panelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEx1.Location = new System.Drawing.Point(0, 0);
             this.panelEx1.Name = "panelEx1";
-            this.panelEx1.Size = new System.Drawing.Size(710, 531);
+            this.panelEx1.Size = new System.Drawing.Size(749, 548);
             this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -388,7 +389,7 @@
             this.cbx3.Size = new System.Drawing.Size(105, 21);
             this.cbx3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbx3.TabIndex = 48;
-            this.cbx3.SelectedIndexChanged += new System.EventHandler(this.cbx3_SelectedIndexChanged);
+            this.cbx3.SelectionChangeCommitted += new System.EventHandler(this.cbx3_SelectionChangeCommitted);
             // 
             // cbx2
             // 
@@ -558,11 +559,15 @@
             this.txtGoodName.Size = new System.Drawing.Size(160, 21);
             this.txtGoodName.TabIndex = 31;
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            // 
             // UpdateExamineGoodInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(710, 531);
+            this.ClientSize = new System.Drawing.Size(749, 548);
             this.Controls.Add(this.panelEx1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -618,5 +623,6 @@
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbx3;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbx2;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbx1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
