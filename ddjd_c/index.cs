@@ -390,7 +390,8 @@ namespace ddjd_c
         /// <param name="e"></param>
         private void btnPublicGoodLibrary_Click(object sender, EventArgs e)
         {
-
+            ct.good.PublicGoodLibraryForm frm = new ct.good.PublicGoodLibraryForm();
+            openWindow(frm, frm.Name);
         }
 
         /// <summary>

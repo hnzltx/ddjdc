@@ -21,12 +21,17 @@ namespace ddjd_c.ct.good
     {
         //保存entity
         private goodEntity entity;
+        //保存行索引
+        private int rowIndex;
         ///保存分类数据
         private List<model.goodscategory> goodscategoriesList=new List<model.goodscategory>();
         //保存每次选择的2级分类
         private List<model.goodscategory> goodscategoriesList2;
-        public UpdateExamineGoodInfoForm(goodEntity entity)
+        ///修改成功回调
+        public Action<int> action;
+        public UpdateExamineGoodInfoForm(goodEntity entity,int rowIndex)
         {
+            this.rowIndex = rowIndex;
             this.entity=entity;
             InitializeComponent();
         }
@@ -293,8 +298,38 @@ namespace ddjd_c.ct.good
                 MessageBox.Show(result.Error);
                 return;
             }
-            Console.Write(result.JsonStr);
+            sc.Post(UpdatexEamineGoodPostCallback, result);
+            
            
+        }
+        /// <summary>
+        /// 异步线程同步
+        /// </summary>
+        /// <param name="obj"></param>
+        private void UpdatexEamineGoodPostCallback(object obj)
+        {
+            this.btnSubmit.Text = "提交";
+            this.btnSubmit.Enabled = true;
+            string success = ((ResponseResult)obj).ToObj()["success"].ToString();
+            switch (success)
+            {
+                case "success":
+                    if(MessageBox.Show("商品成功提交审核；请等待审核结果")== DialogResult.OK)
+                    {
+                        action(rowIndex);
+                        this.Close();
+                    }
+                    break;
+                case "offlineStockMaxError":
+                    MessageBox.Show("库存下限填写的数量不能等于或超过库存");
+                    break;
+                case "goodsPriceOrpurchasePriceTypeError":
+                    MessageBox.Show("商品价格或进货价填写有误");
+                    break;
+                default:
+                    MessageBox.Show("修改失败");
+                    break;
+            }
         }
         #endregion
         #region 输入框设置
