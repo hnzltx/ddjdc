@@ -6,20 +6,29 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
+using ddjd_c.common;
 using ddjd_c.common.extension;
+using Newtonsoft.Json.Linq;
 
 namespace ddjd_c.ct.good
 {
-    public partial class IndexRecommendGoodForm : Form
+    public partial class PublicGoodLibraryForm : Form
     {
-      
-        public IndexRecommendGoodForm()
+        ///3级分类id
+        private int? tCategoryId;
+        //搜索条件
+        private string goodsName;
+        //分类数据源
+        private List<model.goodscategory> goodscategoriesList = new List<model.goodscategory>();
+        //保存每次选择的2级分类
+        private List<model.goodscategory> goodscategoriesList2;
+        public PublicGoodLibraryForm()
         {
             InitializeComponent();
         }
-        private void LoadForm()
+
+        private void PublicGoodLibraryForm_Load(object sender, EventArgs e)
         {
             //将本窗体的DataGridView传递给公共的dgv
             commDgv = this.dataGridViewX1;
@@ -27,19 +36,31 @@ namespace ddjd_c.ct.good
             commDgv.AutoGenerateColumns = false;
             loagPageConfig();
             LoadData();
+            LoadCategory();
         }
+        #region 加载商品数据
         /// <summary>
         /// 数据加载
         /// </summary>
         private void LoadData()
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("bindstoreId", GlobalsInfo.storeId);
+            dic.Add("storeId", GlobalsInfo.storeId);
             dic.Add("pageNumber", this.ct_pageNumber);
             dic.Add("pageSize", this.ct_pageSize);
-            
+            if (this.tCategoryId != null)
+            {
+                dic.Add("tCategoryId", this.tCategoryId);
+            }
+            else
+            {
+                if (this.goodsName.StrIsNull() == false)
+                {
+                    dic.Add("goodsName", this.goodsName);
+                }
+            }
             ResponseResultDelegate action = RequestGoodListCallback;
-            service.good.goodService.IndexGoodsList(action, dic);
+            service.good.goodService.QueryGoodsInfoList_store(action, dic);
 
         }
         /// <summary>
@@ -72,6 +93,72 @@ namespace ddjd_c.ct.good
             //显示数据
             commDgv.DataSource = BList;
         }
+        #endregion
+
+        #region 加载分类
+        /// <summary>
+        /// 加载分类数据
+        /// </summary>
+        private void LoadCategory()
+        {
+            ResponseResultDelegate action = CategoryCallback;
+            //查询分类集合
+            service.goodsCategory_service.goodsCategoryService.queryGoodsAllCateGory(action);
+        }
+
+        /// <summary>
+        /// 分类请求回调
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="sc"></param>
+        private void CategoryCallback(ResponseResult result, System.Threading.SynchronizationContext sc)
+        {
+
+            if (result.Error != null)
+            {
+                MessageBox.Show(result.Error);
+                return;
+            }
+            sc.Post(CategoryPostCallback, result);
+
+        }
+        /// <summary>
+        /// 异步线程同步
+        /// </summary>
+        /// <param name="obj"></param>
+        private void CategoryPostCallback(object obj)
+        {
+            ResponseResult result = (ResponseResult)obj;
+            JArray ja = JArray.Parse(result.JsonStr);
+            //拿到一级分类
+            this.goodscategoriesList.AddRange(JsonHelper.DeserializeJsonToList<model.goodscategory>(ja.ToString()));
+
+            ///显示的值
+            this.cbx1.DisplayMember = "GoodsCategoryName";
+            ///value 值
+            this.cbx1.ValueMember = "GoodsCategoryId";
+
+            this.cbx1.DataSource = this.goodscategoriesList;
+
+
+            ///给23级分类赋值
+            for (var i = 0; i < goodscategoriesList.Count; i++)
+            {
+                JObject j = JObject.Parse(ja[i].ToString());
+                this.goodscategoriesList[i].List = JsonHelper.DeserializeJsonToList<model.goodscategory>(j["list"].ToString());
+                if (this.goodscategoriesList[i].List != null)
+                {
+                    for (var ii = 0; ii < this.goodscategoriesList[i].List.Count; ii++)
+                    {
+                        JObject jj = JObject.Parse(JArray.Parse(j["list"].ToString())[ii].ToString());
+                        this.goodscategoriesList[i].List[ii].List = JsonHelper.DeserializeJsonToList<model.goodscategory>(jj["list"].ToString());
+
+                    }
+                }
+
+            }
+        }
+        #endregion
         #region 分页代码
         /** 目前分页需要改动的只有泛型对象， 
          * 按道理将所有model都继承一个baseModel，稍作改动即可使分页更加通用，暂时记着，以后看改不改 —_—*/
@@ -213,11 +300,12 @@ namespace ddjd_c.ct.good
 
         #endregion
 
-        private void IndexRecommendGoodForm_Load(object sender, EventArgs e)
-        {
-            LoadForm();
-        }
-
+        //#region 页面事件
+        /// <summary>
+        /// 显示行号
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             ///添加行数
@@ -247,40 +335,112 @@ namespace ddjd_c.ct.good
                     if (this.dataGridViewX1.SelectedRows.Count == 1)
                     {
                         this.dataGridViewX1.CurrentCell = this.dataGridViewX1.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    } 
+                    }
                     //弹出操作菜单
                     contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
                 }
             }
         }
-        //移除推荐商品
-        private void ToolStripMenuItem1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 搜索
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            var rowIndex = this.dataGridViewX1.CurrentCell.RowIndex;
-            var storeAndGoodsId = this.dataGridViewX1.Rows[rowIndex].Cells[0].Value.ToString().ToInt();
-            DeleteIndexGood(storeAndGoodsId);
+            this.tCategoryId = null;
+            this.goodsName = this.txtSearch.Text;
+            ///加载数据
+            LoadData();
+        }
+
+        /// <summary>
+        /// 根据3级分类查询商品
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnScreening_Click(object sender, EventArgs e)
+        {
+            this.goodsName = null;
+            this.txtSearch.Text = null;
+            this.tCategoryId = int.Parse(cbx3.SelectedValue.ToString());
+            ///加载数据
+            LoadData();
+
+        }
+        private void cbx1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            //查询当前分类id下面对应的2级分类
+            var list =
+                 from value in this.goodscategoriesList
+                 where value.GoodsCategoryId == int.Parse(cbx1.SelectedValue.ToString())
+                 select value;
+            this.goodscategoriesList2 = list.FirstOrDefault().List;
+            this.cbx2.DataSource = this.goodscategoriesList2;
+            ///显示的值
+            this.cbx2.DisplayMember = "GoodsCategoryName";
+            ///value 值
+            this.cbx2.ValueMember = "GoodsCategoryId";
+        }
+
+        private void cbx2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //查询当前分类id下面对应的2级分类
+            var list =
+                 from value in this.goodscategoriesList2
+                 where value.GoodsCategoryId == int.Parse(cbx2.SelectedValue.ToString())
+                 select value;
+            this.cbx3.DataSource = list.FirstOrDefault().List;
+            ///显示的值
+            this.cbx3.DisplayMember = "GoodsCategoryName";
+            ///value 值
+            this.cbx3.ValueMember = "GoodsCategoryId";
         }
         /// <summary>
-        /// 店铺移除首页推荐商品
+        /// 查看详情
         /// </summary>
-        /// <param name="storeAndGoodsId"></param>
-        private void DeleteIndexGood(int storeAndGoodsId)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+
+            var goodsId = this.dataGridViewX1.Rows[this.dataGridViewX1.CurrentRow.Index].Cells[0].Value.ToString();
+            PublicGoodLibraryDetailForm frm = new PublicGoodLibraryDetailForm();
+            frm.Tag=goodsId;
+            frm.action = AddStoreCallback;
+            frm.ShowDialog();
+        }
+        /// <summary>
+        /// 加入门店回调
+        /// </summary>
+        private void AddStoreCallback()
+        {
+            LoadData();
+        }
+        /// <summary>
+        /// 加入门店
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            var rowIndex = this.dataGridViewX1.CurrentRow.Index;
+            var goodsId = this.dataGridViewX1.Rows[rowIndex].Cells[0].Value.ToString()+",";
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("storeAndGoodsId", storeAndGoodsId);
-            dic.Add("storeId", GlobalsInfo.storeId);
-            JObject obj = service.good.goodService.RemoveIndexGoods(dic);
-            string success = obj["success"].ToString();
-            switch (success)
+            dic.Add("storeId",GlobalsInfo.storeId);
+            dic.Add("goodsId", goodsId);
+            string success = service.good.goodService.AddGoodsInfoGoToStoreAndGood(dic)["success"].ToString();
+            contextMenuStrip1.Close();
+            if (success.Equals("success"))
             {
-                case "success":
-                    contextMenuStrip1.Close();
-                    MessageBox.Show("移除成功");
-                    LoadData();                    
-                    break;
-                default:
-                    MessageBox.Show("操作失败");
-                    break;
+                LoadData();
+                MessageBox.Show("加入成功");
+               
+            }
+            else
+            {
+                MessageBox.Show("添加失败");
             }
         }
     }

@@ -294,7 +294,12 @@ namespace ddjd_c
             openWindow(frm, frm.Name, true, "已完成");
         }
 
-        private void buttonItem16_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 跳转到所有商品
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAllGood_Click(object sender, EventArgs e)
         {
             ct.good.goodManagement frm = new ct.good.goodManagement();
             openWindow(frm, frm.Name);
@@ -377,21 +382,58 @@ namespace ddjd_c
         }
         #endregion
 
+
+        
         /// <summary>
-        /// 跳转到首页推荐商品
+        /// 跳转到审核商品
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonItem17_Click(object sender, EventArgs e)
+        private void btnExamine_Click(object sender, EventArgs e)
+        {
+            ct.good.ExamineGoodtForm frm = new ct.good.ExamineGoodtForm();
+            openWindow(frm, frm.Name);
+        }
+        /// <summary>
+        /// 跳转到商品上传
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGoodUpload_Click(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// 跳转到公共商品库
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPublicGoodLibrary_Click(object sender, EventArgs e)
+        {
+            ct.good.PublicGoodLibraryForm frm = new ct.good.PublicGoodLibraryForm();
+            openWindow(frm, frm.Name);
+        }
+
+        /// <summary>
+        /// 跳转到首页推荐区
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnIndexRecommendGood_Click(object sender, EventArgs e)
         {
             ct.good.IndexRecommendGoodForm frm = new ct.good.IndexRecommendGoodForm();
             openWindow(frm, frm.Name);
         }
 
-        private void buttonItem4_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 跳转到促销区
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPromotion_Click(object sender, EventArgs e)
         {
             ct.good.PromotionGoodForm frm = new ct.good.PromotionGoodForm();
-            openWindow(frm, frm.Name);
+            openWindow(frm,frm.Name);
         }
     }
 }

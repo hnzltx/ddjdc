@@ -6,18 +6,24 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
-using ddjd_c.common.extension;
 
 namespace ddjd_c.ct.good
 {
-    public partial class IndexRecommendGoodForm : Form
+    public partial class ExamineGoodtForm : Form
     {
-      
-        public IndexRecommendGoodForm()
+        //1. 审核中 2. 审核失败 3 审核成功
+        private int examineGoodsFlag = 1;
+        public ExamineGoodtForm()
         {
             InitializeComponent();
+        }
+
+        private void AudiGoodtForm_Load(object sender, EventArgs e)
+        {
+            ///默认选择第一个
+            this.tabControl1.SelectedTab = this.tabItem1;
+            LoadForm();
         }
         private void LoadForm()
         {
@@ -34,12 +40,13 @@ namespace ddjd_c.ct.good
         private void LoadData()
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("bindstoreId", GlobalsInfo.storeId);
+            dic.Add("storeId", GlobalsInfo.storeId);
+            dic.Add("examineGoodsFlag", examineGoodsFlag);
             dic.Add("pageNumber", this.ct_pageNumber);
             dic.Add("pageSize", this.ct_pageSize);
-            
+
             ResponseResultDelegate action = RequestGoodListCallback;
-            service.good.goodService.IndexGoodsList(action, dic);
+            service.good.goodService.QueryExamineGoodsByStoreId(action, dic);
 
         }
         /// <summary>
@@ -63,7 +70,6 @@ namespace ddjd_c.ct.good
         private void RequestGoodListPostCallback(object obj)
         {
             ResponseResult result = (ResponseResult)obj;
-            //result.JsonStr = result.ToObj()["goodsList"].ToString();
             vo.pageInfo<model.good.goodEntity> pg = result.ToEntity<vo.pageInfo<model.good.goodEntity>>();
             //分页配置
             pageInfoConfig(pg);
@@ -71,6 +77,35 @@ namespace ddjd_c.ct.good
             BList = new BindingList<model.good.goodEntity>(pg.List);
             //显示数据
             commDgv.DataSource = BList;
+        }
+
+        /// <summary>
+        /// tab切换
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tab_SelectedTabChanged(object sender, DevComponents.DotNetBar.TabStripTabChangedEventArgs e)
+        {
+            this.examineGoodsFlag = this.tabControl1.SelectedTabIndex + 1;
+            if (this.examineGoodsFlag == 2)//如果是审核失败中显示失败原因
+            {
+                this.dataGridViewX1.Columns[6].Visible = true;
+            }
+            else //其他隐藏
+            {
+                this.dataGridViewX1.Columns[6].Visible = false;
+            }
+            ///加载数据
+            LoadData();
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            ///添加行数
+            using (SolidBrush b = new SolidBrush(this.dataGridViewX1.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                e.Graphics.DrawString((e.RowIndex + 1).ToString(System.Globalization.CultureInfo.CurrentUICulture), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
+            }
         }
         #region 分页代码
         /** 目前分页需要改动的只有泛型对象， 
@@ -213,75 +248,56 @@ namespace ddjd_c.ct.good
 
         #endregion
 
-        private void IndexRecommendGoodForm_Load(object sender, EventArgs e)
+
+        private void dataGridViewX1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            LoadForm();
+            if(e.ColumnIndex == 7)
+            {
+                if (e.Value == null)
+                {
+                    return;
+                }
+                if (e.Value.Equals(1))
+                {
+                    e.Value = "审核中";
+                }
+                else if (e.Value.Equals(2))
+                {
+                    e.Value = "审核失败";
+                }
+                else
+                {
+                    e.Value = "审核成功";
+                }
+            }
+            
         }
 
-        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            ///添加行数
-            using (SolidBrush b = new SolidBrush(this.dataGridViewX1.RowHeadersDefaultCellStyle.ForeColor))
-            {
-                e.Graphics.DrawString((e.RowIndex + 1).ToString(System.Globalization.CultureInfo.CurrentUICulture), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
-            }
-        }
         /// <summary>
-        /// 右键单击 弹出菜单
+        /// row双击时间
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewX1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        private void dataGridViewX1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                if (e.RowIndex >= 0)
-                {
-                    //若行已是选中状态就不再进行设置
-                    if (this.dataGridViewX1.Rows[e.RowIndex].Selected == false)
-                    {
-                        this.dataGridViewX1.ClearSelection();
-                        this.dataGridViewX1.Rows[e.RowIndex].Selected = true;
-                    }
-                    //只选中一行时设置活动单元格
-                    if (this.dataGridViewX1.SelectedRows.Count == 1)
-                    {
-                        this.dataGridViewX1.CurrentCell = this.dataGridViewX1.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    } 
-                    //弹出操作菜单
-                    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
-                }
-            }
-        }
-        //移除推荐商品
-        private void ToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            var rowIndex = this.dataGridViewX1.CurrentCell.RowIndex;
-            var storeAndGoodsId = this.dataGridViewX1.Rows[rowIndex].Cells[0].Value.ToString().ToInt();
-            DeleteIndexGood(storeAndGoodsId);
+            model.good.goodEntity good = BList[e.RowIndex];
+            UpdateExamineGoodInfoForm frm = new UpdateExamineGoodInfoForm(good,e.RowIndex);
+            frm.action = UpdateExamineGoodInfoCallback;
+            frm.ShowDialog();
         }
         /// <summary>
-        /// 店铺移除首页推荐商品
+        /// 修改审核失败商品提交成功结果回调
         /// </summary>
-        /// <param name="storeAndGoodsId"></param>
-        private void DeleteIndexGood(int storeAndGoodsId)
+        /// <param name="rowIndex"></param>
+        private void UpdateExamineGoodInfoCallback(int rowIndex)
         {
-            Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("storeAndGoodsId", storeAndGoodsId);
-            dic.Add("storeId", GlobalsInfo.storeId);
-            JObject obj = service.good.goodService.RemoveIndexGoods(dic);
-            string success = obj["success"].ToString();
-            switch (success)
+            //删除修改成功的行
+            if (this.dataGridViewX1.Rows.Count > 0)
             {
-                case "success":
-                    contextMenuStrip1.Close();
-                    MessageBox.Show("移除成功");
-                    LoadData();                    
-                    break;
-                default:
-                    MessageBox.Show("操作失败");
-                    break;
+                BList.RemoveAt(rowIndex);
+                this.dataGridViewX1.Rows.RemoveAt(rowIndex);
             }
+            
         }
     }
 }

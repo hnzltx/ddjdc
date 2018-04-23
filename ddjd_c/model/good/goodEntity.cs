@@ -9,7 +9,7 @@ namespace ddjd_c.model.good
     /// <summary>
     /// 商品表
     /// </summary>
-    class goodEntity
+    public class goodEntity
     {
 
         private int? goodsId;
@@ -45,6 +45,9 @@ namespace ddjd_c.model.good
         private int? promotionEndTimeSeconds; //促销结束时间秒
         private double? purchasePrice;//店铺进货价
         private int? storeAndGoodsId; //店铺商品id
+        private int? examineGoodsFlag; //1. 审核中 2. 审核失败 3 审核成功
+        private string examineInfo; //审核失败原因
+        private int? examineGoodsId;//审核商品Id
 
 
         public int? GoodsId { get => goodsId; set => goodsId = value; }
@@ -80,5 +83,8 @@ namespace ddjd_c.model.good
         public int? PromotionEndTimeSeconds { get => promotionEndTimeSeconds; set => promotionEndTimeSeconds = value; }
         public double? PurchasePrice { get => purchasePrice; set => purchasePrice = value; }
         public int? StoreAndGoodsId { get => storeAndGoodsId; set => storeAndGoodsId = value; }
+        public int? ExamineGoodsFlag { get => examineGoodsFlag; set => examineGoodsFlag = value; }
+        public string ExamineInfo { get => examineInfo; set => examineInfo = value; }
+        public int? ExamineGoodsId { get => examineGoodsId; set => examineGoodsId = value; }
     }
 }

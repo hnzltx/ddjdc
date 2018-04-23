@@ -115,5 +115,63 @@ namespace ddjd_c.service.good
         {
             baseHttp.GetStrFunction(goodRequest.QueryPromotiongoodsPaginateStore.ToGetRequestURL(dic), resultDelegate);
         }
+
+        /// <summary>
+        /// 查询店铺各种审核状态的商品
+        /// </summary>
+        /// <param name="resultDelegate"></param>
+        /// <param name="dic"></param>
+        public static void QueryExamineGoodsByStoreId(ResponseResultDelegate resultDelegate, Dictionary<string, object> dic)
+        {
+            baseHttp.GetStrFunction(goodRequest.QueryExamineGoodsByStoreId.ToGetRequestURL(dic), resultDelegate);
+        }
+
+        /// <summary>
+        /// 审核失败，修改审核商品
+        /// </summary>
+        /// <param name="resultDelegate"></param>
+        /// <param name="dic"></param>
+        public static void UpdateExamineGoodsByStoreId(ResponseResultDelegate resultDelegate, Dictionary<string, object> dic){
+            baseHttp.PostStrFunction(goodRequest.UpdateExamineGoodsByStoreId,dic,resultDelegate);
+        }
+
+        /// <summary>
+        /// 店铺查询公共商品库商品列表
+        /// </summary>
+        /// <param name="resultDelegate"></param>
+        /// <param name="dic"></param>
+        public static void QueryGoodsInfoList_store(ResponseResultDelegate resultDelegate, Dictionary<string, object> dic)
+        {
+            baseHttp.GetStrFunction(goodRequest.QueryGoodsInfoList_store.ToGetRequestURL(dic),resultDelegate);
+        }
+
+        /// <summary>
+        /// 店铺查询公共商品库商品详情
+        /// </summary>
+        /// <param name="resultDelegate"></param>
+        /// <param name="dic"></param>
+        public static void QueryGoodsInfoByGoodsId_store(ResponseResultDelegate resultDelegate, Dictionary<string, object> dic)
+        {
+            baseHttp.GetStrFunction(goodRequest.QueryGoodsInfoByGoodsId_store.ToGetRequestURL(dic),resultDelegate);
+        }
+
+        /// <summary>
+        /// 单个详细添加到店铺商品库
+        /// </summary>
+        /// <returns></returns>
+        public static JObject AddGoodsInfoGoToStoreAndGoods_detail(Dictionary<string, object> dic)
+        {
+            return JsonHelper.getJObject(baseHttp.GetStrFunction(goodRequest.AddGoodsInfoGoToStoreAndGoods_detail.ToGetRequestURL(dic)));
+        }
+
+        /// <summary>
+        /// 单选or多选添加到店铺商品库
+        /// </summary>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public static JObject AddGoodsInfoGoToStoreAndGood(Dictionary<string, object> dic)
+        {
+            return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.AddGoodsInfoGoToStoreAndGoods,dic));
+        }
     }
 }

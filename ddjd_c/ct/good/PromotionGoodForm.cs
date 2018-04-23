@@ -187,7 +187,8 @@ namespace ddjd_c.ct.good
         /// <param name="e"></param>
         private void btnPreviousPage_Click(object sender, EventArgs e)
         {
-
+            ct_pageNumber = ct_pageNumber - 1;
+            LoadData();
         }
 
         /// <summary>
