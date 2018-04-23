@@ -191,7 +191,11 @@ namespace ddjd_c.ct.good
         }
 
         
-
+        /// <summary>
+        /// 显示行号
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             ///添加行数

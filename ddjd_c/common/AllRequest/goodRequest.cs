@@ -86,5 +86,33 @@ namespace ddjd_c.common.AllRequest
         /// 审核失败，修改审核商品
         /// </summary>
         public static string UpdateExamineGoodsByStoreId { get => updateExamineGoodsByStoreId; }
+
+
+
+        private static string queryGoodsInfoList_store = "front/storeAndGoods/queryGoodsInfoList_store";
+        /// <summary>
+        /// 查询公共商品库信息
+        /// </summary>
+        public static string QueryGoodsInfoList_store{ get => queryGoodsInfoList_store; }
+
+
+        private static string queryGoodsInfoByGoodsId_store = "front/storeAndGoods/queryGoodsInfoByGoodsId_store";
+        /// <summary>
+        /// 店铺查询公共商品库商品详情
+        /// </summary>
+        public static string QueryGoodsInfoByGoodsId_store { get => queryGoodsInfoByGoodsId_store; }
+
+
+        private static string addGoodsInfoGoToStoreAndGoods_detail = "front/storeAndGoods/addGoodsInfoGoToStoreAndGoods_detail";
+        /// <summary>
+        /// 单个详细添加到店铺商品库
+        /// </summary>
+        public static string AddGoodsInfoGoToStoreAndGoods_detail { get => addGoodsInfoGoToStoreAndGoods_detail; }
+
+
+        private static string addGoodsInfoGoToStoreAndGoods = "front/storeAndGoods/addGoodsInfoGoToStoreAndGoods";
+
+        ///单选or多选添加到店铺商品库
+        public static string AddGoodsInfoGoToStoreAndGoods { get => addGoodsInfoGoToStoreAndGoods; }
     }
 }

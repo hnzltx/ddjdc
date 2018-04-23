@@ -217,7 +217,8 @@ namespace ddjd_c.ct.good
         /// <param name="e"></param>
         private void btnPreviousPage_Click(object sender, EventArgs e)
         {
-
+            ct_pageNumber = ct_pageNumber - 1;
+            LoadData();
         }
 
         /// <summary>
@@ -280,8 +281,23 @@ namespace ddjd_c.ct.good
         private void dataGridViewX1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             model.good.goodEntity good = BList[e.RowIndex];
-            UpdateExamineGoodInfoForm frm = new UpdateExamineGoodInfoForm(good);
+            UpdateExamineGoodInfoForm frm = new UpdateExamineGoodInfoForm(good,e.RowIndex);
+            frm.action = UpdateExamineGoodInfoCallback;
             frm.ShowDialog();
+        }
+        /// <summary>
+        /// 修改审核失败商品提交成功结果回调
+        /// </summary>
+        /// <param name="rowIndex"></param>
+        private void UpdateExamineGoodInfoCallback(int rowIndex)
+        {
+            //删除修改成功的行
+            if (this.dataGridViewX1.Rows.Count > 0)
+            {
+                BList.RemoveAt(rowIndex);
+                this.dataGridViewX1.Rows.RemoveAt(rowIndex);
+            }
+            
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ddjd_c.ct.good
 {
-    partial class UpdateExamineGoodInfoForm
+    partial class PublicGoodLibraryDetailForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,24 @@
         {
             this.btnSubmit = new DevComponents.DotNetBar.ButtonX();
             this.pbGoodPic = new System.Windows.Forms.PictureBox();
+            this.lblGoodsMixed = new DevComponents.DotNetBar.LabelX();
+            this.labelX22 = new DevComponents.DotNetBar.LabelX();
+            this.lblBrand = new DevComponents.DotNetBar.LabelX();
+            this.labelX24 = new DevComponents.DotNetBar.LabelX();
+            this.lblGoodsLift = new DevComponents.DotNetBar.LabelX();
             this.labelX18 = new DevComponents.DotNetBar.LabelX();
+            this.lblGoodsCategoryName = new DevComponents.DotNetBar.LabelX();
             this.labelX20 = new DevComponents.DotNetBar.LabelX();
+            this.lblGoodUcode = new DevComponents.DotNetBar.LabelX();
+            this.labelX14 = new DevComponents.DotNetBar.LabelX();
+            this.lblGoodUnit = new DevComponents.DotNetBar.LabelX();
             this.labelX16 = new DevComponents.DotNetBar.LabelX();
+            this.lblGoodName = new DevComponents.DotNetBar.LabelX();
             this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.lblGoodsCode = new DevComponents.DotNetBar.LabelX();
             this.labelX9 = new DevComponents.DotNetBar.LabelX();
             this.labelX8 = new DevComponents.DotNetBar.LabelX();
+            this.labelX10 = new DevComponents.DotNetBar.LabelX();
             this.labelX7 = new DevComponents.DotNetBar.LabelX();
             this.cbxGoodFlag = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.comboItem1 = new DevComponents.Editors.ComboItem();
@@ -50,23 +61,8 @@
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.txtPurchasePrice = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
-            this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
-            this.cbx3 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.cbx2 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.cbx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.labelX19 = new DevComponents.DotNetBar.LabelX();
-            this.txtGoodsMixed = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX17 = new DevComponents.DotNetBar.LabelX();
-            this.txtBrand = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX15 = new DevComponents.DotNetBar.LabelX();
-            this.txtGoodsLift = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblGoodsCategoryName = new DevComponents.DotNetBar.LabelX();
-            this.labelX11 = new DevComponents.DotNetBar.LabelX();
-            this.txtUcode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.txtGoodUnit = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.txtGoodName = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodPic)).BeginInit();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -75,25 +71,81 @@
             // 
             this.btnSubmit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSubmit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSubmit.Location = new System.Drawing.Point(16, 486);
+            this.btnSubmit.Location = new System.Drawing.Point(15, 391);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(187, 40);
             this.btnSubmit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSubmit.TabIndex = 30;
-            this.btnSubmit.Text = "提交";
+            this.btnSubmit.Text = "加入门店";
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // pbGoodPic
             // 
             this.pbGoodPic.BackColor = System.Drawing.Color.White;
             this.pbGoodPic.Image = global::ddjd_c.Properties.Resources.default_icon1;
-            this.pbGoodPic.Location = new System.Drawing.Point(15, 302);
+            this.pbGoodPic.Location = new System.Drawing.Point(644, 215);
             this.pbGoodPic.Name = "pbGoodPic";
             this.pbGoodPic.Size = new System.Drawing.Size(150, 150);
             this.pbGoodPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbGoodPic.TabIndex = 29;
             this.pbGoodPic.TabStop = false;
-            this.pbGoodPic.Click += new System.EventHandler(this.pbGoodPic_Click);
+            // 
+            // lblGoodsMixed
+            // 
+            // 
+            // 
+            // 
+            this.lblGoodsMixed.BackgroundStyle.Class = "";
+            this.lblGoodsMixed.Location = new System.Drawing.Point(333, 332);
+            this.lblGoodsMixed.Name = "lblGoodsMixed";
+            this.lblGoodsMixed.Size = new System.Drawing.Size(160, 20);
+            this.lblGoodsMixed.TabIndex = 28;
+            // 
+            // labelX22
+            // 
+            // 
+            // 
+            // 
+            this.labelX22.BackgroundStyle.Class = "";
+            this.labelX22.Location = new System.Drawing.Point(264, 332);
+            this.labelX22.Name = "labelX22";
+            this.labelX22.Size = new System.Drawing.Size(75, 20);
+            this.labelX22.TabIndex = 27;
+            this.labelX22.Text = "商品配料:";
+            // 
+            // lblBrand
+            // 
+            // 
+            // 
+            // 
+            this.lblBrand.BackgroundStyle.Class = "";
+            this.lblBrand.Location = new System.Drawing.Point(84, 332);
+            this.lblBrand.Name = "lblBrand";
+            this.lblBrand.Size = new System.Drawing.Size(160, 20);
+            this.lblBrand.TabIndex = 26;
+            // 
+            // labelX24
+            // 
+            // 
+            // 
+            // 
+            this.labelX24.BackgroundStyle.Class = "";
+            this.labelX24.Location = new System.Drawing.Point(15, 332);
+            this.labelX24.Name = "labelX24";
+            this.labelX24.Size = new System.Drawing.Size(75, 20);
+            this.labelX24.TabIndex = 25;
+            this.labelX24.Text = "商品品牌:";
+            // 
+            // lblGoodsLift
+            // 
+            // 
+            // 
+            // 
+            this.lblGoodsLift.BackgroundStyle.Class = "";
+            this.lblGoodsLift.Location = new System.Drawing.Point(333, 292);
+            this.lblGoodsLift.Name = "lblGoodsLift";
+            this.lblGoodsLift.Size = new System.Drawing.Size(160, 20);
+            this.lblGoodsLift.TabIndex = 24;
             // 
             // labelX18
             // 
@@ -101,11 +153,22 @@
             // 
             // 
             this.labelX18.BackgroundStyle.Class = "";
-            this.labelX18.Location = new System.Drawing.Point(15, 203);
+            this.labelX18.Location = new System.Drawing.Point(264, 292);
             this.labelX18.Name = "labelX18";
             this.labelX18.Size = new System.Drawing.Size(75, 20);
             this.labelX18.TabIndex = 23;
             this.labelX18.Text = "商品保质期:";
+            // 
+            // lblGoodsCategoryName
+            // 
+            // 
+            // 
+            // 
+            this.lblGoodsCategoryName.BackgroundStyle.Class = "";
+            this.lblGoodsCategoryName.Location = new System.Drawing.Point(84, 292);
+            this.lblGoodsCategoryName.Name = "lblGoodsCategoryName";
+            this.lblGoodsCategoryName.Size = new System.Drawing.Size(160, 20);
+            this.lblGoodsCategoryName.TabIndex = 22;
             // 
             // labelX20
             // 
@@ -113,11 +176,45 @@
             // 
             // 
             this.labelX20.BackgroundStyle.Class = "";
-            this.labelX20.Location = new System.Drawing.Point(264, 126);
+            this.labelX20.Location = new System.Drawing.Point(15, 292);
             this.labelX20.Name = "labelX20";
             this.labelX20.Size = new System.Drawing.Size(75, 20);
             this.labelX20.TabIndex = 21;
-            this.labelX20.Text = "分类选择:";
+            this.labelX20.Text = "商品分类:";
+            // 
+            // lblGoodUcode
+            // 
+            // 
+            // 
+            // 
+            this.lblGoodUcode.BackgroundStyle.Class = "";
+            this.lblGoodUcode.Location = new System.Drawing.Point(333, 253);
+            this.lblGoodUcode.Name = "lblGoodUcode";
+            this.lblGoodUcode.Size = new System.Drawing.Size(160, 20);
+            this.lblGoodUcode.TabIndex = 20;
+            // 
+            // labelX14
+            // 
+            // 
+            // 
+            // 
+            this.labelX14.BackgroundStyle.Class = "";
+            this.labelX14.Location = new System.Drawing.Point(264, 253);
+            this.labelX14.Name = "labelX14";
+            this.labelX14.Size = new System.Drawing.Size(75, 20);
+            this.labelX14.TabIndex = 19;
+            this.labelX14.Text = "商品规格:";
+            // 
+            // lblGoodUnit
+            // 
+            // 
+            // 
+            // 
+            this.lblGoodUnit.BackgroundStyle.Class = "";
+            this.lblGoodUnit.Location = new System.Drawing.Point(84, 253);
+            this.lblGoodUnit.Name = "lblGoodUnit";
+            this.lblGoodUnit.Size = new System.Drawing.Size(160, 20);
+            this.lblGoodUnit.TabIndex = 18;
             // 
             // labelX16
             // 
@@ -125,11 +222,22 @@
             // 
             // 
             this.labelX16.BackgroundStyle.Class = "";
-            this.labelX16.Location = new System.Drawing.Point(15, 91);
+            this.labelX16.Location = new System.Drawing.Point(15, 253);
             this.labelX16.Name = "labelX16";
             this.labelX16.Size = new System.Drawing.Size(75, 20);
             this.labelX16.TabIndex = 17;
             this.labelX16.Text = "商品单位:";
+            // 
+            // lblGoodName
+            // 
+            // 
+            // 
+            // 
+            this.lblGoodName.BackgroundStyle.Class = "";
+            this.lblGoodName.Location = new System.Drawing.Point(333, 215);
+            this.lblGoodName.Name = "lblGoodName";
+            this.lblGoodName.Size = new System.Drawing.Size(305, 20);
+            this.lblGoodName.TabIndex = 16;
             // 
             // labelX12
             // 
@@ -137,7 +245,7 @@
             // 
             // 
             this.labelX12.BackgroundStyle.Class = "";
-            this.labelX12.Location = new System.Drawing.Point(264, 20);
+            this.labelX12.Location = new System.Drawing.Point(264, 215);
             this.labelX12.Name = "labelX12";
             this.labelX12.Size = new System.Drawing.Size(75, 20);
             this.labelX12.TabIndex = 15;
@@ -149,7 +257,7 @@
             // 
             // 
             this.lblGoodsCode.BackgroundStyle.Class = "";
-            this.lblGoodsCode.Location = new System.Drawing.Point(84, 20);
+            this.lblGoodsCode.Location = new System.Drawing.Point(84, 215);
             this.lblGoodsCode.Name = "lblGoodsCode";
             this.lblGoodsCode.Size = new System.Drawing.Size(160, 20);
             this.lblGoodsCode.TabIndex = 14;
@@ -160,7 +268,7 @@
             // 
             // 
             this.labelX9.BackgroundStyle.Class = "";
-            this.labelX9.Location = new System.Drawing.Point(15, 20);
+            this.labelX9.Location = new System.Drawing.Point(15, 215);
             this.labelX9.Name = "labelX9";
             this.labelX9.Size = new System.Drawing.Size(75, 20);
             this.labelX9.TabIndex = 13;
@@ -173,11 +281,25 @@
             // 
             this.labelX8.BackgroundStyle.Class = "";
             this.labelX8.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.labelX8.Location = new System.Drawing.Point(15, 277);
+            this.labelX8.Location = new System.Drawing.Point(15, 181);
             this.labelX8.Name = "labelX8";
-            this.labelX8.Size = new System.Drawing.Size(82, 19);
+            this.labelX8.Size = new System.Drawing.Size(240, 19);
             this.labelX8.TabIndex = 12;
-            this.labelX8.Text = "商品展示图片";
+            this.labelX8.Text = "不可修改信息(公共商品库信息)";
+            // 
+            // labelX10
+            // 
+            // 
+            // 
+            // 
+            this.labelX10.BackgroundStyle.Class = "";
+            this.labelX10.Font = new System.Drawing.Font("微软雅黑", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelX10.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.labelX10.Location = new System.Drawing.Point(503, 82);
+            this.labelX10.Name = "labelX10";
+            this.labelX10.Size = new System.Drawing.Size(317, 23);
+            this.labelX10.TabIndex = 11;
+            this.labelX10.Text = "说明:总库存低于此值,线上商品将显示已售罄";
             // 
             // labelX7
             // 
@@ -187,9 +309,9 @@
             this.labelX7.BackgroundStyle.Class = "";
             this.labelX7.Font = new System.Drawing.Font("微软雅黑", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelX7.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.labelX7.Location = new System.Drawing.Point(500, 163);
+            this.labelX7.Location = new System.Drawing.Point(500, 86);
             this.labelX7.Name = "labelX7";
-            this.labelX7.Size = new System.Drawing.Size(206, 23);
+            this.labelX7.Size = new System.Drawing.Size(317, 23);
             this.labelX7.TabIndex = 11;
             this.labelX7.Text = "说明:总库存低于此值,线上商品将显示已售罄";
             // 
@@ -203,7 +325,7 @@
             this.cbxGoodFlag.Items.AddRange(new object[] {
             this.comboItem1,
             this.comboItem2});
-            this.cbxGoodFlag.Location = new System.Drawing.Point(85, 239);
+            this.cbxGoodFlag.Location = new System.Drawing.Point(85, 135);
             this.cbxGoodFlag.Name = "cbxGoodFlag";
             this.cbxGoodFlag.Size = new System.Drawing.Size(159, 21);
             this.cbxGoodFlag.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -223,7 +345,7 @@
             // 
             // 
             this.labelX6.BackgroundStyle.Class = "";
-            this.labelX6.Location = new System.Drawing.Point(15, 239);
+            this.labelX6.Location = new System.Drawing.Point(15, 136);
             this.labelX6.Name = "labelX6";
             this.labelX6.Size = new System.Drawing.Size(75, 20);
             this.labelX6.TabIndex = 9;
@@ -235,7 +357,7 @@
             // 
             // 
             this.txtOfflineStock.Border.Class = "TextBoxBorder";
-            this.txtOfflineStock.Location = new System.Drawing.Point(333, 163);
+            this.txtOfflineStock.Location = new System.Drawing.Point(333, 86);
             this.txtOfflineStock.Name = "txtOfflineStock";
             this.txtOfflineStock.Size = new System.Drawing.Size(160, 21);
             this.txtOfflineStock.TabIndex = 8;
@@ -247,7 +369,7 @@
             // 
             // 
             this.labelX5.BackgroundStyle.Class = "";
-            this.labelX5.Location = new System.Drawing.Point(264, 163);
+            this.labelX5.Location = new System.Drawing.Point(264, 86);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(75, 20);
             this.labelX5.TabIndex = 7;
@@ -259,7 +381,7 @@
             // 
             // 
             this.txtStock.Border.Class = "TextBoxBorder";
-            this.txtStock.Location = new System.Drawing.Point(84, 163);
+            this.txtStock.Location = new System.Drawing.Point(85, 86);
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(159, 21);
             this.txtStock.TabIndex = 6;
@@ -271,7 +393,7 @@
             // 
             // 
             this.labelX4.BackgroundStyle.Class = "";
-            this.labelX4.Location = new System.Drawing.Point(15, 165);
+            this.labelX4.Location = new System.Drawing.Point(15, 86);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(75, 20);
             this.labelX4.TabIndex = 5;
@@ -283,7 +405,7 @@
             // 
             // 
             this.txtStoreGoodsPrice.Border.Class = "TextBoxBorder";
-            this.txtStoreGoodsPrice.Location = new System.Drawing.Point(333, 56);
+            this.txtStoreGoodsPrice.Location = new System.Drawing.Point(333, 41);
             this.txtStoreGoodsPrice.Name = "txtStoreGoodsPrice";
             this.txtStoreGoodsPrice.Size = new System.Drawing.Size(160, 21);
             this.txtStoreGoodsPrice.TabIndex = 4;
@@ -295,7 +417,7 @@
             // 
             // 
             this.labelX3.BackgroundStyle.Class = "";
-            this.labelX3.Location = new System.Drawing.Point(264, 56);
+            this.labelX3.Location = new System.Drawing.Point(264, 41);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(75, 20);
             this.labelX3.TabIndex = 3;
@@ -307,7 +429,7 @@
             // 
             // 
             this.txtPurchasePrice.Border.Class = "TextBoxBorder";
-            this.txtPurchasePrice.Location = new System.Drawing.Point(84, 55);
+            this.txtPurchasePrice.Location = new System.Drawing.Point(84, 40);
             this.txtPurchasePrice.Name = "txtPurchasePrice";
             this.txtPurchasePrice.Size = new System.Drawing.Size(160, 21);
             this.txtPurchasePrice.TabIndex = 2;
@@ -319,40 +441,49 @@
             // 
             // 
             this.labelX2.BackgroundStyle.Class = "";
-            this.labelX2.Location = new System.Drawing.Point(15, 56);
+            this.labelX2.Location = new System.Drawing.Point(15, 40);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(75, 20);
             this.labelX2.TabIndex = 1;
             this.labelX2.Text = "商品进货价:";
             // 
+            // labelX1
+            // 
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.Class = "";
+            this.labelX1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.labelX1.Location = new System.Drawing.Point(15, 13);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(106, 19);
+            this.labelX1.TabIndex = 0;
+            this.labelX1.Text = "可修改信息";
+            // 
             // panelEx1
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelEx1.Controls.Add(this.cbx3);
-            this.panelEx1.Controls.Add(this.cbx2);
-            this.panelEx1.Controls.Add(this.cbx1);
-            this.panelEx1.Controls.Add(this.labelX19);
-            this.panelEx1.Controls.Add(this.txtGoodsMixed);
-            this.panelEx1.Controls.Add(this.labelX17);
-            this.panelEx1.Controls.Add(this.txtBrand);
-            this.panelEx1.Controls.Add(this.labelX15);
-            this.panelEx1.Controls.Add(this.txtGoodsLift);
-            this.panelEx1.Controls.Add(this.lblGoodsCategoryName);
-            this.panelEx1.Controls.Add(this.labelX11);
-            this.panelEx1.Controls.Add(this.txtUcode);
-            this.panelEx1.Controls.Add(this.labelX1);
-            this.panelEx1.Controls.Add(this.txtGoodUnit);
-            this.panelEx1.Controls.Add(this.txtGoodName);
             this.panelEx1.Controls.Add(this.btnSubmit);
             this.panelEx1.Controls.Add(this.pbGoodPic);
+            this.panelEx1.Controls.Add(this.lblGoodsMixed);
+            this.panelEx1.Controls.Add(this.labelX22);
+            this.panelEx1.Controls.Add(this.lblBrand);
+            this.panelEx1.Controls.Add(this.labelX24);
+            this.panelEx1.Controls.Add(this.lblGoodsLift);
             this.panelEx1.Controls.Add(this.labelX18);
+            this.panelEx1.Controls.Add(this.lblGoodsCategoryName);
             this.panelEx1.Controls.Add(this.labelX20);
+            this.panelEx1.Controls.Add(this.lblGoodUcode);
+            this.panelEx1.Controls.Add(this.labelX14);
+            this.panelEx1.Controls.Add(this.lblGoodUnit);
             this.panelEx1.Controls.Add(this.labelX16);
+            this.panelEx1.Controls.Add(this.lblGoodName);
             this.panelEx1.Controls.Add(this.labelX12);
             this.panelEx1.Controls.Add(this.lblGoodsCode);
             this.panelEx1.Controls.Add(this.labelX9);
             this.panelEx1.Controls.Add(this.labelX8);
+            this.panelEx1.Controls.Add(this.labelX10);
             this.panelEx1.Controls.Add(this.labelX7);
             this.panelEx1.Controls.Add(this.cbxGoodFlag);
             this.panelEx1.Controls.Add(this.labelX6);
@@ -364,10 +495,11 @@
             this.panelEx1.Controls.Add(this.labelX3);
             this.panelEx1.Controls.Add(this.txtPurchasePrice);
             this.panelEx1.Controls.Add(this.labelX2);
+            this.panelEx1.Controls.Add(this.labelX1);
             this.panelEx1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEx1.Location = new System.Drawing.Point(0, 0);
             this.panelEx1.Name = "panelEx1";
-            this.panelEx1.Size = new System.Drawing.Size(749, 548);
+            this.panelEx1.Size = new System.Drawing.Size(819, 450);
             this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx1.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -377,206 +509,21 @@
             this.panelEx1.Style.GradientAngle = 90;
             this.panelEx1.TabIndex = 1;
             // 
-            // cbx3
-            // 
-            this.cbx3.DisplayMember = "Text";
-            this.cbx3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbx3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbx3.FormattingEnabled = true;
-            this.cbx3.ItemHeight = 15;
-            this.cbx3.Location = new System.Drawing.Point(554, 126);
-            this.cbx3.Name = "cbx3";
-            this.cbx3.Size = new System.Drawing.Size(105, 21);
-            this.cbx3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbx3.TabIndex = 48;
-            this.cbx3.SelectionChangeCommitted += new System.EventHandler(this.cbx3_SelectionChangeCommitted);
-            // 
-            // cbx2
-            // 
-            this.cbx2.DisplayMember = "Text";
-            this.cbx2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbx2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbx2.FormattingEnabled = true;
-            this.cbx2.ItemHeight = 15;
-            this.cbx2.Location = new System.Drawing.Point(443, 126);
-            this.cbx2.Name = "cbx2";
-            this.cbx2.Size = new System.Drawing.Size(105, 21);
-            this.cbx2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbx2.TabIndex = 46;
-            this.cbx2.SelectedIndexChanged += new System.EventHandler(this.cbx2_SelectedIndexChanged);
-            // 
-            // cbx1
-            // 
-            this.cbx1.DisplayMember = "Text";
-            this.cbx1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbx1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbx1.FormattingEnabled = true;
-            this.cbx1.ItemHeight = 15;
-            this.cbx1.Location = new System.Drawing.Point(333, 126);
-            this.cbx1.Name = "cbx1";
-            this.cbx1.Size = new System.Drawing.Size(105, 21);
-            this.cbx1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cbx1.TabIndex = 44;
-            this.cbx1.SelectedIndexChanged += new System.EventHandler(this.cbx1_SelectedIndexChanged);
-            // 
-            // labelX19
-            // 
-            // 
-            // 
-            // 
-            this.labelX19.BackgroundStyle.Class = "";
-            this.labelX19.Font = new System.Drawing.Font("微软雅黑", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelX19.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.labelX19.Location = new System.Drawing.Point(495, 238);
-            this.labelX19.Name = "labelX19";
-            this.labelX19.Size = new System.Drawing.Size(63, 23);
-            this.labelX19.TabIndex = 42;
-            this.labelX19.Text = "选填";
-            // 
-            // txtGoodsMixed
-            // 
-            // 
-            // 
-            // 
-            this.txtGoodsMixed.Border.Class = "TextBoxBorder";
-            this.txtGoodsMixed.Location = new System.Drawing.Point(333, 239);
-            this.txtGoodsMixed.Name = "txtGoodsMixed";
-            this.txtGoodsMixed.Size = new System.Drawing.Size(159, 21);
-            this.txtGoodsMixed.TabIndex = 41;
-            // 
-            // labelX17
-            // 
-            // 
-            // 
-            // 
-            this.labelX17.BackgroundStyle.Class = "";
-            this.labelX17.Location = new System.Drawing.Point(264, 240);
-            this.labelX17.Name = "labelX17";
-            this.labelX17.Size = new System.Drawing.Size(75, 20);
-            this.labelX17.TabIndex = 40;
-            this.labelX17.Text = "商品配料:";
-            // 
-            // txtBrand
-            // 
-            // 
-            // 
-            // 
-            this.txtBrand.Border.Class = "TextBoxBorder";
-            this.txtBrand.Location = new System.Drawing.Point(333, 202);
-            this.txtBrand.Name = "txtBrand";
-            this.txtBrand.Size = new System.Drawing.Size(159, 21);
-            this.txtBrand.TabIndex = 39;
-            // 
-            // labelX15
-            // 
-            // 
-            // 
-            // 
-            this.labelX15.BackgroundStyle.Class = "";
-            this.labelX15.Location = new System.Drawing.Point(264, 203);
-            this.labelX15.Name = "labelX15";
-            this.labelX15.Size = new System.Drawing.Size(75, 20);
-            this.labelX15.TabIndex = 38;
-            this.labelX15.Text = "商品品牌:";
-            // 
-            // txtGoodsLift
-            // 
-            // 
-            // 
-            // 
-            this.txtGoodsLift.Border.Class = "TextBoxBorder";
-            this.txtGoodsLift.Location = new System.Drawing.Point(84, 202);
-            this.txtGoodsLift.Name = "txtGoodsLift";
-            this.txtGoodsLift.Size = new System.Drawing.Size(159, 21);
-            this.txtGoodsLift.TabIndex = 37;
-            this.txtGoodsLift.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNumber_KeyPress);
-            // 
-            // lblGoodsCategoryName
-            // 
-            // 
-            // 
-            // 
-            this.lblGoodsCategoryName.BackgroundStyle.Class = "";
-            this.lblGoodsCategoryName.Location = new System.Drawing.Point(84, 126);
-            this.lblGoodsCategoryName.Name = "lblGoodsCategoryName";
-            this.lblGoodsCategoryName.Size = new System.Drawing.Size(159, 20);
-            this.lblGoodsCategoryName.TabIndex = 36;
-            // 
-            // labelX11
-            // 
-            // 
-            // 
-            // 
-            this.labelX11.BackgroundStyle.Class = "";
-            this.labelX11.Location = new System.Drawing.Point(15, 126);
-            this.labelX11.Name = "labelX11";
-            this.labelX11.Size = new System.Drawing.Size(75, 20);
-            this.labelX11.TabIndex = 35;
-            this.labelX11.Text = "商品分类:";
-            // 
-            // txtUcode
-            // 
-            // 
-            // 
-            // 
-            this.txtUcode.Border.Class = "TextBoxBorder";
-            this.txtUcode.Location = new System.Drawing.Point(333, 89);
-            this.txtUcode.Name = "txtUcode";
-            this.txtUcode.Size = new System.Drawing.Size(160, 21);
-            this.txtUcode.TabIndex = 34;
-            // 
-            // labelX1
-            // 
-            // 
-            // 
-            // 
-            this.labelX1.BackgroundStyle.Class = "";
-            this.labelX1.Location = new System.Drawing.Point(264, 91);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(75, 20);
-            this.labelX1.TabIndex = 33;
-            this.labelX1.Text = "商品规格:";
-            // 
-            // txtGoodUnit
-            // 
-            // 
-            // 
-            // 
-            this.txtGoodUnit.Border.Class = "TextBoxBorder";
-            this.txtGoodUnit.Location = new System.Drawing.Point(84, 90);
-            this.txtGoodUnit.Name = "txtGoodUnit";
-            this.txtGoodUnit.Size = new System.Drawing.Size(160, 21);
-            this.txtGoodUnit.TabIndex = 32;
-            // 
-            // txtGoodName
-            // 
-            // 
-            // 
-            // 
-            this.txtGoodName.Border.Class = "TextBoxBorder";
-            this.txtGoodName.Location = new System.Drawing.Point(333, 19);
-            this.txtGoodName.Name = "txtGoodName";
-            this.txtGoodName.Size = new System.Drawing.Size(160, 21);
-            this.txtGoodName.TabIndex = 31;
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
-            // 
-            // UpdateExamineGoodInfoForm
+            // PublicGoodLibraryDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(749, 548);
+            this.ClientSize = new System.Drawing.Size(819, 450);
             this.Controls.Add(this.panelEx1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "UpdateExamineGoodInfoForm";
+            this.Name = "PublicGoodLibraryDetailForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "修改审核商品信息";
-            this.Load += new System.EventHandler(this.UpdateExamineGoodInfoForm_Load);
+            this.Tag = "";
+            this.Text = "平台商品详情";
+            this.Load += new System.EventHandler(this.PublicGoodLibraryDetailForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodPic)).EndInit();
             this.panelEx1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -587,13 +534,24 @@
 
         private DevComponents.DotNetBar.ButtonX btnSubmit;
         private System.Windows.Forms.PictureBox pbGoodPic;
+        private DevComponents.DotNetBar.LabelX lblGoodsMixed;
+        private DevComponents.DotNetBar.LabelX labelX22;
+        private DevComponents.DotNetBar.LabelX lblBrand;
+        private DevComponents.DotNetBar.LabelX labelX24;
+        private DevComponents.DotNetBar.LabelX lblGoodsLift;
         private DevComponents.DotNetBar.LabelX labelX18;
+        private DevComponents.DotNetBar.LabelX lblGoodsCategoryName;
         private DevComponents.DotNetBar.LabelX labelX20;
+        private DevComponents.DotNetBar.LabelX lblGoodUcode;
+        private DevComponents.DotNetBar.LabelX labelX14;
+        private DevComponents.DotNetBar.LabelX lblGoodUnit;
         private DevComponents.DotNetBar.LabelX labelX16;
+        private DevComponents.DotNetBar.LabelX lblGoodName;
         private DevComponents.DotNetBar.LabelX labelX12;
         private DevComponents.DotNetBar.LabelX lblGoodsCode;
         private DevComponents.DotNetBar.LabelX labelX9;
         private DevComponents.DotNetBar.LabelX labelX8;
+        private DevComponents.DotNetBar.LabelX labelX10;
         private DevComponents.DotNetBar.LabelX labelX7;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbxGoodFlag;
         private DevComponents.Editors.ComboItem comboItem1;
@@ -607,22 +565,7 @@
         private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.DotNetBar.Controls.TextBoxX txtPurchasePrice;
         private DevComponents.DotNetBar.LabelX labelX2;
-        private DevComponents.DotNetBar.PanelEx panelEx1;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtGoodName;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtGoodUnit;
-        private DevComponents.DotNetBar.LabelX labelX11;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtUcode;
         private DevComponents.DotNetBar.LabelX labelX1;
-        private DevComponents.DotNetBar.LabelX labelX19;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtGoodsMixed;
-        private DevComponents.DotNetBar.LabelX labelX17;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtBrand;
-        private DevComponents.DotNetBar.LabelX labelX15;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtGoodsLift;
-        private DevComponents.DotNetBar.LabelX lblGoodsCategoryName;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbx3;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbx2;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx cbx1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private DevComponents.DotNetBar.PanelEx panelEx1;
     }
 }
