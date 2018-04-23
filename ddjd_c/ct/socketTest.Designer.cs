@@ -49,6 +49,7 @@
             this.Controls.Add(this.button1);
             this.Name = "socketTest";
             this.Text = "socketTest";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.socketTest_FormClosed);
             this.Load += new System.EventHandler(this.socketTest_Load);
             this.ResumeLayout(false);
 

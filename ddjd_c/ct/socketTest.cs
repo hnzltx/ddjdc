@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ddjd_c.common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -49,10 +50,7 @@ namespace ddjd_c.ct
             ws.OnMessage += (sender, e) =>
             {
                 Console.WriteLine(e.Data);
-                System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-                player.SoundLocation = Application.StartupPath + "//xindingdan.mp3";
-                player.LoadAsync();
-                player.PlaySync();
+                new MCI().Play("xindingdan.mp3", 1);
             };
                
 
@@ -67,6 +65,11 @@ namespace ddjd_c.ct
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            ws.Close();
+        }
+
+        private void socketTest_FormClosed(object sender, FormClosedEventArgs e)
         {
             ws.Close();
         }
