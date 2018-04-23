@@ -47,7 +47,14 @@ namespace ddjd_c.ct
             };
 
             ws.OnMessage += (sender, e) =>
+            {
                 Console.WriteLine(e.Data);
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+                player.SoundLocation = Application.StartupPath + "//xindingdan.mp3";
+                player.LoadAsync();
+                player.PlaySync();
+            };
+               
 
             ws.OnClose += (sender, e) => {
                 Console.WriteLine("连接关闭!" + e.Reason);
