@@ -401,7 +401,8 @@ namespace ddjd_c
         /// <param name="e"></param>
         private void btnGoodUpload_Click(object sender, EventArgs e)
         {
-
+            ct.good.UpLoadGoodCodeVerifyForm frm = new ct.good.UpLoadGoodCodeVerifyForm();
+            openWindow(frm,frm.Name);
         }
         /// <summary>
         /// 跳转到公共商品库

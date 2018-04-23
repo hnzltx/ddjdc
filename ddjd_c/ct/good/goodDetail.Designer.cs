@@ -519,6 +519,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "goodDetail";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "修改商品信息";
             this.Load += new System.EventHandler(this.goodDetail_Load);

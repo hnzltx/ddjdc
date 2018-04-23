@@ -47,7 +47,7 @@ namespace ddjd_c.ct.ScanCode
         /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            switch (keyData)
+                switch (keyData)
             {
                 case Keys.Escape:
                     if (MessageBox.Show("确认退出收银界面?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)

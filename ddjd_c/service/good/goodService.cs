@@ -161,7 +161,7 @@ namespace ddjd_c.service.good
         /// <returns></returns>
         public static JObject AddGoodsInfoGoToStoreAndGoods_detail(Dictionary<string, object> dic)
         {
-            return JsonHelper.getJObject(baseHttp.GetStrFunction(goodRequest.AddGoodsInfoGoToStoreAndGoods_detail.ToGetRequestURL(dic)));
+            return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.AddGoodsInfoGoToStoreAndGoods_detail,dic));
         }
 
         /// <summary>
@@ -172,6 +172,14 @@ namespace ddjd_c.service.good
         public static JObject AddGoodsInfoGoToStoreAndGood(Dictionary<string, object> dic)
         {
             return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.AddGoodsInfoGoToStoreAndGoods,dic));
+        }
+        /// <summary>
+        /// 扫码验证或查询商品
+        /// </summary>
+        /// <returns></returns>
+        public static JObject QueryGoodsCodeIsExist(Dictionary<string, object> dic)
+        {
+            return JsonHelper.getJObject(baseHttp.GetStrFunction(goodRequest.QueryGoodsCodeIsExist.ToGetRequestURL(dic)));
         }
     }
 }

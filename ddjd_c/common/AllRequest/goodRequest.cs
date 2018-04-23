@@ -114,5 +114,12 @@ namespace ddjd_c.common.AllRequest
 
         ///单选or多选添加到店铺商品库
         public static string AddGoodsInfoGoToStoreAndGoods { get => addGoodsInfoGoToStoreAndGoods; }
+
+
+        private static string queryGoodsCodeIsExist = "front/storeUploadGoods/queryGoodsCodeIsExist";
+        /// <summary>
+        /// 扫码验证或查询商品 验证条码是否存在；如果存在，就返回公共商品库的商品信息，且同时返回这个店铺是否已经拥有了这个商品（根据exist判断），如果值为true表明已经拥有，且同时返回店铺的商品信息（querySag），如果值为false，表明没有拥有;如果不存在，直接返回 notExist
+        /// </summary>
+        public static string QueryGoodsCodeIsExist { get => queryGoodsCodeIsExist; }
     }
 }

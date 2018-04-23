@@ -22,7 +22,7 @@ namespace ddjd_c.ct.good
         //保存entity
         private goodEntity entity;
         //保存行索引
-        private int rowIndex;
+        private int rowIndex=-1;
         ///保存分类数据
         private List<model.goodscategory> goodscategoriesList=new List<model.goodscategory>();
         //保存每次选择的2级分类
@@ -33,6 +33,10 @@ namespace ddjd_c.ct.good
         {
             this.rowIndex = rowIndex;
             this.entity=entity;
+            InitializeComponent();
+        }
+        public UpdateExamineGoodInfoForm()
+        {
             InitializeComponent();
         }
 
@@ -254,6 +258,11 @@ namespace ddjd_c.ct.good
                 MessageBox.Show("库存下限不能为空");
                 return;
             }
+            if (lblGoodsCategoryName.Text.StrIsNull())
+            {
+                MessageBox.Show("请选择商品分类");
+                return;
+            }
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("examineGoodsId", entity.ExamineGoodsId);
             dic.Add("goodsCode", entity.GoodsCode);
@@ -316,7 +325,7 @@ namespace ddjd_c.ct.good
                 case "success":
                     if(MessageBox.Show("商品成功提交审核；请等待审核结果")== DialogResult.OK)
                     {
-                        action(rowIndex);
+                        action?.Invoke(rowIndex);
                         this.Close();
                     }
                     break;
@@ -415,11 +424,11 @@ namespace ddjd_c.ct.good
                         //  是指XXX.jpg
                         string picpath = openFileDialog.SafeFileName;
 
-                        //NameValueCollection data = new NameValueCollection();
-                        //data.Add("path","goodsImages");
+                        NameValueCollection data = new NameValueCollection();
+                        data.Add("path","goodsImages");
 
-                        Upload_Request(http.baseHttp.getDdjdcUrl() + "upload/start", imageUrl, picpath);
-                        //http.baseHttp.HttpUploadFile(http.baseHttp.getDdjdcUrl()+ "upload/start", new string[] { imageUrl,picpath }, data);
+                        //Upload_Request(http.baseHttp.getDdjdcUrl() + "upload/start", imageUrl, picpath);
+                        http.baseHttp.HttpUploadFile(http.baseHttp.getDdjdcUrl()+ "upload/start", new string[] { imageUrl}, data);
 
 
                        

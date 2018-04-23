@@ -17,7 +17,7 @@ namespace ddjd_c.ct.good
         /// <summary>
         /// 加入门店成功回调
         /// </summary>
-        public Action action;
+        public Action<String> action;
         public PublicGoodLibraryDetailForm()
         {
             InitializeComponent();
@@ -128,7 +128,7 @@ namespace ddjd_c.ct.good
                 case "success":
                     if (MessageBox.Show("加入门店成功", "确定", MessageBoxButtons.OK) == DialogResult.OK)
                     {
-                        action();
+                        action(this.Tag.ToString());
                         this.Close();
                     }
                     break;

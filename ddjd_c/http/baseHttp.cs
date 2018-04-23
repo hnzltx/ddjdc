@@ -385,9 +385,11 @@ namespace ddjd_c.http
 
                 //1.3 form end
                 stream.Write(endbytes, 0, endbytes.Length);
+                
             }
             //2.WebResponse
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            
             using (StreamReader stream = new StreamReader(response.GetResponseStream()))
             {
                 var str = stream.ReadToEnd();
