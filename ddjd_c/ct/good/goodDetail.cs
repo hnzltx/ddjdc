@@ -23,7 +23,8 @@ namespace ddjd_c.ct.good
         public event UpdateGoodListDelegate UpdateGoodList;
         private int? storeAndGoodsId;
         private int rowIndex;
-        public goodDetail(int? id,int rowIndex)
+        
+        public goodDetail(int? id, int rowIndex)
         {
             this.storeAndGoodsId = id;
             this.rowIndex = rowIndex;
@@ -33,6 +34,7 @@ namespace ddjd_c.ct.good
         private void goodDetail_Load(object sender, EventArgs e)
         {
             RequestGoodDetail();
+   
         }
 
         /// <summary>
@@ -67,22 +69,29 @@ namespace ddjd_c.ct.good
             ddjd_c.model.good.goodEntity entity = ((ResponseResult)result).ToEntity<model.good.goodEntity>();
             if (entity != null)
             {
-                this.txtPurchasePrice.Text = entity.PurchasePrice.ToString();
-                this.txtOfflineStock.Text = entity.OfflineStock.ToString();
-                this.txtStock.Text = entity.Stock.ToString();
-                this.txtStoreGoodsPrice.Text = entity.StoreGoodsPrice.ToString();
-                this.lblBrand.Text = entity.Brand;
-                this.lblGoodName.Text = entity.GoodsName;
-                this.lblGoodsCategoryName.Text = entity.GoodsCategoryName;
-                this.lblGoodsCode.Text = entity.GoodsCode;
-                this.lblGoodsLift.Text = entity.GoodsLift.ToString() + "天";
-                this.lblGoodsMixed.Text = entity.GoodsMixed;
-                this.lblGoodUcode.Text = entity.GoodUcode;
-                this.lblGoodUnit.Text = entity.GoodsUnit;
-                this.cbxGoodFlag.SelectedIndex = entity.GoodsFlag == 1 ? this.cbxGoodFlag.SelectedIndex = 0 : this.cbxGoodFlag.SelectedIndex = 1;
-                this.pbGoodPic.Image = ddjd_c.common.extension.ExtensionImage.HttpGetImage(ddjd_c.http.baseHttp.getDdjdcUrl() + entity.GoodsPic, common.extension.DefaultImgType.Good);
+                SetValue(entity);
             }
             
+        }
+        /// <summary>
+        /// 给页面控件赋值
+        /// </summary>
+        private void SetValue(model.good.goodEntity entity)
+        {
+            this.txtPurchasePrice.Text = entity.PurchasePrice.ToString();
+            this.txtOfflineStock.Text = entity.OfflineStock.ToString();
+            this.txtStock.Text = entity.Stock.ToString();
+            this.txtStoreGoodsPrice.Text = entity.StoreGoodsPrice.ToString();
+            this.lblBrand.Text = entity.Brand;
+            this.lblGoodName.Text = entity.GoodsName;
+            this.lblGoodsCategoryName.Text = entity.GoodsCategoryName;
+            this.lblGoodsCode.Text = entity.GoodsCode;
+            this.lblGoodsLift.Text = entity.GoodsLift.ToString() + "天";
+            this.lblGoodsMixed.Text = entity.GoodsMixed;
+            this.lblGoodUcode.Text = entity.GoodUcode;
+            this.lblGoodUnit.Text = entity.GoodsUnit;
+            this.cbxGoodFlag.SelectedIndex = entity.GoodsFlag == 1 ? this.cbxGoodFlag.SelectedIndex = 0 : this.cbxGoodFlag.SelectedIndex = 1;
+            this.pbGoodPic.Image = ddjd_c.common.extension.ExtensionImage.HttpGetImage(ddjd_c.http.baseHttp.getDdjdcUrl() + entity.GoodsPic, common.extension.DefaultImgType.Good);
         }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -132,7 +141,7 @@ namespace ddjd_c.ct.good
                 case "success":
                     if (MessageBox.Show("修改成功", "确定", MessageBoxButtons.OK) == DialogResult.OK)
                     {
-                        UpdateGoodList(dic["goodsFlag"].ToString().ToInt(),rowIndex);
+                        UpdateGoodList?.Invoke(dic["goodsFlag"].ToString().ToInt(), rowIndex);
                         this.Close();
                     }
                     break;

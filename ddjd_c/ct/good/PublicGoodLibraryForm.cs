@@ -23,6 +23,8 @@ namespace ddjd_c.ct.good
         private List<model.goodscategory> goodscategoriesList = new List<model.goodscategory>();
         //保存每次选择的2级分类
         private List<model.goodscategory> goodscategoriesList2;
+        ///选中商品id
+        private List<String> selectGoodArr = new List<String>();
         public PublicGoodLibraryForm()
         {
             InitializeComponent();
@@ -30,6 +32,8 @@ namespace ddjd_c.ct.good
 
         private void PublicGoodLibraryForm_Load(object sender, EventArgs e)
         {
+            ///禁用加入门店按钮
+            btnAddStore.Enabled = false;
             //将本窗体的DataGridView传递给公共的dgv
             commDgv = this.dataGridViewX1;
             //禁用自动拼装所有实体对象
@@ -412,11 +416,13 @@ namespace ddjd_c.ct.good
             frm.ShowDialog();
         }
         /// <summary>
-        /// 加入门店回调
+        /// 详情单个加入门店成功回调
         /// </summary>
-        private void AddStoreCallback()
+        private void AddStoreCallback(string goodsId)
         {
+            selectGoodArr.Remove(goodsId);
             LoadData();
+            UpdateSelectedGoodCount();
         }
         /// <summary>
         /// 加入门店
@@ -426,21 +432,147 @@ namespace ddjd_c.ct.good
         private void ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             var rowIndex = this.dataGridViewX1.CurrentRow.Index;
-            var goodsId = this.dataGridViewX1.Rows[rowIndex].Cells[0].Value.ToString()+",";
+            var goodsId = this.dataGridViewX1.Rows[rowIndex].Cells[0].Value.ToString();
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("storeId",GlobalsInfo.storeId);
-            dic.Add("goodsId", goodsId);
+            dic.Add("goodsId", goodsId+",");
             string success = service.good.goodService.AddGoodsInfoGoToStoreAndGood(dic)["success"].ToString();
             contextMenuStrip1.Close();
             if (success.Equals("success"))
             {
+                selectGoodArr.Remove(goodsId);
+                UpdateSelectedGoodCount();
                 LoadData();
                 MessageBox.Show("加入成功");
-               
             }
             else
             {
                 MessageBox.Show("添加失败");
+            }
+        }
+
+        /// <summary>
+        /// 单击行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridViewX1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ///商品id
+            var goodsId = this.dataGridViewX1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            //1选中0没有选中
+            var value = this.dataGridViewX1.Rows[e.RowIndex].Cells[1].Value;
+            if (value != null)
+            {
+                if(value.Equals("0"))
+                {
+                    value = "1";
+                    selectGoodArr.Add(goodsId);
+                    
+                }
+                else
+                {
+                    value = "0"; 
+                    selectGoodArr.Remove(goodsId);
+                    
+                }
+            }
+            else
+            {
+                value = "1";
+                selectGoodArr.Add(goodsId);
+            }
+            this.dataGridViewX1.Rows[e.RowIndex].Cells[1].Value = value;
+            UpdateSelectedGoodCount();
+        }
+
+        /// <summary>
+        /// 单元格错误处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridViewX1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            
+        }
+        /// <summary>
+        /// 设置单元格显示选中状态
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridViewX1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            ///商品id
+            var goodsId = this.dataGridViewX1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            //查询当前选中数组中是否有对应的goodsId
+            var v =
+                 from str in this.selectGoodArr
+                 where str == goodsId
+                 select str;
+            var goodId = v.FirstOrDefault() == null?null: v.FirstOrDefault().ToString();
+            if (goodsId.Equals(goodId))
+            {
+                this.dataGridViewX1.Rows[e.RowIndex].Cells[1].Value = 1;
+            }
+        }
+
+        /// <summary>
+        /// 把商品批量加入门店
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddStore_Click(object sender, EventArgs e)
+        {
+            StringBuilder goodsId=new StringBuilder();
+            foreach (string str in this.selectGoodArr)
+            {
+                goodsId.Append(str);
+                goodsId.Append(",");
+            }
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("storeId", GlobalsInfo.storeId);
+            dic.Add("goodsId", goodsId);
+            JObject obj = service.good.goodService.AddGoodsInfoGoToStoreAndGood(dic);
+            string success = obj["success"].ToString();
+            int isFailCount = obj["isFailCount"].ToString().ToInt();
+            contextMenuStrip1.Close();
+            if (success.Equals("success"))
+            {
+                LoadData();
+                if (isFailCount > 0)
+                {
+                    if(MessageBox.Show("有"+isFailCount+"个商品添加失败") == DialogResult.OK)
+                    {
+                        MessageBox.Show("成功加入"+(selectGoodArr.Count- isFailCount)+"个商品到您的店铺");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("成功加入" + (selectGoodArr.Count) + "个商品到您的店铺");
+                }
+                
+                
+                selectGoodArr.Clear();
+                UpdateSelectedGoodCount();
+            }
+            else
+            {
+                MessageBox.Show("添加失败");
+            }
+        }
+        /// <summary>
+        /// 更新选中商品数量
+        /// </summary>
+        private void UpdateSelectedGoodCount()
+        {
+            this.lblSelectedGoodCount.Text = "已选中" + selectGoodArr.Count + "个商品";
+            if (selectGoodArr.Count > 0)//如果有选中商品  加入门店按钮可以点击
+            {
+                btnAddStore.Enabled = true;
+            }
+            else
+            {
+                btnAddStore.Enabled = false;
             }
         }
     }

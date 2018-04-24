@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
+            this.btnAddStore = new DevComponents.DotNetBar.ButtonX();
+            this.lblSelectedGoodCount = new DevComponents.DotNetBar.LabelX();
             this.bar1 = new DevComponents.DotNetBar.Bar();
             this.btnHomePage = new DevComponents.DotNetBar.ButtonItem();
             this.btnPreviousPage = new DevComponents.DotNetBar.ButtonItem();
@@ -52,6 +55,12 @@
             this.comboItem20 = new DevComponents.Editors.ComboItem();
             this.labelItem9 = new DevComponents.DotNetBar.LabelItem();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.cbx3 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
@@ -65,14 +74,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelEx1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
@@ -83,8 +84,8 @@
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelEx1.Controls.Add(this.buttonX2);
-            this.panelEx1.Controls.Add(this.labelX1);
+            this.panelEx1.Controls.Add(this.btnAddStore);
+            this.panelEx1.Controls.Add(this.lblSelectedGoodCount);
             this.panelEx1.Controls.Add(this.bar1);
             this.panelEx1.Controls.Add(this.dataGridViewX1);
             this.panelEx1.Controls.Add(this.buttonX1);
@@ -109,6 +110,36 @@
             this.panelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelEx1.Style.GradientAngle = 90;
             this.panelEx1.TabIndex = 0;
+            // 
+            // btnAddStore
+            // 
+            this.btnAddStore.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAddStore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddStore.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAddStore.Location = new System.Drawing.Point(741, 93);
+            this.btnAddStore.Name = "btnAddStore";
+            this.btnAddStore.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnAddStore.Size = new System.Drawing.Size(67, 26);
+            this.btnAddStore.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAddStore.TabIndex = 15;
+            this.btnAddStore.Text = "加入门店";
+            this.btnAddStore.Click += new System.EventHandler(this.btnAddStore_Click);
+            // 
+            // lblSelectedGoodCount
+            // 
+            this.lblSelectedGoodCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSelectedGoodCount.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblSelectedGoodCount.BackgroundStyle.Class = "";
+            this.lblSelectedGoodCount.Location = new System.Drawing.Point(582, 91);
+            this.lblSelectedGoodCount.Name = "lblSelectedGoodCount";
+            this.lblSelectedGoodCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblSelectedGoodCount.Size = new System.Drawing.Size(153, 30);
+            this.lblSelectedGoodCount.TabIndex = 24;
+            this.lblSelectedGoodCount.Text = "已选中0个商品";
+            this.lblSelectedGoodCount.UseMnemonic = false;
             // 
             // bar1
             // 
@@ -229,8 +260,8 @@
             this.dataGridViewX1.AllowUserToAddRows = false;
             this.dataGridViewX1.AllowUserToDeleteRows = false;
             this.dataGridViewX1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
-            this.dataGridViewX1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            this.dataGridViewX1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewX1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -244,14 +275,14 @@
             this.Column2,
             this.Column4,
             this.Column3});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.HighlightSelectedColumnHeaders = false;
             this.dataGridViewX1.Location = new System.Drawing.Point(0, 124);
@@ -262,8 +293,67 @@
             this.dataGridViewX1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewX1.Size = new System.Drawing.Size(820, 207);
             this.dataGridViewX1.TabIndex = 22;
+            this.dataGridViewX1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewX1_CellClick);
+            this.dataGridViewX1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewX1_CellFormatting);
             this.dataGridViewX1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewX1_CellMouseDown);
+            this.dataGridViewX1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridViewX1_DataError);
             this.dataGridViewX1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Column1.DataPropertyName = "GoodsId";
+            this.Column1.FillWeight = 60F;
+            this.Column1.HeaderText = "商品Id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            this.Column1.Width = 60;
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.NullValue = "0";
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Column5.FalseValue = "0";
+            this.Column5.FillWeight = 60F;
+            this.Column5.HeaderText = "选中";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.TrueValue = "1";
+            this.Column5.Width = 60;
+            // 
+            // name
+            // 
+            this.name.DataPropertyName = "GoodsName";
+            this.name.HeaderText = "商品名称";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "StoreGoodsPrice";
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = "0.00";
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Column2.HeaderText = "商品零售价";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "GoodsUnit";
+            this.Column4.HeaderText = "单位";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "GoodUcode";
+            this.Column3.HeaderText = "规格";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // buttonX1
             // 
@@ -415,85 +505,6 @@
             this.ToolStripMenuItem2.Text = "加入门店";
             this.ToolStripMenuItem2.Click += new System.EventHandler(this.ToolStripMenuItem2_Click);
             // 
-            // labelX1
-            // 
-            this.labelX1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelX1.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX1.BackgroundStyle.Class = "";
-            this.labelX1.Location = new System.Drawing.Point(582, 91);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelX1.Size = new System.Drawing.Size(153, 30);
-            this.labelX1.TabIndex = 24;
-            this.labelX1.Text = "已选中0个商品";
-            this.labelX1.UseMnemonic = false;
-            // 
-            // buttonX2
-            // 
-            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX2.Location = new System.Drawing.Point(741, 93);
-            this.buttonX2.Name = "buttonX2";
-            this.buttonX2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.buttonX2.Size = new System.Drawing.Size(67, 26);
-            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX2.TabIndex = 15;
-            this.buttonX2.Text = "加入门店";
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "GoodsId";
-            this.Column1.HeaderText = "商品Id";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
-            // 
-            // Column5
-            // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Column5.FillWeight = 60F;
-            this.Column5.HeaderText = "选中";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column5.Width = 60;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "GoodsName";
-            this.name.HeaderText = "商品名称";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "StoreGoodsPrice";
-            dataGridViewCellStyle14.Format = "C2";
-            dataGridViewCellStyle14.NullValue = "0.00";
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle14;
-            this.Column2.HeaderText = "商品零售价";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "GoodsUnit";
-            this.Column4.HeaderText = "单位";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "GoodUcode";
-            this.Column3.HeaderText = "规格";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
             // PublicGoodLibraryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -546,8 +557,8 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem2;
-        private DevComponents.DotNetBar.ButtonX buttonX2;
-        private DevComponents.DotNetBar.LabelX labelX1;
+        private DevComponents.DotNetBar.ButtonX btnAddStore;
+        private DevComponents.DotNetBar.LabelX lblSelectedGoodCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;

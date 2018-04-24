@@ -102,11 +102,11 @@
     <Compile Include="ct\good\UpdateExamineGoodInfoForm.Designer.cs">
       <DependentUpon>UpdateExamineGoodInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ct\good\UpLoadGoodForm.cs">
+    <Compile Include="ct\good\UpLoadGoodCodeVerifyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ct\good\UpLoadGoodForm.Designer.cs">
-      <DependentUpon>UpLoadGoodForm.cs</DependentUpon>
+    <Compile Include="ct\good\UpLoadGoodCodeVerifyForm.Designer.cs">
+      <DependentUpon>UpLoadGoodCodeVerifyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ct\ScanCode\Guadan.cs">
       <SubType>Form</SubType>
@@ -310,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ct\good\UpdateExamineGoodInfoForm.resx">
       <DependentUpon>UpdateExamineGoodInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\good\UpLoadGoodCodeVerifyForm.resx">
+      <DependentUpon>UpLoadGoodCodeVerifyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\Order\Order.resx">
       <DependentUpon>Order.cs</DependentUpon>
