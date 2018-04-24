@@ -847,7 +847,7 @@ namespace ddjd_c.ct.ScanCode
         BindingList<vo.order.order> BList;
         //当前窗体的每页查询条数
         //int ct_pageSize = GlobalsInfo.pageSize;
-        int ct_pageSize = GlobalsInfo.pageSize;
+        int ct_pageSize = GlobalsInfo.pageSize + 10;
         //当前窗体已经查询到第几页
         int ct_pageNumber = GlobalsInfo.pageNumber;
         //数据总页数

@@ -62,6 +62,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="common\AllRequest\storeStatistics.cs" />
+    <Compile Include="common\MCI.cs" />
+    <Compile Include="common\update\ZipHelper.cs" />
+    <Compile Include="common\update\update.cs" />
     <Compile Include="ct\good\ExamineGoodtForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +119,12 @@
     </Compile>
     <Compile Include="ct\socketTest.Designer.cs">
       <DependentUpon>socketTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ct\storeStatistics\queryStoreTurnover.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ct\storeStatistics\queryStoreTurnover.Designer.cs">
+      <DependentUpon>queryStoreTurnover.cs</DependentUpon>
     </Compile>
     <Compile Include="ct\store\storeAndMember.cs">
       <SubType>Form</SubType>
@@ -254,6 +264,7 @@
     <Compile Include="service\login_service\loginService.cs" />
     <Compile Include="service\order_service\orderService.cs" />
     <Compile Include="service\scanCode_service\scanCodeService.cs" />
+    <Compile Include="service\storeStatistics_service\storeStatisticsService.cs" />
     <Compile Include="service\store_service\storeInfoService.cs" />
     <Compile Include="vo\addShopCar\addShopCarGoods.cs" />
     <Compile Include="vo\addShopCar\addShopCarReturnInfo.cs" />
@@ -265,6 +276,8 @@
     <Compile Include="vo\pageInfo.cs" />
     <Compile Include="vo\scanCode\queryGuadanNumber.cs" />
     <Compile Include="vo\serialPortInfo.cs" />
+    <Compile Include="vo\storeStatistics\queryStoreTransferaccountsrecord.cs" />
+    <Compile Include="vo\storeStatistics\queryStoreTurnover.cs" />
     <EmbeddedResource Include="ct\AboutUs\AboutUs.resx">
       <DependentUpon>AboutUs.cs</DependentUpon>
     </EmbeddedResource>
@@ -321,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ct\socketTest.resx">
       <DependentUpon>socketTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ct\storeStatistics\queryStoreTurnover.resx">
+      <DependentUpon>queryStoreTurnover.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ct\store\storeAndMember.resx">
       <DependentUpon>storeAndMember.cs</DependentUpon>

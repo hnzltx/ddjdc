@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2B9F74338CA2EA904E02468021855073"
+        "OwnerKey" = "8:_3BB82707894B4A62B270D794352DC382"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_3305E02033C8CB234C651CA9072AA05E"
         "OwnerKey" = "8:_3BB82707894B4A62B270D794352DC382"
         "MsmSig" = "8:_UNDEFINED"
@@ -45,8 +51,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1C457F88CA4070F43675D820A6E892A3"
+        "MsmKey" = "8:_DF589CCF49E340F7BF75CB3768258B04"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,13 +64,31 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9704D51B10ACDA656227BF4DCF8965B2"
+        "OwnerKey" = "8:_DF589CCF49E340F7BF75CB3768258B04"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1C457F88CA4070F43675D820A6E892A3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_3305E02033C8CB234C651CA9072AA05E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_9704D51B10ACDA656227BF4DCF8965B2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2B9F74338CA2EA904E02468021855073"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -85,6 +109,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -153,13 +193,34 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_1C457F88CA4070F43675D820A6E892A3"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_189EC99D78E2448BBDFA5E511416AF90"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2B9F74338CA2EA904E02468021855073"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:websocket-sharp-with-proxy-support, Version=1.0.2.28248, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                }
+            "SourcePath" = "8:websocket-sharp-with-proxy-support.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_189EC99D78E2448BBDFA5E511416AF90"
@@ -184,11 +245,6 @@
             "AssemblyAsmDisplayName" = "8:DevComponents.DotNetBar2, Version=8.3.0.7, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_3305E02033C8CB234C651CA9072AA05E"
-                    {
-                    "Name" = "8:DevComponents.DotNetBar2.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:DevComponents.DotNetBar2.dll"
             "TargetName" = "8:"
@@ -235,11 +291,6 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_9704D51B10ACDA656227BF4DCF8965B2"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -286,6 +337,17 @@
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_D488E8AA1EE24828A458EE5B98736AB8"
+                    {
+                    "Name" = "8:点单相邻"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_4A8FE2554D9E4C4EB203DCB6B65FE27C"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_DBEE4C5B7C9C426786FBDC8AC0ADEB59"
@@ -316,7 +378,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:点单相邻管理系统Test V1.0"
         "ProductCode" = "8:{872033E3-9C7E-4F95-AF60-8EFE2B5636DE}"
-        "PackageCode" = "8:{383B543B-EE06-4FFC-A104-FC19CA102FC0}"
+        "PackageCode" = "8:{289016EE-FB50-4838-842C-BB67D99E25AE}"
         "UpgradeCode" = "8:{A3CAD0E7-B5B9-4E55-B753-AF27F3C76C55}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -446,6 +508,20 @@
             "Transitive" = "11:FALSE"
             "Target" = "8:_3BB82707894B4A62B270D794352DC382"
             "Folder" = "8:_DBEE4C5B7C9C426786FBDC8AC0ADEB59"
+            "WorkingFolder" = "8:_189EC99D78E2448BBDFA5E511416AF90"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5BD5FCF08A174F8385DEAB1822A189E8"
+            {
+            "Name" = "8:点单相邻"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_3BB82707894B4A62B270D794352DC382"
+            "Folder" = "8:_D488E8AA1EE24828A458EE5B98736AB8"
             "WorkingFolder" = "8:_189EC99D78E2448BBDFA5E511416AF90"
             "Icon" = "8:"
             "Feature" = "8:"
@@ -872,6 +948,34 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{6E584732-BF41-4C67-ACD7-B1511F7466C1}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DF589CCF49E340F7BF75CB3768258B04"
+            {
+            "SourcePath" = "8:..\\update\\obj\\Debug\\update.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_189EC99D78E2448BBDFA5E511416AF90"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{E036F1D1-44C9-48DB-90DE-60B79F9C36AD}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

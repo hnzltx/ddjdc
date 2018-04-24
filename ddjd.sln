@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ddjd_c", "ddjd_c\ddjd_c.csp
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ddjd", "ddjd\ddjd.vdproj", "{0F0E548E-7D56-4173-98ED-2D25CEFA4C46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "update", "update\update.csproj", "{E036F1D1-44C9-48DB-90DE-60B79F9C36AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{6E584732-BF41-4C67-ACD7-B1511F7466C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F0E548E-7D56-4173-98ED-2D25CEFA4C46}.Debug|Any CPU.ActiveCfg = Debug
 		{0F0E548E-7D56-4173-98ED-2D25CEFA4C46}.Release|Any CPU.ActiveCfg = Release
+		{E036F1D1-44C9-48DB-90DE-60B79F9C36AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E036F1D1-44C9-48DB-90DE-60B79F9C36AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E036F1D1-44C9-48DB-90DE-60B79F9C36AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E036F1D1-44C9-48DB-90DE-60B79F9C36AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

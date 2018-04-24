@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using ddjd_c.ct;
 using System.Collections;
 using ddjd_c.http;
+using WebSocketSharp;
+using ddjd_c.common;
 
 namespace ddjd_c
 {
@@ -30,6 +32,9 @@ namespace ddjd_c
             baseHttp.ScanerEvent += Listener_ScanerEvent;
         }
 
+
+       
+
         private void indexName_Load(object sender, EventArgs e)
         {
             this.Text = this.Text + " --【" + GlobalsInfo.storeName + "】";
@@ -48,9 +53,10 @@ namespace ddjd_c
                     break;
                 }
             }
-
-
             loadAppConfig();
+
+            //打开webSocket
+            webSocketStart();
         }
 
         
@@ -434,6 +440,74 @@ namespace ddjd_c
         {
             ct.good.PromotionGoodForm frm = new ct.good.PromotionGoodForm();
             openWindow(frm,frm.Name);
+        }
+
+
+        #region webSocket 操作 ; 页面加载时调用
+        WebSocket ws;
+        private void webSocketStart()
+        {
+            //using (var ws = new WebSocket("ws://localhost/websocket/" + GlobalsInfo.storeId))
+            //{
+            //    ws.OnMessage += (sender, e) =>
+            //        Console.WriteLine("Laputa says: " + e.Data);
+
+            //    ws.Connect();
+            //    ws.Send("BALUS");
+            //}
+
+            //  "ws://192.168.199.215/websocket/" + GlobalsInfo.storeId
+            //  "ws://c.hnddjd.com/websocket/" + GlobalsInfo.storeId
+            ws = new WebSocket("ws://192.168.199.215/websocket/" + GlobalsInfo.storeId);
+
+            ws.OnOpen += (sender, e) => {
+                Console.WriteLine("连接成功!");
+            };
+
+            ws.OnError += (sender, e) => {
+                Console.WriteLine("发生错误!");
+            };
+
+            ws.OnMessage += (sender, e) =>
+            {
+                Console.WriteLine(e.Data);
+                new MCI().Play("xindingdan.mp3", 1);
+            };
+
+
+            ws.OnClose += (sender, e) => {
+                Console.WriteLine("连接关闭!" + e.Reason);
+            };
+
+            ws.Connect();
+
+
+        }
+        #endregion
+
+
+
+
+        /// <summary>
+        /// 首页窗体关闭时调用
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void indexName_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ws.Close();
+        }
+
+
+        /// <summary>
+        /// 营业额按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnStoreTurnover_Click(object sender, EventArgs e)
+        {
+            ct.storeStatistics.frmQueryStoreTurnover frm = new ct.storeStatistics.frmQueryStoreTurnover();
+            openWindow(frm, frm.Name);
         }
     }
 }

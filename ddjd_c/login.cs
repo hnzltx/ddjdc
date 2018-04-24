@@ -12,6 +12,7 @@ using ddjd_c.common;
 using ddjd_c.http;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using ddjd_c.common.update;
 
 namespace ddjd_c
 {
@@ -41,6 +42,8 @@ namespace ddjd_c
 
         private void login_Load(object sender, EventArgs e)
         {
+            checkUpdate();//检查更新
+
             //验证记住密码文件是否存在。如果存在就将账号密码拿出来
             if (utils.FileExists(accInfo)) {
                 JObject json =  utils.getFile(accInfo);
@@ -49,6 +52,30 @@ namespace ddjd_c
                 this.cbPs.Checked = true;
             }
         }
+
+        /// <summary>
+        /// 检查是否有更新，有就打开更新程序
+        /// </summary>
+        public void checkUpdate()
+        {
+            update app = new update(Application.ExecutablePath, "ddjdc");
+            try
+            {
+                if (app.IsUpdate && MessageBox.Show("检查到新版本，是否更新？", "准备更新", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    //打开同目录下的update.exe
+                    System.Diagnostics.Process.Start(Application.StartupPath + @"\update.exe", System.IO.Directory.GetCurrentDirectory());
+                    
+                    System.Environment.Exit(System.Environment.ExitCode);   //结束主线程
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
 
         /// <summary>
         /// 页面键盘捕捉
