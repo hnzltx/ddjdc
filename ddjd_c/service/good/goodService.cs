@@ -129,10 +129,10 @@ namespace ddjd_c.service.good
         /// <summary>
         /// 审核失败，修改审核商品
         /// </summary>
-        /// <param name="resultDelegate"></param>
+        /// 
         /// <param name="dic"></param>
-        public static void UpdateExamineGoodsByStoreId(ResponseResultDelegate resultDelegate, Dictionary<string, object> dic){
-            baseHttp.PostStrFunction(goodRequest.UpdateExamineGoodsByStoreId,dic,resultDelegate);
+        public static JObject UpdateExamineGoodsByStoreId(Dictionary<string, object> dic){
+            return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.UpdateExamineGoodsByStoreId, dic));
         }
 
         /// <summary>
@@ -180,6 +180,14 @@ namespace ddjd_c.service.good
         public static JObject QueryGoodsCodeIsExist(Dictionary<string, object> dic)
         {
             return JsonHelper.getJObject(baseHttp.GetStrFunction(goodRequest.QueryGoodsCodeIsExist.ToGetRequestURL(dic)));
+        }
+
+        /// <summary>
+        /// 店铺上传商品 （待审核）
+        /// </summary>
+        public static JObject StoreUploadGoodsInfo(Dictionary<string, object> dic)
+        {
+            return JsonHelper.getJObject(baseHttp.PostStrFunction(goodRequest.StoreUploadGoodsInfo, dic));
         }
     }
 }

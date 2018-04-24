@@ -87,6 +87,8 @@ namespace ddjd_c.ct.good
 
                 }
             }
+            //关闭键盘钩子
+            listener.Stop();
             SetTextCode();
             ResponseResult result = new ResponseResult();
             if (exist)//店铺已拥有
@@ -115,14 +117,15 @@ namespace ddjd_c.ct.good
         /// </summary>
         private void PushUpLoadGood()
         {
-            SetTextCode();
+            
             UpdateExamineGoodInfoForm frm = new UpdateExamineGoodInfoForm();
+            frm.Tag = this.txtCode.Text;
             frm.ShowDialog();
+            SetTextCode();
         }
         private void SetTextCode()
         {
             this.txtCode.Text = "";
-            this.txtCode.Focus();
         }
         /// <summary>
         /// 页面关闭

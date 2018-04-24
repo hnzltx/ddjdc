@@ -335,68 +335,84 @@ namespace ddjd_c.http
         /// <param name="files"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static string HttpUploadFile(string url, string[] files, NameValueCollection data)
+        public static string HttpUploadFile(string url, string fileKeyName,
+                                    string filePath, NameValueCollection stringDict)
         {
-            var encoding = Encoding.UTF8;
-            string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
-            byte[] boundarybytes = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
-            byte[] endbytes = Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+            string responseContent;
+            var memStream = new MemoryStream();
+            var webRequest = (HttpWebRequest)WebRequest.Create(url);
+            // 边界符  
+            var boundary = "---------------" + DateTime.Now.Ticks.ToString("x");
+            // 边界符  
+            var beginBoundary = Encoding.ASCII.GetBytes("--" + boundary + "\r\n");
+            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            // 最后的结束符  
+            var endBoundary = Encoding.ASCII.GetBytes("--" + boundary + "--\r\n");
 
-            //1.HttpWebRequest
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.ContentType = "multipart/form-data; boundary=" + boundary;
-            request.Method = "POST";
-            request.KeepAlive = true;
-            request.Credentials = CredentialCache.DefaultCredentials;
-
-            using (Stream stream = request.GetRequestStream())
-            {
-                //1.1 key/value
-                string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
-                if (data != null)
-                {
-                    foreach (string key in data.Keys)
-                    {
-                        stream.Write(boundarybytes, 0, boundarybytes.Length);
-                        string formitem = string.Format(formdataTemplate, key, data[key]);
-                        byte[] formitembytes = encoding.GetBytes(formitem);
-                        stream.Write(formitembytes, 0, formitembytes.Length);
-                    }
-                }
-
-                //1.2 file
-                string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: application/octet-stream\r\n\r\n";
-                byte[] buffer = new byte[4096];
-                int bytesRead = 0;
-                for (int i = 0; i < files.Length; i++)
-                {
-                    stream.Write(boundarybytes, 0, boundarybytes.Length);
-                    string header = string.Format(headerTemplate, "file" + i, Path.GetFileName(files[i]));
-                    byte[] headerbytes = encoding.GetBytes(header);
-                    stream.Write(headerbytes, 0, headerbytes.Length);
-                    using (FileStream fileStream = new FileStream(files[i], FileMode.Open, FileAccess.Read))
-                    {
-                        while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
-                        {
-                            stream.Write(buffer, 0, bytesRead);
-                        }
-                    }
-                }
-
-                //1.3 form end
-                stream.Write(endbytes, 0, endbytes.Length);
-                
-            }
-            //2.WebResponse
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            // 设置属性  
+            webRequest.Method = "POST";
+            webRequest.Timeout = 300000;
+            webRequest.ContentType = "multipart/form-data; boundary=" + boundary;
             
-            using (StreamReader stream = new StreamReader(response.GetResponseStream()))
+            // 写入文件  
+            const string filePartHeader =
+                "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\n" +
+                 "Content-Type: application/octet-stream\r\n\r\n";
+            var header = string.Format(filePartHeader, fileKeyName, filePath);
+            var headerbytes = Encoding.UTF8.GetBytes(header);
+
+            memStream.Write(beginBoundary, 0, beginBoundary.Length);
+            memStream.Write(headerbytes, 0, headerbytes.Length);
+
+            var buffer = new byte[1024];
+            int bytesRead; // =0  
+
+            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
             {
-                var str = stream.ReadToEnd();
-                Console.Write(str);
-                return stream.ReadToEnd();
-                 
+                memStream.Write(buffer, 0, bytesRead);
             }
+
+            // 写入字符串的Key  
+            var stringKeyHeader = "\r\n--" + boundary +
+                                   "\r\nContent-Disposition: form-data; name=\"{0}\"" +
+                                   "\r\n\r\n{1}\r\n";
+
+            foreach (byte[] formitembytes in from string key in stringDict.Keys
+                                             select string.Format(stringKeyHeader, key, stringDict[key])
+                                                 into formitem
+                                             select Encoding.UTF8.GetBytes(formitem))
+            {
+                memStream.Write(formitembytes, 0, formitembytes.Length);
+            }
+
+            // 写入最后的结束边界符  
+            memStream.Write(endBoundary, 0, endBoundary.Length);
+
+            webRequest.ContentLength = memStream.Length;
+
+            var requestStream = webRequest.GetRequestStream();
+
+            memStream.Position = 0;
+            var tempBuffer = new byte[memStream.Length];
+            memStream.Read(tempBuffer, 0, tempBuffer.Length);
+            memStream.Close();
+
+            requestStream.Write(tempBuffer, 0, tempBuffer.Length);
+            requestStream.Close();
+
+            var httpWebResponse = (HttpWebResponse)webRequest.GetResponse();
+
+            using (var httpStreamReader = new StreamReader(httpWebResponse.GetResponseStream(),
+                                                            Encoding.GetEncoding("utf-8")))
+            {
+                responseContent = httpStreamReader.ReadToEnd();
+            }
+
+            fileStream.Close();
+            httpWebResponse.Close();
+            webRequest.Abort();
+
+            return responseContent;
         }
     }
     

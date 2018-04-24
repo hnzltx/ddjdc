@@ -38,14 +38,24 @@ namespace ddjd_c.ct.good
         public UpdateExamineGoodInfoForm()
         {
             InitializeComponent();
+            
         }
 
         private void UpdateExamineGoodInfoForm_Load(object sender, EventArgs e)
         {
             ///上传图片 用到
             this.AllowDrop = true;
+            if (entity == null)
+            {
+                this.Name = "商品上传";
+                entity = new goodEntity();
+                entity.GoodsCode = this.Tag.ToString();
+            }
             LoadCategory();
             LoadData();
+            ///隐藏图片上传进度条
+            this.progressBar.Visible = false;
+            this.lblState.Visible = false;
         }
         /// <summary>
         /// 加载数据
@@ -263,6 +273,11 @@ namespace ddjd_c.ct.good
                 MessageBox.Show("请选择商品分类");
                 return;
             }
+            if (entity.GoodsPic.StrIsNull())
+            {
+                MessageBox.Show("请上传图片");
+                return;
+            }
             Dictionary<string, object> dic = new Dictionary<string, object>();
             dic.Add("examineGoodsId", entity.ExamineGoodsId);
             dic.Add("goodsCode", entity.GoodsCode);
@@ -282,7 +297,24 @@ namespace ddjd_c.ct.good
             dic.Add("offlineStock", offlineStock);
             dic.Add("purchasePrice", purchasePrice);
             dic.Add("goodsMixed",this.txtGoodsMixed.Text);
-            UpdatexEamineGoodInfo(dic);
+            if(this.Tag == null)
+            {
+                
+                UpdatexEamineGoodInfo(dic);
+            }
+            else
+            {
+                StoreUploadGoodsInfo(dic);
+            }
+            
+        }
+        /// <summary>
+        /// 店铺上传商品
+        /// </summary>
+        private void StoreUploadGoodsInfo(Dictionary<string, object> dic)
+        {
+            JObject obj=service.good.goodService.StoreUploadGoodsInfo(dic);
+            Callback(obj);
         }
         /// <summary>
         /// 修改审核信息
@@ -290,36 +322,19 @@ namespace ddjd_c.ct.good
         /// <param name="dic"></param>
         private void UpdatexEamineGoodInfo(Dictionary<string, object> dic)
         {
-            this.btnSubmit.Text = "正在提交...";
-            this.btnSubmit.Enabled = false;
-            ResponseResultDelegate resultDelegate = UpdatexEamineGoodCallback;
-            service.good.goodService.UpdateExamineGoodsByStoreId(resultDelegate, dic);
-        }
-        /// <summary>
-        /// 请求回调
-        /// </summary>
-        /// <param name="result"></param>
-        /// <param name="sc"></param>
-        private void UpdatexEamineGoodCallback(ResponseResult result,System.Threading.SynchronizationContext sc)
-        {
-            if (result.Error != null)
-            {
-                MessageBox.Show(result.Error);
-                return;
-            }
-            sc.Post(UpdatexEamineGoodPostCallback, result);
             
-           
+            JObject obj=service.good.goodService.UpdateExamineGoodsByStoreId(dic);
+            Callback(obj);
         }
+        
         /// <summary>
-        /// 异步线程同步
+        /// 结果返回
         /// </summary>
         /// <param name="obj"></param>
-        private void UpdatexEamineGoodPostCallback(object obj)
+        private void Callback(JObject obj)
         {
-            this.btnSubmit.Text = "提交";
-            this.btnSubmit.Enabled = true;
-            string success = ((ResponseResult)obj).ToObj()["success"].ToString();
+            
+            string success = obj["success"].ToString();
             switch (success)
             {
                 case "success":
@@ -334,6 +349,9 @@ namespace ddjd_c.ct.good
                     break;
                 case "goodsPriceOrpurchasePriceTypeError":
                     MessageBox.Show("商品价格或进货价填写有误");
+                    break;
+                case "examineExist":
+                    MessageBox.Show("此商品正在审核中");
                     break;
                 default:
                     MessageBox.Show("修改失败");
@@ -389,9 +407,13 @@ namespace ddjd_c.ct.good
 
         #endregion
 
-       
 
-
+        #region 上传图片
+        /// <summary>
+        /// 上传图片
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pbGoodPic_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -423,15 +445,29 @@ namespace ddjd_c.ct.good
                         string imageUrl = openFileDialog.FileName;
                         //  是指XXX.jpg
                         string picpath = openFileDialog.SafeFileName;
+                        ///显示图片上传进度条
+                        this.progressBar.Visible = true;
+                        this.lblState.Visible = true;
+                        var result=Upload_Request(http.baseHttp.getDdjdcUrl() + "upload/start?path=goodsImages", imageUrl, picpath);
+                        if (result.Error != null)
+                        {
+                            MessageBox.Show(result.Error);
+                            return;
+                        }
+                        var obj = result.ToObj();
+                        string success = obj["success"].ToString();
+                        if (success.Equals("success"))
+                        {
+                            entity.GoodsPic = obj["path"].ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("上传图片失败");
+                            return;
+                        }
 
-                        NameValueCollection data = new NameValueCollection();
-                        data.Add("path","goodsImages");
-
-                        //Upload_Request(http.baseHttp.getDdjdcUrl() + "upload/start", imageUrl, picpath);
-                        http.baseHttp.HttpUploadFile(http.baseHttp.getDdjdcUrl()+ "upload/start", new string[] { imageUrl}, data);
 
 
-                       
                     }
                 }
             }
@@ -446,9 +482,9 @@ namespace ddjd_c.ct.good
         /// <param name="saveName">文件上传后的名称</param>  
         /// <param name="progressBar">上传进度条</param>  
         /// <returns>成功返回1，失败返回0</returns>  
-        private int Upload_Request(string address, string fileNamePath, string saveName)
+        private ResponseResult Upload_Request(string address, string fileNamePath, string saveName)
         {
-            int returnValue = 0;
+            var result = new ResponseResult();
 
             // 要上传的文件  
             FileStream fs = new FileStream(fileNamePath, FileMode.Open, FileAccess.Read);
@@ -456,24 +492,23 @@ namespace ddjd_c.ct.good
 
             //时间戳  
             string strBoundary = "----------" + DateTime.Now.Ticks.ToString("x");
-            byte[] boundaryBytes = Encoding.ASCII.GetBytes("/r/n--" + strBoundary + "/r/n");
-            
-            //请求头部信息  
+            byte[] boundaryBytes = Encoding.ASCII.GetBytes("\r\n--" + strBoundary + "--\r\n");
+
+            //请求头部信息 
             StringBuilder sb = new StringBuilder();
             sb.Append("--");
             sb.Append(strBoundary);
-            sb.Append("/r/n");
-            sb.Append("Content-Disposition: form-data; name=/");  
+            sb.Append("\r\n");
+            sb.Append("Content-Disposition: form-data; name=\"");
             sb.Append("file");
-            sb.Append("/filename=/");
+            sb.Append("\"; filename=\"");
             sb.Append(saveName);
-            sb.Append("/path=/");
-            sb.Append("goodsImages");  
-            sb.Append("/r/n");
+            sb.Append("\"");
+            sb.Append("\r\n");
             sb.Append("Content-Type: ");
             sb.Append("application/octet-stream");
-            sb.Append("/r/n");
-            sb.Append("/r/n");
+            sb.Append("\r\n");
+            sb.Append("\r\n");
             string strPostHeader = sb.ToString();
             byte[] postHeaderBytes = Encoding.UTF8.GetBytes(strPostHeader);
 
@@ -492,9 +527,9 @@ namespace ddjd_c.ct.good
             httpReq.ContentLength = length;
             try
             {
-                //progressBar.Maximum = int.MaxValue;
-                //progressBar.Minimum = 0;
-                //progressBar.Value = 0;
+                progressBar.Maximum = int.MaxValue;
+                progressBar.Minimum = 0;
+                progressBar.Value = 0;
 
                 //每次上传4k  
                 int bufferLength = 4096;
@@ -513,20 +548,10 @@ namespace ddjd_c.ct.good
                 {
                     postStream.Write(buffer, 0, size);
                     offset += size;
-                    //progressBar.Value = (int)(offset * (int.MaxValue / length));
+                    progressBar.Value = (int)(offset * (int.MaxValue / length));
                     TimeSpan span = DateTime.Now - startTime;
                     double second = span.TotalSeconds;
-                    //lblTime.Text = "已用时：" + second.ToString("F2") + "秒";
-                    if (second > 0.001)
-                    {
-                        //lblSpeed.Text = " 平均速度：" + (offset / 1024 / second).ToString("0.00") + "KB/秒";
-                    }
-                    else
-                    {
-                        //lblSpeed.Text = " 正在连接…";
-                    }
-                    //lblState.Text = "已上传：" + (offset * 100.0 / length).ToString("F2") + "%";
-                    //lblSize.Text = (offset / 1048576.0).ToString("F2") + "M/" + (fileLength / 1048576.0).ToString("F2") + "M";
+                    lblState.Text = "已上传：" + (offset * 100.0 / length).ToString("F2") + "%";
                     Application.DoEvents();
                     size = r.Read(buffer, 0, bufferLength);
                 }
@@ -543,28 +568,22 @@ namespace ddjd_c.ct.good
                 String sReturnString = sr.ReadLine();
                 s.Close();
                 sr.Close();
-                if (sReturnString == "Success")
-                {
-                    returnValue = 1;
-                }
-                else if (sReturnString == "Error")
-                {
-                    returnValue = 0;
-                }
+                result.JsonStr = sReturnString;
 
-            }
-            catch
+            }catch(Exception e)
             {
-                returnValue = 0;
+                result.Error = e.Message;
             }
             finally
             {
                 fs.Close();
                 r.Close();
+                lblState.Text = "已上传:100%";
             }
 
-            return returnValue;
+            return result;
         }
+        #endregion
 
     }
 }

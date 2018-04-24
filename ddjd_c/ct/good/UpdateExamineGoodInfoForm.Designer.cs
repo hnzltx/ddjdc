@@ -67,6 +67,8 @@
             this.txtGoodUnit = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtGoodName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.lblState = new System.Windows.Forms.Label();
+            this.progressBar = new DevComponents.DotNetBar.Controls.ProgressBarX();
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodPic)).BeginInit();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +77,7 @@
             // 
             this.btnSubmit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSubmit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnSubmit.Location = new System.Drawing.Point(16, 486);
+            this.btnSubmit.Location = new System.Drawing.Point(16, 468);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(187, 40);
             this.btnSubmit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -329,6 +331,8 @@
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx1.Controls.Add(this.progressBar);
+            this.panelEx1.Controls.Add(this.lblState);
             this.panelEx1.Controls.Add(this.cbx3);
             this.panelEx1.Controls.Add(this.cbx2);
             this.panelEx1.Controls.Add(this.cbx1);
@@ -563,6 +567,28 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
+            // lblState
+            // 
+            this.lblState.AutoSize = true;
+            this.lblState.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblState.Location = new System.Drawing.Point(171, 440);
+            this.lblState.Name = "lblState";
+            this.lblState.Size = new System.Drawing.Size(35, 10);
+            this.lblState.TabIndex = 52;
+            this.lblState.Text = "label1";
+            // 
+            // progressBar
+            // 
+            // 
+            // 
+            // 
+            this.progressBar.BackgroundStyle.Class = "";
+            this.progressBar.Location = new System.Drawing.Point(16, 440);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(149, 12);
+            this.progressBar.TabIndex = 53;
+            this.progressBar.Text = "progressBarX1";
+            // 
             // UpdateExamineGoodInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -579,6 +605,7 @@
             this.Load += new System.EventHandler(this.UpdateExamineGoodInfoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodPic)).EndInit();
             this.panelEx1.ResumeLayout(false);
+            this.panelEx1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -624,5 +651,7 @@
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbx2;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbx1;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Label lblState;
+        private DevComponents.DotNetBar.Controls.ProgressBarX progressBar;
     }
 }
