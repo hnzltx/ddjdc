@@ -18,9 +18,14 @@ namespace ddjd_c.ct.good
         /// 加入门店成功回调
         /// </summary>
         public Action<String> action;
-        public PublicGoodLibraryDetailForm()
+        /// <summary>
+        /// 条码验证窗体
+        /// </summary>
+        private UpLoadGoodCodeVerifyForm frm;
+        public PublicGoodLibraryDetailForm(UpLoadGoodCodeVerifyForm frm=null)
         {
             InitializeComponent();
+            this.frm = frm;
         }
 
         private void PublicGoodLibraryDetailForm_Load(object sender, EventArgs e)
@@ -128,7 +133,8 @@ namespace ddjd_c.ct.good
                 case "success":
                     if (MessageBox.Show("加入门店成功", "确定", MessageBoxButtons.OK) == DialogResult.OK)
                     {
-                        action(this.Tag.ToString());
+                        action?.Invoke(this.Tag.ToString());
+                        
                         this.Close();
                     }
                     break;
@@ -179,6 +185,11 @@ namespace ddjd_c.ct.good
                 e.KeyChar = (char)0;
             }
 
+        }
+
+        private void PublicGoodLibraryDetailForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            frm?.LoadScanerEvent();
         }
     }
 }

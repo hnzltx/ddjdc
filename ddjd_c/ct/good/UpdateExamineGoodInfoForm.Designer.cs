@@ -51,6 +51,8 @@
             this.txtPurchasePrice = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
+            this.progressBar = new DevComponents.DotNetBar.Controls.ProgressBarX();
+            this.lblState = new System.Windows.Forms.Label();
             this.cbx3 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cbx2 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cbx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -67,8 +69,6 @@
             this.txtGoodUnit = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.txtGoodName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.lblState = new System.Windows.Forms.Label();
-            this.progressBar = new DevComponents.DotNetBar.Controls.ProgressBarX();
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodPic)).BeginInit();
             this.panelEx1.SuspendLayout();
             this.SuspendLayout();
@@ -381,6 +381,28 @@
             this.panelEx1.Style.GradientAngle = 90;
             this.panelEx1.TabIndex = 1;
             // 
+            // progressBar
+            // 
+            // 
+            // 
+            // 
+            this.progressBar.BackgroundStyle.Class = "";
+            this.progressBar.Location = new System.Drawing.Point(16, 440);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(149, 12);
+            this.progressBar.TabIndex = 53;
+            this.progressBar.Text = "progressBarX1";
+            // 
+            // lblState
+            // 
+            this.lblState.AutoSize = true;
+            this.lblState.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblState.Location = new System.Drawing.Point(171, 440);
+            this.lblState.Name = "lblState";
+            this.lblState.Size = new System.Drawing.Size(35, 10);
+            this.lblState.TabIndex = 52;
+            this.lblState.Text = "label1";
+            // 
             // cbx3
             // 
             this.cbx3.DisplayMember = "Text";
@@ -567,28 +589,6 @@
             // 
             this.openFileDialog.FileName = "openFileDialog";
             // 
-            // lblState
-            // 
-            this.lblState.AutoSize = true;
-            this.lblState.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblState.Location = new System.Drawing.Point(171, 440);
-            this.lblState.Name = "lblState";
-            this.lblState.Size = new System.Drawing.Size(35, 10);
-            this.lblState.TabIndex = 52;
-            this.lblState.Text = "label1";
-            // 
-            // progressBar
-            // 
-            // 
-            // 
-            // 
-            this.progressBar.BackgroundStyle.Class = "";
-            this.progressBar.Location = new System.Drawing.Point(16, 440);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(149, 12);
-            this.progressBar.TabIndex = 53;
-            this.progressBar.Text = "progressBarX1";
-            // 
             // UpdateExamineGoodInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -602,6 +602,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "修改审核商品信息";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UpdateExamineGoodInfoForm_FormClosing);
             this.Load += new System.EventHandler(this.UpdateExamineGoodInfoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodPic)).EndInit();
             this.panelEx1.ResumeLayout(false);

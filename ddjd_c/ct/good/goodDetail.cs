@@ -23,11 +23,16 @@ namespace ddjd_c.ct.good
         public event UpdateGoodListDelegate UpdateGoodList;
         private int? storeAndGoodsId;
         private int rowIndex;
+        /// <summary>
+        /// 条码验证窗体
+        /// </summary>
+        private UpLoadGoodCodeVerifyForm frm;
         
-        public goodDetail(int? id, int rowIndex)
+        public goodDetail(int? id, int rowIndex,UpLoadGoodCodeVerifyForm frm=null)
         {
             this.storeAndGoodsId = id;
             this.rowIndex = rowIndex;
+            this.frm = frm;
             InitializeComponent();
         }
 
@@ -142,6 +147,7 @@ namespace ddjd_c.ct.good
                     if (MessageBox.Show("修改成功", "确定", MessageBoxButtons.OK) == DialogResult.OK)
                     {
                         UpdateGoodList?.Invoke(dic["goodsFlag"].ToString().ToInt(), rowIndex);
+                        
                         this.Close();
                     }
                     break;
@@ -190,6 +196,11 @@ namespace ddjd_c.ct.good
                 e.KeyChar = (char)0;
             }
 
+        }
+
+        private void goodDetail_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            frm?.LoadScanerEvent();
         }
     }
 }

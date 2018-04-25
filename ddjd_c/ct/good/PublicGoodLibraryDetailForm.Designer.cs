@@ -523,6 +523,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "";
             this.Text = "平台商品详情";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PublicGoodLibraryDetailForm_FormClosing);
             this.Load += new System.EventHandler(this.PublicGoodLibraryDetailForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodPic)).EndInit();
             this.panelEx1.ResumeLayout(false);

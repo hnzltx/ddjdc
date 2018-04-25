@@ -35,10 +35,11 @@ namespace ddjd_c.ct.good
             this.entity=entity;
             InitializeComponent();
         }
-        public UpdateExamineGoodInfoForm()
+        private UpLoadGoodCodeVerifyForm frm;
+        public UpdateExamineGoodInfoForm(UpLoadGoodCodeVerifyForm frm)
         {
             InitializeComponent();
-            
+            this.frm = frm;
         }
 
         private void UpdateExamineGoodInfoForm_Load(object sender, EventArgs e)
@@ -341,6 +342,7 @@ namespace ddjd_c.ct.good
                     if(MessageBox.Show("商品成功提交审核；请等待审核结果")== DialogResult.OK)
                     {
                         action?.Invoke(rowIndex);
+                        
                         this.Close();
                     }
                     break;
@@ -585,5 +587,9 @@ namespace ddjd_c.ct.good
         }
         #endregion
 
+        private void UpdateExamineGoodInfoForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            frm?.LoadScanerEvent();
+        }
     }
 }

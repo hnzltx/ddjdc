@@ -93,6 +93,7 @@
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(164, 21);
             this.txtCode.TabIndex = 1;
+            this.txtCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNumber_KeyPress);
             // 
             // labelX1
             // 

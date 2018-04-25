@@ -20,14 +20,19 @@ namespace ddjd_c.ct.good
         public UpLoadGoodCodeVerifyForm()
         {
             InitializeComponent();
+            LoadScanerEvent();
+        }
+        /// <summary>
+        /// 监听键盘钩子
+        /// </summary>
+        public void LoadScanerEvent()
+        {
             listener.ScanerEvent += Listener_ScanerEvent;
         }
-
         private void Listener_ScanerEvent(KeyboardHookLib.ScanerCodes codes)
-        {
-            //键盘钩子获取的条码，赋值到文本框中
-            txtCode.Text = codes.Result;
-
+        {   
+               //键盘钩子获取的条码，赋值到文本框中
+              txtCode.Text = codes.Result;
         }
 
        
@@ -53,6 +58,7 @@ namespace ddjd_c.ct.good
                     QueryGoodsCodeIsExist();
                     return true;
                 default:
+      
                     return base.ProcessCmdKey(ref msg, keyData);
             }
         }
@@ -87,8 +93,7 @@ namespace ddjd_c.ct.good
 
                 }
             }
-            //关闭键盘钩子
-            listener.Stop();
+            listener.ScanerEvent -= Listener_ScanerEvent;
             SetTextCode();
             ResponseResult result = new ResponseResult();
             if (exist)//店铺已拥有
@@ -106,7 +111,7 @@ namespace ddjd_c.ct.good
             {
                 result.JsonStr = obj["queryGoodsInfo"].ToString();
                 var goodEntity = result.ToEntity<model.good.goodEntity>();
-                PublicGoodLibraryDetailForm frm = new PublicGoodLibraryDetailForm();
+                PublicGoodLibraryDetailForm frm = new PublicGoodLibraryDetailForm(this);
                 frm.Tag = goodEntity.GoodsId;
                 frm.ShowDialog();
             }
@@ -117,8 +122,8 @@ namespace ddjd_c.ct.good
         /// </summary>
         private void PushUpLoadGood()
         {
-            
-            UpdateExamineGoodInfoForm frm = new UpdateExamineGoodInfoForm();
+            listener.ScanerEvent -= Listener_ScanerEvent;
+            UpdateExamineGoodInfoForm frm = new UpdateExamineGoodInfoForm(this);
             frm.Tag = this.txtCode.Text;
             frm.ShowDialog();
             SetTextCode();
@@ -142,5 +147,21 @@ namespace ddjd_c.ct.good
         {
             QueryGoodsCodeIsExist();
         }
+        /// <summary>
+        /// 只能输入数字
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != '\b')//这是允许输入退格键
+            {
+                if ((e.KeyChar < '0') || (e.KeyChar > '9'))//这是允许输入0-9数字
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
     }
 }

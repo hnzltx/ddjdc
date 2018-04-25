@@ -522,6 +522,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "修改商品信息";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.goodDetail_FormClosing);
             this.Load += new System.EventHandler(this.goodDetail_Load);
             this.panelEx1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbGoodPic)).EndInit();
