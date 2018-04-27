@@ -40,9 +40,13 @@ namespace ddjd_c.ct.Set
                 if (allPort.Length <= 0)
                 {
                     MessageBox.Show("没有检测到收银秤!");
+                    //没有端口号，设置个默认的
+                    cmbPortList.Text = "COM4";
                 }
-
-                cmbPortList.DataSource = allPort;
+                else {
+                    cmbPortList.DataSource = allPort;
+                }
+                
 
                 //选中第一个波特率
                 cmbBaudRate.SelectedIndex = 0;

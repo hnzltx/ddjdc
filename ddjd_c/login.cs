@@ -13,6 +13,7 @@ using ddjd_c.http;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using ddjd_c.common.update;
+using ddjd_c.ct;
 
 namespace ddjd_c
 {
@@ -42,7 +43,10 @@ namespace ddjd_c
 
         private void login_Load(object sender, EventArgs e)
         {
-            checkUpdate();//检查更新
+            this.Text = "点单相邻收银管理系统 -- v" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            
+            
+            //checkUpdate();//检查更新
 
             //验证记住密码文件是否存在。如果存在就将账号密码拿出来
             if (utils.FileExists(accInfo)) {
@@ -52,6 +56,9 @@ namespace ddjd_c
                 this.cbPs.Checked = true;
             }
         }
+        
+
+
 
         /// <summary>
         /// 检查是否有更新，有就打开更新程序
@@ -67,6 +74,7 @@ namespace ddjd_c
                     System.Diagnostics.Process.Start(Application.StartupPath + @"\update.exe", System.IO.Directory.GetCurrentDirectory());
                     
                     System.Environment.Exit(System.Environment.ExitCode);   //结束主线程
+                   
                 }
             }
             catch (Exception ex)
@@ -75,7 +83,9 @@ namespace ddjd_c
             }
         }
 
+        
 
+      
 
         /// <summary>
         /// 页面键盘捕捉
