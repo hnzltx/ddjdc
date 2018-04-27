@@ -99,12 +99,6 @@ namespace ddjd_c.ct.ScanCode
                 }
             }
 
-            //加载收银秤配置
-            if (!loadCashierScaleConfig())
-            {
-                return;
-            }
-
             //加载分页配置
             loagPageConfig();
 
@@ -746,38 +740,7 @@ namespace ddjd_c.ct.ScanCode
 
 
 
-
-
-        /// <summary>
-        /// 加载收银秤的配置
-        /// </summary>
-        /// <returns></returns>
-        private bool loadCashierScaleConfig() {
-
-            if (common.utils.FileExists("SetCashierScale.json"))
-            {
-                JObject json = common.utils.getFile("SetCashierScale.json");
-                if (json != null)
-                {
-                    db.SetCashierScale.SetCashierScale.PortName = json["PortName"].ToString();
-                    db.SetCashierScale.SetCashierScale.BaudRate = int.Parse(json["BaudRate"].ToString());
-                    db.SetCashierScale.SetCashierScale.DataBits = int.Parse(json["DataBits"].ToString());
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show("您可能还未设置收银秤,请先去设置!");
-                    this.Close();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("您可能还未设置收银秤,请先去设置!");
-                this.Close();
-                return false;
-            }
-        }
+        
 
         /// <summary>
         /// 点击按钮，删除某一商品

@@ -13,6 +13,7 @@ using System.Collections;
 using ddjd_c.http;
 using WebSocketSharp;
 using ddjd_c.common;
+using Newtonsoft.Json.Linq;
 
 namespace ddjd_c
 {
@@ -221,10 +222,48 @@ namespace ddjd_c
         /// <param name="e"></param>
         private void btnScanCode_Click(object sender, EventArgs e)
         {
+            //加载收银秤配置
+            if (!loadCashierScaleConfig())
+            {
+                return;
+            }
             ct.ScanCode.frmScanCode frm = new ct.ScanCode.frmScanCode();
             frm.Show();
             //openWindow(frm, frm.Name);
         }
+
+
+
+        /// <summary>
+        /// 加载收银秤的配置
+        /// </summary>
+        /// <returns></returns>
+        private bool loadCashierScaleConfig()
+        {
+
+            if (common.utils.FileExists("SetCashierScale.json"))
+            {
+                JObject json = common.utils.getFile("SetCashierScale.json");
+                if (json != null)
+                {
+                    db.SetCashierScale.SetCashierScale.PortName = json["PortName"].ToString();
+                    db.SetCashierScale.SetCashierScale.BaudRate = int.Parse(json["BaudRate"].ToString());
+                    db.SetCashierScale.SetCashierScale.DataBits = int.Parse(json["DataBits"].ToString());
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("您可能还未设置收银秤,请先去设置!");
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("您可能还未设置收银秤,请先去设置!");
+                return false;
+            }
+        }
+
 
         /// <summary>
         /// 跳转到关于我们界面
@@ -448,6 +487,7 @@ namespace ddjd_c
         WebSocket ws;
         private void webSocketStart()
         {
+            
             //using (var ws = new WebSocket("ws://localhost/websocket/" + GlobalsInfo.storeId))
             //{
             //    ws.OnMessage += (sender, e) =>
@@ -460,6 +500,9 @@ namespace ddjd_c
             //  "ws://192.168.199.215/websocket/" + GlobalsInfo.storeId
             //  "ws://c.hnddjd.com/websocket/" + GlobalsInfo.storeId
             ws = new WebSocket("ws://192.168.199.215/websocket/" + GlobalsInfo.storeId);
+
+            //只记录错误信息
+            ws.Log.Level = LogLevel.Error;
 
             ws.OnOpen += (sender, e) => {
                 Console.WriteLine("连接成功!");

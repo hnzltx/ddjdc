@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("ddjd_c")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("点单相邻 - 收银管理系统")]
+[assembly: AssemblyDescription("点单相邻 - 收银管理系统")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("湖南纵览点单网络科技有限公司")]
 [assembly: AssemblyProduct("ddjd_c")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2018")]
+[assembly: AssemblyCopyright("Copyright © 湖南纵览点单网络科技有限公司")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

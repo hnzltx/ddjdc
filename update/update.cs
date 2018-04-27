@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -51,11 +53,29 @@ namespace update
 
             if (e.ProgressPercentage == 100)
             {
+                
+
                 //下载完成之后开始覆盖
+
+                //这个exe程序一直覆盖不了，直接删除；
+                //先记录一下， 删除也没权限。。。
+                //string ddjdcExe = Application.StartupPath + @"\ddjd_c.exe";
+                //if (File.Exists(ddjdcExe)) {
+                //    File.Delete(ddjdcExe);
+                //}
+
+                //System.IO.FileInfo file = new System.IO.FileInfo(Application.StartupPath + @"\ddjd_c.exe");
+                //if (file.Exists)
+                //{
+                //    file.Delete();
+                //}
 
                 ZipHelper.Unzip(newFileName);//调用解压的类
 
                 //此处更新完成；
+
+                
+                
 
                 //重新打开ddjd_c.exe
                 System.Diagnostics.Process.Start(Application.StartupPath + @"\ddjd_c.exe", System.IO.Directory.GetCurrentDirectory());

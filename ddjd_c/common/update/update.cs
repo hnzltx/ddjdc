@@ -17,7 +17,6 @@ namespace ddjd_c.common.update
     /// </summary>  
     public class update
     {
-
         private string download;
         private const string updateUrl = "http://192.168.199.215/update.xml";//升级配置的XML文件地址  
 
